@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Wallboarder</title>
+    <link rel="stylesheet" href="/jquery-ui.min.css">
+    <script src="/external/jquery/jquery.js"></script> 
+    <script src="/jquery-ui.min.js"></script>
+  
+    <script>
+      $(function() {
+
+        $( ".draggable" ).draggable();
+
+        saveWallboard = function() {
+          wbJson = [];
+
+          $(".wb").children().each(function() { 
+            i = $(this);
+        
+            elem = {
+              firstElementChild: i.prop("tagName"),
+              height: i.height(),
+              width: i.width(),
+              innerText: i.text()
+            }
+
+            wbJson.push(elem);
+          }).promise().done(function() {
+            $.post( '/save', { wb: wbJson } );
+          });
+        }
+
+        $("#save").click(saveWallboard);
+      }); 
+      
+    </script>
+
+
+   </head>
+  <body>
+    <input type="button" id="save" value="save"/> 
+    <div class="wb">
+      
+      <div class="draggable ui-widget-content">
+        <h1>My Wallboard</h1>
+      </div>
+    
+      <div class="draggable ui-widget-content">
+        <p>Drag me around 1</p>
+      </div>
+      <div class="draggable ui-widget-content">
+        <p>Drag me around 2</p>
+      </div>
+      <div class="draggable ui-widget-content">
+        <p>Drag me around 3</p>
+      </div>
+
+
+
+
+    </div>
+  </body>
+
+</html>
