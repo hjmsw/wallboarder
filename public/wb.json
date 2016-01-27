@@ -1,0 +1,55 @@
+[
+
+   {
+      "id":"1",
+      "tagName":"H1",
+      "height":"80",
+      "width":"935",
+      "color": "blue",
+      "position": {"top": "0", "left": "0"},
+      "innerText":"\n        My Wallboard\n      "
+   },
+   {
+      "id":"2",
+      "tagName":"DIV",
+      "height":"50",
+      "width":"150",
+      "color":"red",
+      "position": {"top": "189.875", "left": "109"},
+      "innerText":"\n        Drag me around 1\n      "
+   },
+   {
+      "id":"3",
+      "tagName":"DIV",
+      "height":"50",
+      "width":"200",
+      "color":"red",
+      "position": {"top": "251.875", "left": "461"},
+      "innerText":"\n        Drag me around 2\n      "
+   },
+   {
+      "id":"4",
+      "tagName":"DIV",
+      "height":"50",
+      "width":"100",
+      "color":"blue",
+      "position": {"top": "396.875", "left": "306"},
+      "innerText":"\n        Drag me around 3\n      "
+   },
+   {
+     "id": "5",
+     "tagName":"table",
+     "table": true,
+     "tableObj": {
+       "editButton": false,
+       "deleteButton": false,
+       "hideIdentifier": true,
+       "columns": {
+         "identifier": [0, "id"],
+         "editable": [[2, "firstname"], [3, "lastname"]]
+       }
+     }
+   }
+
+
+]

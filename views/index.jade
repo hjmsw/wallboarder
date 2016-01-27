@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet" href="/jquery-ui.min.css")
+    script(src="/external/jquery/jquery.js")
+    script(src="/jquery-ui.min.js")
+    script(src="/jquery.tabledit.min.js")
+    script(src="/main.js")
+
+
+  body
+    div.container
+      - each elem in wb
+          if elem.table
+            script.
+              $('#table1').Tabledit(JSON.parse(#{elem.tableObj}));
+          else
+            #{elem.tagName}(
+              id=elem.id
+              class="draggable ui-widget-content"
+              contentEditable="true"
+              style="height:#{elem.height}px; width: #{elem.width}px; color: #{elem.color}; position:relative; left: #{elem.position.left}px; top: #{elem.position.top}px;"
+            )= elem.innerText
