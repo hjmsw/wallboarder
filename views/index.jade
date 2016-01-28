@@ -8,17 +8,26 @@ html
     script(src="/jquery.tabledit.min.js")
     script(src="/main.js")
 
+    | <style>
+    - each elem in elems
+      | ##{elem.id} {
+      |   height: #{elem.style.height}px;
+      |   width: #{elem.style.width}px;
+      |   color: #{elem.style.color};
+      |   position:relative;
+      if elem.style.position
+        |   left: #{elem.style.position.left}px;
+        |   top: #{elem.style.position.top}px;
+      | }
+    | </style>
+
+
 
   body
     div.container
-      - each elem in wb
-          if elem.table
-            script.
-              $('#table1').Tabledit(JSON.parse(#{elem.tableObj}));
-          else
-            #{elem.tagName}(
-              id=elem.id
-              class="draggable ui-widget-content"
-              contentEditable="true"
-              style="height:#{elem.height}px; width: #{elem.width}px; color: #{elem.color}; position:relative; left: #{elem.position.left}px; top: #{elem.position.top}px;"
-            )= elem.innerText
+      - each elem in elems
+          #{elem.tagName}(
+            id=elem.id
+            class="draggable ui-widget-content"
+            contentEditable="true"
+          )= elem.innerText

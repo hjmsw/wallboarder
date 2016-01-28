@@ -6,8 +6,8 @@ var util = require('util');
 router.get('/', function (req, res) {
 
   var elems = require(__dirname + '/../public/wb.json');
-  console.log(elems);
-  res.render('index', { wb: elems });
+
+  res.render('index', { elems: elems });
 });
 
 module.exports = router;
