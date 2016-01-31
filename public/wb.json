@@ -51,20 +51,20 @@
    {
       "id": "wb_5",
       "tagName": "TABLE",
+      "tableEditData": {
+        "editButton": false,
+        "deleteButton": false,
+        "hideIdentifier": false,
+        "columns": {
+            "identifier": [0, "item"],
+            "editable": [[0, "item"], [1, "status"]]
+        }
+      },
       "struct": {
         "row": [
-          [
-            ["th", "Item"],
-            ["th", "Status"]
-          ],
-          [
-            ["td", "item 1"],
-            ["td", "cool"]
-          ],
-          [
-            ["td", "item 2"],
-            ["td", "drool"]
-          ]
+          [["th", "Item"],["th", "Status"]],
+          [["td", "item 1"],["td", "cool"]],
+          [["td", "item 2"],["td", "drool"]]
         ]
       },
       "style": [

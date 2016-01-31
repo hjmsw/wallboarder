@@ -21,14 +21,14 @@ $(function() {
     });
   });
 
-  $('#exampleTable').Tabledit({
-    editButton: false,
-    deleteButton: false,
-    hideIdentifier: false,
-    columns: {
-        identifier: [0, 'item'],
-        editable: [[0, 'item'], [1, 'status']]
-    }
-  });
+  // $('#exampleTable').Tabledit({
+  //   editButton: false,
+  //   deleteButton: false,
+  //   hideIdentifier: false,
+  //   columns: {
+  //       identifier: [0, 'item'],
+  //       editable: [[0, 'item'], [1, 'status']]
+  //   }
+  // });
 
 });

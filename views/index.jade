@@ -23,12 +23,16 @@ html
     div.container
       - each elem in elems
           if elem.tagName == "TABLE"
+
             div(id=elem.id class="draggable ui-widget-content")
               table#exampleTable.table.table-striped
                 - each tabr in elem.struct.row
                   tr
                     - each i in tabr
                       #{i[0]} #{i[1]}
+              | <script>
+              |  $("##{elem.id} table").Tabledit(!{JSON.stringify(elem.tableEditData)});
+              | </script>
           else
             #{elem.tagName}(
               id=elem.id
