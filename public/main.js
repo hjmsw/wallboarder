@@ -27,26 +27,44 @@ $(function() {
         delete elem.innerText;
 
         rows = [];
+        columns = [];
 
         i.find("tr").each(function(index) {
             row = []
+            //each td or th
             $(this).children().each(function() {
               row.push([$(this).prop("tagName"),$(this).text()]);
             });
+            if (index == 0) columns = row;
             rows.push(row);
         });
 
         elem.struct = {
           rows: rows
         }
+
+        editable = []
+
+        columns.forEach(function(e, i) {
+          editable.push([parseInt(i), e[1]])
+        });
+
+        elem.tableEditData = {
+          "editButton": false,
+          "deleteButton": false,
+          "hideIdentifier": false,
+          "columns": {
+              "identifier": editable[0],
+              "editable": editable
+          }
+        }
       }
 
-      console.log(elem.struct);
-
+      console.log(JSON.stringify(elem));
       wbJson.push(elem);
 
     }).promise().done(function() {
-      //$.post( '/save', { wb: wbJson } );
+      $.post( '/save', { wb: wbJson } );
     });
   });
 });

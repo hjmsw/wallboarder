@@ -5,7 +5,7 @@ var util = require('util');
 
 router.get('/', function (req, res) {
 
-  var elems = require(__dirname + '/../public/wb_template.json');
+  var elems = require(__dirname + '/../public/wb.json');
 
   res.render('index', { elems: elems });
 });

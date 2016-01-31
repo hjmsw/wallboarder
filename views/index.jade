@@ -23,13 +23,13 @@ html
     input(type="button" id="save" value="save")
     div.container.wb
       - each elem in elems
-          if elem.tagName == "TABLE"
+          if elem.tagName == "table"
 
             div(id=elem.id class="draggable ui-widget-content")
               table#exampleTable.table.table-striped
-                - each tabr in elem.struct.row
+                - each row in elem.struct.rows
                   tr
-                    - each i in tabr
+                    - each i in row
                       #{i[0]} #{i[1]}
               | <script>
               |  $("##{elem.id} table").Tabledit(!{JSON.stringify(elem.tableEditData)});

@@ -1,1 +1,211 @@
-[{"id":"wb_0","tagName":"H1","innerText":"My Wallboard","style":[["height","80px"],["width","935px"],["color","rgb(0, 0, 255)"],["position","relative"],["left","auto"],["top","auto"]]},{"id":"wb_1","tagName":"DIV","innerText":"Drag me around 1","style":[["height","50px"],["width","150px"],["color","rgb(255, 0, 0)"],["position","relative"],["left","109px"],["top","189.875px"]]},{"id":"wb_2","tagName":"DIV","innerText":"Drag me around 2","style":[["height","50px"],["width","200px"],["color","rgb(255, 0, 0)"],["position","relative"],["left","461px"],["top","251.875px"]]},{"id":"wb_3","tagName":"DIV","innerText":"Drag me around 3","style":[["height","50px"],["width","100px"],["color","rgb(0, 0, 255)"],["position","relative"],["left","306px"],["top","396.875px"]]},{"id":"wb_4","tagName":"DIV","innerText":"ItemStatusitem 1coolitem 2drool\n $(\"#wb_5 table\").Tabledit({\"editButton\":false,\"deleteButton\":false,\"hideIdentifier\":false,\"columns\":{\"identifier\":[0,\"item\"],\"editable\":[[0,\"item\"],[1,\"status\"]]}});\n","style":[["height","111px"],["width","720px"],["color","rgb(51, 51, 51)"],["position","relative"],["left","3px"],["top","-127px"]]}]
+[
+  {
+    "id": "wb_0",
+    "tagName": "H1",
+    "innerText": "My Wallboard",
+    "style": [
+      [
+        "height",
+        "80px"
+      ],
+      [
+        "width",
+        "935px"
+      ],
+      [
+        "color",
+        "rgb(0, 0, 255)"
+      ],
+      [
+        "position",
+        "relative"
+      ],
+      [
+        "left",
+        "auto"
+      ],
+      [
+        "top",
+        "auto"
+      ]
+    ]
+  },
+  {
+    "id": "wb_1",
+    "tagName": "DIV",
+    "innerText": "Drag me around 1",
+    "style": [
+      [
+        "height",
+        "50px"
+      ],
+      [
+        "width",
+        "150px"
+      ],
+      [
+        "color",
+        "rgb(255, 0, 0)"
+      ],
+      [
+        "position",
+        "relative"
+      ],
+      [
+        "left",
+        "109px"
+      ],
+      [
+        "top",
+        "189.875px"
+      ]
+    ]
+  },
+  {
+    "id": "wb_2",
+    "tagName": "DIV",
+    "innerText": "Drag me around 2",
+    "style": [
+      [
+        "height",
+        "50px"
+      ],
+      [
+        "width",
+        "200px"
+      ],
+      [
+        "color",
+        "rgb(255, 0, 0)"
+      ],
+      [
+        "position",
+        "relative"
+      ],
+      [
+        "left",
+        "461px"
+      ],
+      [
+        "top",
+        "251.875px"
+      ]
+    ]
+  },
+  {
+    "id": "wb_3",
+    "tagName": "DIV",
+    "innerText": "Drag me around 3",
+    "style": [
+      [
+        "height",
+        "50px"
+      ],
+      [
+        "width",
+        "100px"
+      ],
+      [
+        "color",
+        "rgb(0, 0, 255)"
+      ],
+      [
+        "position",
+        "relative"
+      ],
+      [
+        "left",
+        "306px"
+      ],
+      [
+        "top",
+        "396.875px"
+      ]
+    ]
+  },
+  {
+    "id": "wb_4",
+    "tagName": "table",
+    "style": [
+      [
+        "height",
+        "111px"
+      ],
+      [
+        "width",
+        "720px"
+      ],
+      [
+        "color",
+        "rgb(51, 51, 51)"
+      ],
+      [
+        "position",
+        "relative"
+      ],
+      [
+        "left",
+        "3px"
+      ],
+      [
+        "top",
+        "-127px"
+      ]
+    ],
+    "struct": {
+      "rows": [
+        [
+          [
+            "TH",
+            "Item"
+          ],
+          [
+            "TH",
+            "Status"
+          ]
+        ],
+        [
+          [
+            "TD",
+            "item 1"
+          ],
+          [
+            "TD",
+            "cool"
+          ]
+        ],
+        [
+          [
+            "TD",
+            "item 2"
+          ],
+          [
+            "TD",
+            "drool"
+          ]
+        ]
+      ]
+    },
+    "tableEditData": {
+      "editButton": "false",
+      "deleteButton": "false",
+      "hideIdentifier": "false",
+      "columns": {
+        "identifier": [
+          "0",
+          "Item"
+        ],
+        "editable": [
+          [
+            "0",
+            "Item"
+          ],
+          [
+            "1",
+            "Status"
+          ]
+        ]
+      }
+    }
+  }
+]
