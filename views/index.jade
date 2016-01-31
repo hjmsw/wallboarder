@@ -20,7 +20,8 @@ html
     | </style>
 
   body
-    div.container
+    input(type="button" id="save" value="save")
+    div.container.wb
       - each elem in elems
           if elem.tagName == "TABLE"
 
