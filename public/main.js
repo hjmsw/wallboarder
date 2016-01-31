@@ -2,7 +2,7 @@ $(function() {
 
   $( ".draggable" ).draggable();
 
-  saveWallboard = function() {
+  $("#save").click(function() {
     wbJson = [];
 
     $(".wb").children().each(function() {
@@ -19,7 +19,16 @@ $(function() {
     }).promise().done(function() {
       $.post( '/save', { wb: wbJson } );
     });
-  }
+  });
 
-  $("#save").click(saveWallboard);
+  $('#exampleTable').Tabledit({
+    editButton: false,
+    deleteButton: false,
+    hideIdentifier: false,
+    columns: {
+        identifier: [0, 'item'],
+        editable: [[0, 'item'], [1, 'status']]
+    }
+  });
+
 });

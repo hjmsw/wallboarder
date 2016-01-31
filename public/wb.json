@@ -2,45 +2,75 @@
    {
       "id":"wb_1",
       "tagName":"H1",
-      "style": {
-        "height":"80",
-        "width":"935",
-        "color": "blue",
-        "position": {"top": "0", "left": "0"}
-      },
-      "innerText":"\n        My Wallboard\n      "
+      "style": [
+        ["height","80px"],
+        ["width","935px"],
+        ["color","blue"]
+      ],
+      "innerText":"My Wallboard"
    },
    {
       "id":"wb_2",
       "tagName":"DIV",
-      "style": {
-        "height":"50",
-        "width":"150",
-        "color":"red",
-        "position": {"top": "189.875", "left": "109"}
-      },
-      "innerText":"\n        Drag me around 1\n      "
+      "style": [
+        ["height","50px"],
+        ["width","150px"],
+        ["color","red"],
+        ["top","189.875px"],
+        ["left","109px"],
+        ["position","relative"]
+      ],
+      "innerText":"Drag me around 1"
    },
    {
       "id":"wb_3",
       "tagName":"DIV",
-      "style": {
-        "height":"50",
-        "width":"200",
-        "color":"red",
-        "position": {"top": "251.875", "left": "461"}
-      },
-      "innerText":"\n        Drag me around 2\n      "
+      "style": [
+        ["height","50px"],
+        ["width","200px"],
+        ["color","red"],
+        ["top","251.875px"],
+        ["left","461px"],
+        ["position","relative"]
+      ],
+      "innerText":"Drag me around 2"
    },
    {
       "id":"wb_4",
       "tagName":"DIV",
-      "style": {
-        "height":"50",
-        "width":"100",
-        "color":"blue",
-        "position": {"top": "396.875", "left": "306"}
+      "style": [
+        ["height","50px"],
+        ["width","100px"],
+        ["color","blue"],
+        ["top","396.875px"],
+        ["left","306px"],
+        ["position","relative"]
+      ],
+      "innerText":"Drag me around 3"
+   },
+   {
+      "id": "wb_5",
+      "tagName": "TABLE",
+      "struct": {
+        "row": [
+          [
+            ["th", "Item"],
+            ["th", "Status"]
+          ],
+          [
+            ["td", "item 1"],
+            ["td", "cool"]
+          ],
+          [
+            ["td", "item 2"],
+            ["td", "drool"]
+          ]
+        ]
       },
-      "innerText":"\n        Drag me around 3\n      "
+      "style": [
+        ["left","3px"],
+        ["top","-127px"],
+        ["position","relative"]
+      ]
    }
 ]

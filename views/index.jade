@@ -3,31 +3,35 @@ html
   head
     title= title
     link(rel="stylesheet" href="/jquery-ui.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous")
     script(src="/external/jquery/jquery.js")
     script(src="/jquery-ui.min.js")
     script(src="/jquery.tabledit.min.js")
     script(src="/main.js")
 
     | <style>
+    | .ui-widget-content { border: none !important; }
     - each elem in elems
-      | ##{elem.id} {
-      |   height: #{elem.style.height}px;
-      |   width: #{elem.style.width}px;
-      |   color: #{elem.style.color};
-      |   position:relative;
-      if elem.style.position
-        |   left: #{elem.style.position.left}px;
-        |   top: #{elem.style.position.top}px;
-      | }
+      if elem.style
+        | ##{elem.id} {
+        - each i in elem.style
+          | #{i[0]}:#{i[1]};
+        | }
     | </style>
-
-
 
   body
     div.container
       - each elem in elems
-          #{elem.tagName}(
-            id=elem.id
-            class="draggable ui-widget-content"
-            contentEditable="true"
-          )= elem.innerText
+          if elem.tagName == "TABLE"
+            div(id=elem.id class="draggable ui-widget-content")
+              table#exampleTable.table.table-striped
+                - each tabr in elem.struct.row
+                  tr
+                    - each i in tabr
+                      #{i[0]} #{i[1]}
+          else
+            #{elem.tagName}(
+              id=elem.id
+              class="draggable ui-widget-content"
+              contentEditable="true"
+            )= elem.innerText
