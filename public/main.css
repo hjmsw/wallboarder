@@ -1,0 +1,10 @@
+.newRow {
+    float: right;
+    position: absolute;
+    top: 4px;
+    right: 8px;
+}
+
+.wb_table .btn {
+    display:none;
+}

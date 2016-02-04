@@ -4,6 +4,7 @@ html
     title= title
     link(rel="stylesheet" href="/jquery-ui.min.css")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous")
+    link(rel="stylesheet" href="/main.css")
     script(src="/external/jquery/jquery.js")
     script(src="/jquery-ui.min.js")
     script(src="/jquery.tabledit.min.js")
@@ -25,14 +26,29 @@ html
       - each elem in elems
           if elem.tagName == "table"
 
-            div(id=elem.id class="draggable ui-widget-content")
+            div(id=elem.id class="draggable ui-widget-content wb_table")
+              button.newRow.btn.btn-sm.btn-default
+                span.glyphicon.glyphicon-plus
+
               table#exampleTable.table.table-striped
                 - each row in elem.struct.rows
                   tr
                     - each i in row
                       #{i[0]} #{i[1]}
               | <script>
-              |  $("##{elem.id} table").Tabledit(!{JSON.stringify(elem.tableEditData)});
+              |  $(function() {
+              |     wb_tables.push({
+              |        t_elem:  #{elem.id},
+              |        params:  {
+              |         editButton: false,
+              |          deleteButton: false,
+              |          hideIdentifier: false,
+              |          toolbar: true,
+              |          columns: !{JSON.stringify(elem.tableEditColumns)}
+              |        }
+              |      });
+              |     //$("##{elem.id} table").Tabledit(params);
+              |   });
               | </script>
           else
             #{elem.tagName}(

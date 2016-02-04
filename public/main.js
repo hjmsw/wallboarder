@@ -1,9 +1,41 @@
+var wb_tables = [];
+
+
 $(function() {
+
+  initTableEdit = function() {
+    wb_tables.forEach(function(i) {
+      $(i.t_elem).find("table").Tabledit(i.params);
+    });
+  };
+
+  nr = $(".newRow");
+
+  //Initialise Tabledit tables
+  $(window).load(initTableEdit);
+  nr.on("newRow", initTableEdit);
 
   $( ".draggable" ).draggable();
 
+  $(".wb_table").hover(function() {
+    $(this).find(".newRow").show();
+  }, function() {
+    $(this).find(".newRow").hide();
+  });
+
+  nr.click(function() {
+
+    $(this).siblings("table").find("tbody").append("<tr><td></td><td></td></tr>");
+    $(this).trigger("newRow");
+  });
+
   $("#save").click(function() {
-    wbJson = [];
+    wb = {
+      title: "Test Wallboard",
+      _id: "wallboard1",
+      elems: []
+    };
+
 
     $(".wb").children().each(function(index) {
       i = $(this);
@@ -49,22 +81,16 @@ $(function() {
           editable.push([parseInt(i), e[1]])
         });
 
-        elem.tableEditData = {
-          "editButton": false,
-          "deleteButton": false,
-          "hideIdentifier": false,
-          "columns": {
-              "identifier": editable[0],
-              "editable": editable
-          }
+        elem.tableEditColumns = {
+          "identifier": editable[0],
+          "editable": editable
         }
       }
 
-      console.log(JSON.stringify(elem));
-      wbJson.push(elem);
+      wb.elems.push(elem);
 
     }).promise().done(function() {
-      $.post( '/save', { wb: wbJson } );
+      $.post( '/save', { wb: wb } );
     });
   });
 });
