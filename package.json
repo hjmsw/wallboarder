@@ -5,6 +5,8 @@
     "body-parser": "~1.0.1",
     "express": "~4.0.0",
     "jade": "^1.11.0",
-    "jsonfile": "^2.2.3"
+    "jsonfile": "^2.2.3",
+    "kerberos": "0.0.17",
+    "mongodb": "^2.1.0"
   }
 }
