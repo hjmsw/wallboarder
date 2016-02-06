@@ -21,12 +21,11 @@ html
     | </style>
 
   body
-    input(type="button" id="save" value="save")
-    div.container.wb
+    div.container-fluid.wb
       - each elem in elems
           if elem.tagName == "table"
 
-            div(id=elem.id class="draggable ui-widget-content wb_table")
+            div(id=elem.id class="draggable resizble ui-widget-content wb_table")
               button.newRow.btn.btn-sm.btn-default
                 span.glyphicon.glyphicon-plus
 
@@ -50,9 +49,17 @@ html
               |     //$("##{elem.id} table").Tabledit(params);
               |   });
               | </script>
+          else if elem.tagName == "H1"
+            #{elem.tagName}(
+              id=elem.id
+            )= elem.innerText
+
           else
             #{elem.tagName}(
               id=elem.id
-              class="draggable ui-widget-content"
+              class="draggable resizable ui-widget-content"
               contentEditable="true"
             )= elem.innerText
+    div#plt
+      input(type="button" class="save" value="save")
+      h3= "text box"
