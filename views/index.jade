@@ -2,9 +2,11 @@ doctype html
 html
   head
     title= title
+
     link(rel="stylesheet" href="/jquery-ui.min.css")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous")
     link(rel="stylesheet" href="/main.css")
+
     script(src="/external/jquery/jquery.js")
     script(src="/jquery-ui.min.js")
     script(src="/jquery.tabledit.min.js")
@@ -61,5 +63,6 @@ html
               contentEditable="true"
             )= elem.innerText
     div#plt
-      input(type="button" class="save" value="save")
-      h3= "text box"
+      form
+        input(type="button" class="save btn btn-default btn-lg" value="save")
+        h3= "text box"
