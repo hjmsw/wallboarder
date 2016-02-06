@@ -15,3 +15,4 @@ app.use('/', routes);
 server.listen(8081);
 
 app.use(express.static('public'));
+app.use('/components', express.static('bower_components'));
