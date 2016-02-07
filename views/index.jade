@@ -10,7 +10,7 @@ html
     script(src="/components/jquery/dist/jquery.min.js")
     script(src="/components/jquery-ui/jquery-ui.min.js")
     script(src="/components/markcell/jquery-tabledit/jquery.tabledit.min.js")
-    script(src="/main.js")
+    script(src="/components/tinycolorpicker/lib/jquery.tinycolorpicker.min.js")
 
     | <style>
     | .ui-widget-content { border: none !important; }
@@ -66,3 +66,32 @@ html
       form
         input(type="button" class="save btn btn-default btn-lg" value="save")
         h3= "text box"
+        div
+          div.box.p_box.draggable.resizable= "Text goes here..."
+
+          div.colorPickers
+            div.colorPicker.colorPickerBG
+              a.color
+                div.colorInner
+              div.track
+              ul.dropdown
+                li
+              input(type="hidden" class="colorInput")
+            p= "Bg"
+
+
+            div.colorPicker.colorPickerTX
+              a.color
+                div.colorInner
+              div.track
+              ul.dropdown
+                li
+              input(type="hidden" class="colorInput")
+            p= "Aa"
+          input(type="button" class="add btn btn-default", value="Add")
+
+        div#binIcon
+          span.glyphicon.glyphicon-trash
+
+    script(src="/main.js")
+

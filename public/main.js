@@ -9,20 +9,50 @@ $(function () {
             $(i.t_elem).find("table").Tabledit(i.params);
         });
     };
+    initWbElems = function() {
+        $(".draggable").draggable({
+            grid: [10, 10],
+            scroll: false
+        });
+
+        $(".resizable").resizable({
+            autoHide: true,
+            grid: [10, 10]
+        });
+    };
+
+    $(window).load(function() {
+        initTableEdit();
+        initWbElems();
+
+        $(".wb").css({
+            height: $(window).height(),
+        });
+
+        $(".colorPicker").each(function() {
+            $(this).tinycolorpicker();
+
+            $(this).bind("change", function() {
+                if ($(this).hasClass("colorPickerBG")) {
+                    $(this).parent().siblings(".box").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                } else if ($(this).hasClass("colorPickerTX")) {
+                    $(this).parent().siblings(".box").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                }
+            });
+        });
+    });
 
     nr = $(".newRow");
-
-    //Initialise Tabledit tables
-    $(window).load(initTableEdit);
     nr.on("newRow", initTableEdit);
 
-    $(".draggable").draggable({
-        grid: [10, 10]
+    $("#binIcon").droppable({
+        drop: function(event, ui) {
+            $("#"+ui.draggable.attr("id")).effect( "explode", 500, function() {
+                $(this).remove();
+            });
+        }
     });
-    $(".resizable").resizable({
-        autoHide: true,
-        grid: [10, 10]
-    });
+
 
     $(".wb_table").hover(function () {
         $(this).find(".newRow").show();
@@ -34,6 +64,39 @@ $(function () {
 
         $(this).siblings("table").find("tbody").append("<tr><td></td><td></td></tr>");
         $(this).trigger("newRow");
+    });
+
+    $(".add").click(function() {
+        elem = $(this).siblings(".p_box");
+
+        id = Date.now();
+
+
+        $(".wb").append("<div id='"+id+"'>"+elem.text()+"</div>");
+        n_elem = $("#"+id);
+
+        n_elem.css({
+            color: elem.css("color"),
+            background: elem.css("background"),
+            width: elem.css("width"),
+            height: elem.css("height"),
+            padding: "10px"
+        });
+
+        n_elem.addClass("draggable resizable");
+
+        elem.text("Text goes here...");
+        elem.css({
+            background: "#EFEFEF",
+            color: "#000"
+        });
+
+        $("#plt").find(".colorInner").each(function(){
+           $(this).css("background-color", "#EFEFEF");
+        });
+
+        initWbElems();
+
     });
 
     $(".save").click(function () {

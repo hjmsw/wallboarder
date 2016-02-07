@@ -1,9 +1,16 @@
+body {
+    overflow:hidden;
+}
 
 .newRow {
     float: right;
     position: absolute;
     top: 4px;
     right: 8px;
+}
+
+.draggable {
+    z-index:2;
 }
 
 .wb_table .btn {
@@ -30,5 +37,107 @@
     position: fixed;
     padding:10px;
     right:0;
+    top:0;
     background: #dddddd;
+}
+
+.p_box {
+    height:80px;
+    width:150px;
+    padding:10px;
+    background:#EFEFEF;
+}
+
+.colorPickers p {
+    float: left;
+    width: 60px;
+    height: 30px;
+    z-index: 9;
+    -webkit-border-radius: 27px;
+    -moz-border-radius: 27px;
+    border-radius: 27px;
+    border: 1px solid #ccc;
+    background: #ccc;
+    margin-top: 10px;
+    padding-left: 32px;
+    padding-top:3px;
+    left: -30px;
+    position: relative;
+}
+
+.colorPicker
+{
+    width:          30px;
+    height:         30px;
+    position: relative;
+    float:left;
+
+}
+
+.colorPicker .track {
+    background:     url(/cp.png) no-repeat 50% 50%;
+    height:         200px;
+    width:          200px;
+    position:       fixed;
+    cursor:         crosshair;
+    bottom:         0;
+    right:          0;
+    display:        none;
+    z-index:        10;
+
+}
+
+.colorPicker .color {
+    width:          30px;
+    height:         30px;
+    display:        block;
+    position:       relative;
+    z-index:        11;
+    background-color: #EFEFEF;
+    -webkit-border-radius: 27px;
+    -moz-border-radius: 27px;
+    border-radius: 27px;
+    cursor: pointer;
+}
+
+
+.colorPicker .colorInner {
+    width:          30px;
+    height:         30px;
+    z-index:        9;
+    -webkit-border-radius: 27px;
+    -moz-border-radius: 27px;
+    border-radius: 27px;
+    border: 1px solid #ccc;
+    margin-top:10px;
+}
+
+.colorPicker .dropdown {
+    list-style: none;
+    display: none;
+    width: 27px;
+    position: absolute;
+    top: 28px;
+    border: 1px solid #ccc;
+    left: 0;
+    z-index: 1000;
+}
+
+.colorPicker .dropdown li{
+    height: 25px;
+    cursor: pointer;
+}
+
+#binIcon {
+    position: fixed;
+    bottom:0;
+    right:0;
+    height: 150px;
+    width: 200px;
+    text-align: center;
+}
+
+#binIcon .glyphicon {
+    font-size:125px;
+    color: #eee;
 }

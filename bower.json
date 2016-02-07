@@ -26,6 +26,7 @@
     "jquery": "^2.2.0",
     "jquery-ui": "^1.11.4",
     "bootstrap": "^3.3.6",
+    "tinycolorpicker": "^0.9.5",
     "markcell/jquery-tabledit": "jquery-tabledit#^1.2.3"
   }
 }
