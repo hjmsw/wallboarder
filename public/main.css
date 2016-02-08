@@ -17,6 +17,10 @@ body {
     display:none;
 }
 
+.tabledit-view-mode {
+    height: 37px;
+}
+
 .ui-widget-content {
     position: absolute !important;
     padding: 10px;
