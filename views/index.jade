@@ -63,11 +63,11 @@ html
               contentEditable="true"
             )= elem.innerText
     div#plt
-      form
+      form.form
         input(type="button" class="save btn btn-default btn-lg" value="save")
         h3= "text box"
         div
-          div.box.p_box.draggable.resizable= "Text goes here..."
+          div.box.p_box= "Text goes here..."
 
           div.colorPickers
             div.colorPicker.colorPickerBG
@@ -88,7 +88,13 @@ html
                 li
               input(type="hidden" class="colorInput")
             p= "Aa"
-          input(type="button" class="add btn btn-default", value="Add")
+          input(type="button" id="addTextBox" class="add btn btn-default", value="Add")
+          hr
+          div
+            div.form-group
+              label(for="tableCols")= "Columns:"
+              input(type="text" class="form-control" id="tableCols" name="tableCols")
+              div#colNames
 
         div#binIcon
           span.glyphicon.glyphicon-trash

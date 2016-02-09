@@ -60,17 +60,61 @@ $(function () {
         $(this).find(".newRow").hide();
     });
 
-    nr.click(function () {
+    //Build Table Row
+    bTR = function(cc, el) {
+        row = "<tr>";
+        for (var i = 0; i < cc; i++) row += "<"+el+">Text</"+el+">";
+        row += "</tr>";
+        return row;
+    };
 
-        $(this).siblings("table").find("tbody").append("<tr><td></td><td></td></tr>");
+    $("#tableCols").change(function() {
+        $(this).prop('disabled', true);
+        if ($(this).val() > 0) {
+            console.log("disabled until insert confirmed");
+            cc = parseInt($(this).val());
+            tId = Date.now();
+
+            $(".wb").append(
+                "<div id='"+tId+"' class='wb_table draggable resizble'><table class='table table-striped'><tbody>" +
+                bTR(cc, "th") +
+                bTR(cc, "td") +
+                bTR(cc, "td") +
+                "</tbody></table></div>");
+
+            editable = function(cc) {
+                eCols = [];
+                for (var i = 0; i < cc; i++) eCols.push([i, "col"+i]);
+                return eCols;
+            };
+
+            params =  {
+                editButton: false,
+                deleteButton: false,
+                hideIdentifier: false,
+                toolbar: true,
+                "columns": {
+                    "identifier": [0, "col0"],
+                    "editable": editable(cc)
+                }
+            };
+
+            $("#"+tId).find("table").Tabledit(params);
+
+            initWbElems();
+        }
+    });
+
+    nr.click(function () {
+        cc = $(this).siblings("table").find("tr").first().children().length;
+        $(this).siblings("table").find("tbody").append(bTRw(cc,"td"));
         $(this).trigger("newRow");
     });
 
-    $(".add").click(function() {
+    $("#addTextBox").click(function() {
         elem = $(this).siblings(".p_box");
 
         id = Date.now();
-
 
         $(".wb").append("<div id='"+id+"'>"+elem.text()+"</div>");
         n_elem = $("#"+id);
