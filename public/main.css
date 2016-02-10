@@ -30,19 +30,41 @@ body {
     display:none;
 }
 
-#save {
-    float:right;
-}
-
-
 #plt {
     width:200px;
     height:100%;
     position: fixed;
-    padding:10px;
     right:0;
     top:0;
-    background: #dddddd;
+    background: rgba(221, 221, 221, 0.5);
+    z-index:2;
+}
+
+#plt #accordion {
+    padding:5px;
+    z-index: 100;
+}
+
+#pltToolbar {
+    padding: 10px 5px;
+    background-color: #AAA;
+}
+
+#pltToolbar div {
+    margin: 0 2px;
+}
+
+.btn-inner {
+    float: left;
+    padding:0;
+    font-size:18px;
+}
+span.btn-inner {
+    margin-right: 8px;
+    margin-top: 3px;
+}
+p.btn-inner {
+    margin:0;
 }
 
 .p_box {
@@ -65,13 +87,13 @@ body {
     margin-top: 10px;
     padding-left: 32px;
     padding-top:3px;
-    left: -30px;
+    top: -40px;
     position: relative;
 }
 
 .colorPicker
 {
-    width:          30px;
+    width:          70px;
     height:         30px;
     position: relative;
     float:left;
@@ -132,6 +154,10 @@ body {
     cursor: pointer;
 }
 
+.colorPickers {
+    height:60px;
+}
+
 #binIcon {
     position: fixed;
     bottom:0;
@@ -143,5 +169,24 @@ body {
 
 #binIcon .glyphicon {
     font-size:125px;
-    color: #eee;
+    color: #CCC;
+}
+
+.ui-resizable-e {
+    border-right: dashed 1px #444;
+}
+.ui-resizable-w {
+    border-left: dashed 1px #444;
+}
+
+.ui-resizable-n {
+    border-top: dashed 1px #444;
+}
+
+.ui-resizable-s {
+    border-bottom: dashed 1px #444;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding:4px;
 }

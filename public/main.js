@@ -15,15 +15,25 @@ $(function () {
             scroll: false
         });
 
+
         $(".resizable").resizable({
             autoHide: true,
-            grid: [10, 10]
+            grid: [10, 10],
+            handles: "n, ne, e, se, s, sw, w, nw"
+        });
+
+        $(".resizable-table").resizable({
+            autoHide: true,
+            grid: [10, 10],
+            handles: "e, w"
         });
     };
 
     $(window).load(function() {
         initTableEdit();
         initWbElems();
+
+        $(".accordion").accordion();
 
         $(".wb").css({
             height: $(window).height(),
@@ -76,7 +86,7 @@ $(function () {
             tId = Date.now();
 
             $(".wb").append(
-                "<div id='"+tId+"' class='wb_table draggable resizble'><table class='table table-striped'><tbody>" +
+                "<div id='"+tId+"' class='wb_table draggable resizable-table'><table class='table table-striped'><tbody>" +
                 bTR(cc, "th") +
                 bTR(cc, "td") +
                 bTR(cc, "td") +
@@ -100,6 +110,14 @@ $(function () {
             };
 
             $("#"+tId).find("table").Tabledit(params);
+
+            $("#colNames").append(function() {
+                rhtml = "";
+                for (var i = 0; i < cc; i++) {
+                    rhtml += "<div class='form-group'><label for='colName_"+i+"'>Column "+i+" Name:</label><input type='text' id='colName_"+i+"' name='colName_"+i+"' class='form-control'></div>";
+                }
+                return rhtml;
+            });
 
             initWbElems();
         }
@@ -143,6 +161,12 @@ $(function () {
 
     });
 
+    $(".plt-hide").click(function() {
+        $("#plt").effect("fade", function() {
+            $(this).hide();
+        })
+    });
+
     $(".save").click(function () {
         wb = {
             title: "Test Wallboard",
@@ -157,11 +181,11 @@ $(function () {
             elem = {
                 id: "wb_" + index,
                 tagName: i.prop("tagName"),
-                innerText: i.text(),
+                innerText: i.text()
             };
 
             if (i.children("table").length == 1) {
-                elem.tagName = "table"
+                elem.tagName = "table";
                 delete elem.innerText;
 
                 rows = [];

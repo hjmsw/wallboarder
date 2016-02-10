@@ -11,6 +11,7 @@ html
     script(src="/components/jquery-ui/jquery-ui.min.js")
     script(src="/components/markcell/jquery-tabledit/jquery.tabledit.min.js")
     script(src="/components/tinycolorpicker/lib/jquery.tinycolorpicker.min.js")
+    script(src="/components/bootstrap/js/collapse.js")
 
     | <style>
     | .ui-widget-content { border: none !important; }
@@ -27,7 +28,7 @@ html
       - each elem in elems
           if elem.tagName == "table"
 
-            div(id=elem.id class="draggable resizble ui-widget-content wb_table")
+            div(id=elem.id class="draggable resizable-table ui-widget-content wb_table")
               button.newRow.btn.btn-sm.btn-default
                 span.glyphicon.glyphicon-plus
 
@@ -63,38 +64,55 @@ html
               contentEditable="true"
             )= elem.innerText
     div#plt
-      form.form
-        input(type="button" class="save btn btn-default btn-lg" value="save")
-        h3= "text box"
-        div
-          div.box.p_box= "Text goes here..."
+        div#pltToolbar
+          div(class="save btn btn-default")
+            span.btn-inner.glyphicon.glyphicon-floppy-save
+            p.btn-inner="Save"
+          div(class="plt-hide btn btn-default")
+            span.btn-inner.glyphicon.glyphicon-remove-circle
+            p.btn-inner="Hide"
 
-          div.colorPickers
-            div.colorPicker.colorPickerBG
-              a.color
-                div.colorInner
-              div.track
-              ul.dropdown
-                li
-              input(type="hidden" class="colorInput")
-            p= "Bg"
+        div(class="panel-group" id="accordion" role="tablist" aria-multiselectable="true")
+          div(class="panel panel-default")
+            div(class="panel-heading" role="tab" id="headingOne")
+              h4
+                a(role="button" data-toggle="collapse" data-parent="#accordion"
+                href="#collapseOne" aria-expanded="true" aria-controls="collapseOne")="Insert Text Box"
+            div(id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne")
+              div(class="panel-body")
+                div.box.p_box= "Text goes here..."
+                div.colorPickers
+                  div.colorPicker.colorPickerBG
+                    a.color
+                      div.colorInner
+                    p= "Bg"
+                    div.track
+                    ul.dropdown
+                      li
+                    input(type="hidden" class="colorInput")
 
+                  div.colorPicker.colorPickerTX
+                    a.color
+                      div.colorInner
+                    p= "Aa"
+                    div.track
+                    ul.dropdown
+                      li
+                    input(type="hidden" class="colorInput")
 
-            div.colorPicker.colorPickerTX
-              a.color
-                div.colorInner
-              div.track
-              ul.dropdown
-                li
-              input(type="hidden" class="colorInput")
-            p= "Aa"
-          input(type="button" id="addTextBox" class="add btn btn-default", value="Add")
-          hr
-          div
-            div.form-group
-              label(for="tableCols")= "Columns:"
-              input(type="text" class="form-control" id="tableCols" name="tableCols")
-              div#colNames
+                input(type="button" id="addTextBox" class="add btn btn-default", value="Add")
+
+          div(class="panel panel-default")
+            div(class="panel-heading" role="tab" id="headingTwo")
+              h4
+                a(role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo")="Insert Table"
+            div(id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo")
+              div(class="panel-body")
+                div.form-group
+                  label(for="tableCols")= "Columns:"
+                  input(type="text" class="form-control" id="tableCols" name="tableCols")
+                div#colNames
 
         div#binIcon
           span.glyphicon.glyphicon-trash
