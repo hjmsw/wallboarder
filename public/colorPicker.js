@@ -7,7 +7,7 @@
 $(function () {
 
     //Init all color pickers
-    init = function(e, elem) {
+    function init(e, elem) {
         $(".colorPicker").each(function () {
             $(this).tinycolorpicker();
 

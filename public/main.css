@@ -13,6 +13,10 @@ body {
     z-index:2;
 }
 
+.editable {
+    cursor: pointer;
+}
+
 .wb_table .btn {
     display:none;
 }

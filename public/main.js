@@ -4,15 +4,16 @@ var wb_tables = [];
 
 $(function () {
 
-    initTableEdit = function () {
+    function initTableEdit() {
         wb_tables.forEach(function (i) {
             $(i.t_elem).find("table").Tabledit(i.params);
         });
-    };
-    initWbElems = function() {
+    }
+    function initWbElems() {
         $(".draggable").draggable({
             grid: [10, 10],
-            scroll: false
+            scroll: false,
+            stack: "div"
         });
 
 
@@ -27,7 +28,7 @@ $(function () {
             grid: [10, 10],
             handles: "e, w"
         });
-    };
+    }
 
     $(window).load(function() {
         initTableEdit();
@@ -40,6 +41,15 @@ $(function () {
         });
 
 
+    });
+
+    //Make sure side panel (palette) has highest z-index on dragstop
+    $(".draggable").on("dragstop", function(event, ui) {
+        z_index = 0;
+        $(".draggable").each(function() {
+           if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
+        });
+        $("#plt").css("z-index", z_index+1);
     });
 
     nr = $(".newRow");
@@ -61,12 +71,12 @@ $(function () {
     });
 
     //Build Table Row
-    bTR = function(cc, el) {
+    function bTR(cc, el) {
         row = "<tr>";
         for (var i = 0; i < cc; i++) row += "<"+el+">Text</"+el+">";
         row += "</tr>";
         return row;
-    };
+    }
 
     $("#tableCols").change(function() {
         $(this).prop('disabled', true);
@@ -151,7 +161,7 @@ $(function () {
 
     });
 
-    $(".draggable").dblclick(function(e) {
+    $(".editable").dblclick(function () {
         elem = $(this);
 
         plt = $("#plt");
@@ -172,10 +182,14 @@ $(function () {
 
             if (elem.hasClass('wb_table')) {
                 el += "<h3 class='panel-title'>Edit Table</h3></div>";
-            } else {
+            } else if(elem.hasClass('wb_box')) {
                 el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>" +
-                    "<div class='form-group'><input type='text' class='form-control' value='" +
-                    elem.text() + "'/></div></div><div class='colorPickers'></div>";
+                    "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
+                    elem.text() + "'/></div><div class='colorPickers'></div></div>";
+            } else {
+                el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
+                    "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
+                    elem.text() + "'/></div><div class='colorPickers'></div></div>";
             }
 
             el +=  "</div>";
@@ -183,9 +197,14 @@ $(function () {
             return el;
         });
 
+        $(".edit-text").on("keyup", function() {
+            elem.find(".box-content").text($(this).val());
+        });
+
         ez.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
 
     });
+
     $(".wb").click(function(e) {
         //Only reset plt if wb parent was clicked
         if ($(e.toElement).hasClass('wb')) {
