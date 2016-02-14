@@ -68,6 +68,10 @@ body {
     margin: 0 2px;
 }
 
+#editZone {
+    padding:5px;
+}
+
 .btn-inner {
     float: left;
     padding:0;

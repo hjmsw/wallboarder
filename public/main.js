@@ -39,17 +39,7 @@ $(function () {
             height: $(window).height(),
         });
 
-        $(".colorPicker").each(function() {
-            $(this).tinycolorpicker();
 
-            $(this).bind("change", function() {
-                if ($(this).hasClass("colorPickerBG")) {
-                    $(this).parent().siblings(".box").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
-                } else if ($(this).hasClass("colorPickerTX")) {
-                    $(this).parent().siblings(".box").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
-                }
-            });
-        });
     });
 
     nr = $(".newRow");
@@ -174,24 +164,30 @@ $(function () {
 
         $("#accordion").hide();
 
-        $("#editZone").html(function() {
-            el = "<div class='panel-body'>";
+        ez = $("#editZone");
+
+        ez.html(function() {
+
+            el = "<div class='panel panel-default'><div class='panel-heading'>";
 
             if (elem.hasClass('wb_table')) {
-                el += "<h4>Edit Table</h4>";
+                el += "<h3 class='panel-title'>Edit Table</h3></div>";
             } else {
-                el += "<h4>Edit Text Box</h4>" +
+                el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>" +
                     "<div class='form-group'><input type='text' class='form-control' value='" +
-                    elem.text() + "'/></div>";
+                    elem.text() + "'/></div></div><div class='colorPickers'></div>";
             }
 
             el +=  "</div>";
 
             return el;
         });
+
+        ez.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
+
     });
     $(".wb").click(function(e) {
-        //Only reset plt if wb parent clicked
+        //Only reset plt if wb parent was clicked
         if ($(e.toElement).hasClass('wb')) {
             $("#editZone").html("");
             $("#accordion").show();
