@@ -12,7 +12,7 @@ router.get('/', function (req, res) {
         console.log(wallboard);
         if (error) console.log(error)
 
-        if (wallboard == null) {
+        if (true) { //wallboard == null) {
             console.log("restoring from json");
             wb = require(__dirname + '/../json/wb.json');
             res.render('index', {elems: wb.elems});
@@ -31,11 +31,11 @@ router.post('/', function (req, res) {
 });
 
 router.post('/save', function (req, res) {
-    WallboardProvider.save(
-        req.body.wb,
-        function (error, docs) {
-            console.log(error);
-        });
+    //WallboardProvider.save(
+    //    req.body.wb,
+    //    function (error, docs) {
+    //        console.log(error);
+    //    });
 });
 
 module.exports = router;

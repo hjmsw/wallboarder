@@ -161,6 +161,43 @@ $(function () {
 
     });
 
+    $(".draggable").dblclick(function(e) {
+        elem = $(this);
+
+        plt = $("#plt");
+
+        if (plt.css("display") === "none") {
+            plt.effect("fade", function() {
+                $(this).show();
+            });
+        }
+
+        $("#accordion").hide();
+
+        $("#editZone").html(function() {
+            el = "<div class='panel-body'>";
+
+            if (elem.hasClass('wb_table')) {
+                el += "<h4>Edit Table</h4>";
+            } else {
+                el += "<h4>Edit Text Box</h4>" +
+                    "<div class='form-group'><input type='text' class='form-control' value='" +
+                    elem.text() + "'/></div>";
+            }
+
+            el +=  "</div>";
+
+            return el;
+        });
+    });
+    $(".wb").click(function(e) {
+        //Only reset plt if wb parent clicked
+        if ($(e.toElement).hasClass('wb')) {
+            $("#editZone").html("");
+            $("#accordion").show();
+        }
+    });
+
     $(".plt-hide").click(function() {
         $("#plt").effect("fade", function() {
             $(this).hide();
@@ -249,3 +286,10 @@ $(function () {
         });
     });
 });
+
+//<div class="row">
+//    <div class="col-md-2"><i class="fa fa-gbp" style="
+//font-weight: bold;
+//"></i></div>
+//<div class="col-md-10">Drag me around 1</div>
+//</div>

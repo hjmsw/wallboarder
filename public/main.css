@@ -30,6 +30,20 @@ body {
     display:none;
 }
 
+.box-decoration {
+    width: 20%;
+    float: left;
+}
+
+.box-content {
+    width: 80%;
+    float:left;
+}
+
+.box-content-full-width {
+    width:100%;
+}
+
 #plt {
     width:200px;
     height:100%;

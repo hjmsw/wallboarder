@@ -5,6 +5,7 @@ html
 
     link(rel="stylesheet" href="/components/jquery-ui/themes/base/jquery-ui.min.css")
     link(rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css")
+    link(rel="stylesheet" href="/components/font-awesome/css/font-awesome.min.css")
     link(rel="stylesheet" href="/main.css")
 
     script(src="/components/jquery/dist/jquery.min.js")
@@ -60,9 +61,15 @@ html
           else
             #{elem.tagName}(
               id=elem.id
-              class="draggable resizable ui-widget-content"
-              contentEditable="true"
-            )= elem.innerText
+              class="draggable resizable ui-widget-content")
+              div
+                if elem.decoration
+                  div.box-decoration
+                    i(class="fa #{elem.decoration}")
+                  div(class="box-content" contentEditable="true")= elem.innerText
+                else
+                  div(class="box-content-full-width" contentEditable="true")= elem.innerText
+
     div#plt
         div#pltToolbar
           div(class="save btn btn-default")
@@ -113,7 +120,7 @@ html
                   label(for="tableCols")= "Columns:"
                   input(type="text" class="form-control" id="tableCols" name="tableCols")
                 div#colNames
-
+        div#editZone
         div#binIcon
           span.glyphicon.glyphicon-trash
 
