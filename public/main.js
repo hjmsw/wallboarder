@@ -1,14 +1,6 @@
 
-var wb_tables = [];
-
-
 $(function () {
 
-    function initTableEdit() {
-        wb_tables.forEach(function (i) {
-            $(i.t_elem).find("table").Tabledit(i.params);
-        });
-    }
     function initWbElems() {
         $(".draggable").draggable({
             grid: [10, 10],
@@ -31,17 +23,18 @@ $(function () {
     }
 
     $(window).load(function() {
-        initTableEdit();
         initWbElems();
 
         $(".accordion").accordion();
 
         $(".wb").css({
-            height: $(window).height(),
+            height: $(window).height()
         });
 
 
     });
+
+    $(".wb").on("update_wb", initWbElems);
 
     //Make sure side panel (palette) has highest z-index on dragstop
     $(".draggable").on("dragstop", function(event, ui) {
@@ -52,81 +45,12 @@ $(function () {
         $("#plt").css("z-index", z_index+1);
     });
 
-    nr = $(".newRow");
-    nr.on("newRow", initTableEdit);
-
     $("#binIcon").droppable({
         drop: function(event, ui) {
             $("#"+ui.draggable.attr("id")).effect( "explode", 500, function() {
                 $(this).remove();
             });
         }
-    });
-
-
-    $(".wb_table").hover(function () {
-        $(this).find(".newRow").show();
-    }, function () {
-        $(this).find(".newRow").hide();
-    });
-
-    //Build Table Row
-    function bTR(cc, el) {
-        row = "<tr>";
-        for (var i = 0; i < cc; i++) row += "<"+el+">Text</"+el+">";
-        row += "</tr>";
-        return row;
-    }
-
-    $("#tableCols").change(function() {
-        $(this).prop('disabled', true);
-        if ($(this).val() > 0) {
-            console.log("disabled until insert confirmed");
-            cc = parseInt($(this).val());
-            tId = Date.now();
-
-            $(".wb").append(
-                "<div id='"+tId+"' class='wb_table draggable resizable-table'><table class='table table-striped'><tbody>" +
-                bTR(cc, "th") +
-                bTR(cc, "td") +
-                bTR(cc, "td") +
-                "</tbody></table></div>");
-
-            editable = function(cc) {
-                eCols = [];
-                for (var i = 0; i < cc; i++) eCols.push([i, "col"+i]);
-                return eCols;
-            };
-
-            params =  {
-                editButton: false,
-                deleteButton: false,
-                hideIdentifier: false,
-                toolbar: true,
-                "columns": {
-                    "identifier": [0, "col0"],
-                    "editable": editable(cc)
-                }
-            };
-
-            $("#"+tId).find("table").Tabledit(params);
-
-            $("#colNames").append(function() {
-                rhtml = "";
-                for (var i = 0; i < cc; i++) {
-                    rhtml += "<div class='form-group'><label for='colName_"+i+"'>Column "+i+" Name:</label><input type='text' id='colName_"+i+"' name='colName_"+i+"' class='form-control'></div>";
-                }
-                return rhtml;
-            });
-
-            initWbElems();
-        }
-    });
-
-    nr.click(function () {
-        cc = $(this).siblings("table").find("tr").first().children().length;
-        $(this).siblings("table").find("tbody").append(bTRw(cc,"td"));
-        $(this).trigger("newRow");
     });
 
     $("#addTextBox").click(function() {
@@ -157,7 +81,7 @@ $(function () {
            $(this).css("background-color", "#EFEFEF");
         });
 
-        initWbElems();
+        $(".wb").trigger("update_wb");
 
     });
 
@@ -219,87 +143,6 @@ $(function () {
         })
     });
 
-    $(".save").click(function () {
-        wb = {
-            title: "Test Wallboard",
-            _id: "wallboard1",
-            elems: []
-        };
-
-
-        $(".wb").children().each(function (index) {
-            i = $(this);
-
-            elem = {
-                id: "wb_" + index,
-                tagName: i.prop("tagName"),
-                innerText: i.text()
-            };
-
-            if (i.children("table").length == 1) {
-                elem.tagName = "table";
-                delete elem.innerText;
-
-                rows = [];
-                columns = [];
-
-                i.find("tr").each(function (index) {
-                    row = []
-                    //each td or th
-                    $(this).children().each(function () {
-                        row.push([$(this).prop("tagName"), $(this).text()]);
-                    });
-                    if (index == 0) columns = row;
-                    rows.push(row);
-                });
-
-                elem.struct = {
-                    rows: rows
-                };
-
-                editable = [];
-
-                columns.forEach(function (e, i) {
-                    editable.push([parseInt(i), e[1]])
-                });
-
-                elem.tableEditColumns = {
-                    "identifier": editable[0],
-                    "editable": editable
-                }
-                elem.style = [
-                    ["height", i.css("height")],
-                    ["width", i.css("width")],
-                    ["position", "absolute"],
-                    ["left", i.css("left")],
-                    ["top", i.css("top")]
-                ]
-            }
-            else if (elem.tagName == 'H1') {
-                elem.style = [
-                    ["width", "100%"],
-                    ["position", "fixed"]
-                ]
-            }
-            else {
-                elem.style = [
-                    ["height", i.css("height")],
-                    ["width", i.css("width")],
-                    ["color", i.css("color")],
-                    ["position", "absolute"],
-                    ["left", i.css("left")],
-                    ["top", i.css("top")],
-                    ["background", i.css("background")]
-                ]
-            }
-
-
-            wb.elems.push(elem);
-
-        }).promise().done(function () {
-            $.post('/save', {wb: wb});
-        });
-    });
 });
 
 //<div class="row">
