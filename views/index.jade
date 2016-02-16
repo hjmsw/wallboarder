@@ -121,6 +121,10 @@ html
                   label(for="tableCols")= "Columns:"
                   input(type="text" class="form-control" id="tableCols" name="tableCols")
                 div#colNames
+                div.form-group
+                  input(type="button" id="wb-table-confirm" name="wb-table-confirm" value="Confirm" class="btn btn-default form-control hidden")
+                div.form-group
+                  input(type="button" id="wb-table-cancel" name="wb-table-cancel" value="Cancel" class="btn btn-default form-control hidden")
         div#editZone
         div#binIcon
           span.glyphicon.glyphicon-trash

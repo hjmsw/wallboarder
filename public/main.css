@@ -17,12 +17,24 @@ body {
     cursor: pointer;
 }
 
+.wb_table {
+    background:#FFF;
+}
+
 .wb_table .btn {
     display:none;
 }
 
 .tabledit-view-mode {
     height: 37px;
+}
+
+.colNames {
+    height: 230px;
+    overflow: scroll;
+    border: solid 1px #DDD;
+    padding: 5px;
+
 }
 
 .ui-widget-content {

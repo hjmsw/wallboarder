@@ -22,9 +22,6 @@ $(function() {
     //Events
     $(window).load(initTableEdit);
 
-    nr = $(".newRow");
-    nr.on("newRow", initTableEdit);
-
     $(".wb_table").hover(function () {
         $(this).find(".newRow").show();
     }, function () {
@@ -32,6 +29,11 @@ $(function() {
     });
 
     $("#tableCols").change(function() {
+        cancelBtn = $("#wb-table-cancel");
+        confirmBtn = $("#wb-table-confirm");
+
+        cancelBtn.removeClass("hidden");
+
         $(this).prop('disabled', true);
         if ($(this).val() > 0) {
             console.log("disabled until insert confirmed");
@@ -39,7 +41,7 @@ $(function() {
             tId = Date.now();
 
             $(".wb").append(
-                "<div id='"+tId+"' class='wb_table draggable resizable-table'><table class='table table-striped'><tbody>" +
+                "<div id='"+tId+"' class='wb_table draggable resizable-table' style='width:30%;'><table class='table table-striped'><tbody>" +
                 bTR(cc, "th") +
                 bTR(cc, "td") +
                 bTR(cc, "td") +
@@ -62,20 +64,60 @@ $(function() {
                 }
             };
 
-            $("#"+tId).find("table").Tabledit(params);
+            wb_t = $("#"+tId).find("table");
+            wb_t.Tabledit(params);
 
             $("#colNames").append(function() {
                 rhtml = "";
                 for (var i = 0; i < cc; i++) {
-                    rhtml += "<div class='form-group'><label for='colName_"+i+"'>Column "+i+" Name:</label><input type='text' id='colName_"+i+"' name='colName_"+i+"' class='form-control'></div>";
+                    rhtml += "<div class='form-group'><label for='colName_"+i+"'>Column "+i+" Name:</label><input type='text' id='colName_"+i+"' name='colName_"+i+"' class='form-control col-th-edit'></div>";
                 }
                 return rhtml;
             });
 
             $(".wb").trigger("update_wb");
-            //initWbElems();
+
+            cte = $(".col-th-edit");
+
+            cte.on("keyup", function() {
+                a = $(this).attr("id").split("_");
+                col_index = a[a.length-1];
+
+                $(wb_t.find("th")[col_index]).text($(this).val());
+
+                cols_populated = true;
+                cte.each(function() {
+                    if ($(this).val() === "") cols_populated = false;
+                });
+                if (cols_populated) confirmBtn.removeClass("hidden");
+            });
+
+
+            cancelBtn.click(function() {
+                clearTableForm(true)
+            });
+            confirmBtn.click(function() {
+                clearTableForm(false)
+            });
+
+            function clearTableForm(delete_table) {
+                $("#colNames").html("");
+
+                tc = $("#tableCols");
+                tc.val("");
+                tc.prop('disabled', false);
+
+                cancelBtn.addClass("hidden");
+                confirmBtn.addClass("hidden");
+
+                if (delete_table) wb_t.remove();
+            }
         }
     });
+
+    nr = $(".newRow");
+
+    nr.on("newRow", initTableEdit);
 
     nr.click(function () {
         cc = $(this).siblings("table").find("tr").first().children().length;
