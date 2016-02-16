@@ -27,6 +27,10 @@ $(function() {
                         ["position", "fixed"]
                     ]
                 } else {
+                    if(i.find(".box-decoration").length == 1) {
+                        c = i.find("i").attr("class").split(" ");
+                        elem.decoration = c[c.length-1];
+                    }
                     elem.style = [
                         ["height", i.css("height")],
                         ["width", i.css("width")],
