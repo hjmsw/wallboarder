@@ -54,8 +54,4 @@ $(function () {
         }
 
     });
-
-    $(".colorInner").click(function() {
-        //$("#binIcon").hide();
-    });
 });

@@ -67,7 +67,7 @@ $(function () {
                 } else if(elem.hasClass('wb_box')) {
                     el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>" +
                         "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
-                        elem.text() + "'/></div><div class='colorPickers'></div></div>";
+                        elem.find(".box-content").text() + "'/></div><div class='colorPickers'></div></div>";
                 } else {
                     el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
                         "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
@@ -132,8 +132,27 @@ $(function () {
 
         id = Date.now();
 
-        wb.append("<div id='"+id+"'>"+elem.text()+"</div>");
+        wb.append(function() {
+            bdv = $("#boxDecoration").val()
+            if (bdv === "") {
+                return "<div id='"+id+"'>\
+                            <div>\
+                                <div class='box-content box-content-full-width'></div>\
+                            </div>\
+                        </div>";
+            }
+            else {
+                return "<div id='"+id+"'>\
+                            <div>\
+                                <div class='box-decoration'><i class='fa "+bdv+"'></i></div>\
+                                <div class='box-content'></div>\
+                             </div>\
+                        </div>";
+            }
+        });
         n_elem = $("#"+id);
+
+        n_elem.find(".box-content").text(elem.text());
 
         n_elem.css({
             color: elem.css("color"),
@@ -143,18 +162,21 @@ $(function () {
             padding: "10px"
         });
 
-        n_elem.addClass("draggable resizable editable");
+        n_elem.addClass("draggable resizable editable wb_box");
 
+        //Reset preview box
         elem.text("Text goes here...");
         elem.css({
             background: "#EFEFEF",
             color: "#000"
         });
 
+        //reset color selectors
         $("#plt").find(".colorInner").each(function(){
            $(this).css("background-color", "#EFEFEF");
         });
 
+        //Update wallboard, initialising this element
         $(".wb").trigger("update_wb");
 
     });
