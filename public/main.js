@@ -22,19 +22,21 @@ $(function () {
         });
     }
 
+    wb = $(".wb");
+
     $(window).load(function() {
         initWbElems();
 
         $(".accordion").accordion();
 
-        $(".wb").css({
+        wb.css({
             height: $(window).height()
         });
 
 
     });
 
-    $(".wb").on("update_wb", initWbElems);
+    wb.on("update_wb", initWbElems);
 
     //Make sure side panel (palette) has highest z-index on dragstop
     $(".draggable").on("dragstop", function(event, ui) {
@@ -47,7 +49,7 @@ $(function () {
 
     $("#binIcon").droppable({
         drop: function(event, ui) {
-            $("#"+ui.draggable.attr("id")).effect( "explode", 500, function() {
+            $(ui.draggable).effect( "explode", 500, function() {
                 $(this).remove();
             });
         }
@@ -58,7 +60,7 @@ $(function () {
 
         id = Date.now();
 
-        $(".wb").append("<div id='"+id+"'>"+elem.text()+"</div>");
+        wb.append("<div id='"+id+"'>"+elem.text()+"</div>");
         n_elem = $("#"+id);
 
         n_elem.css({
@@ -129,7 +131,7 @@ $(function () {
 
     });
 
-    $(".wb").click(function(e) {
+    wb.click(function(e) {
         //Only reset plt if wb parent was clicked
         if ($(e.toElement).hasClass('wb')) {
             $("#editZone").html("");
@@ -144,10 +146,3 @@ $(function () {
     });
 
 });
-
-//<div class="row">
-//    <div class="col-md-2"><i class="fa fa-gbp" style="
-//font-weight: bold;
-//"></i></div>
-//<div class="col-md-10">Drag me around 1</div>
-//</div>

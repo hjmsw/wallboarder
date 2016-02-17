@@ -36,7 +36,6 @@ $(function() {
 
         $(this).prop('disabled', true);
         if ($(this).val() > 0) {
-            console.log("disabled until insert confirmed");
             cc = parseInt($(this).val());
             tId = Date.now();
 
