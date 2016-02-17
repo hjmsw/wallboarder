@@ -11,7 +11,7 @@ html
     script(src="/components/jquery/dist/jquery.min.js")
     script(src="/components/jquery-ui/jquery-ui.min.js")
     script(src="/components/markcell/jquery-tabledit/jquery.tabledit.min.js")
-    script(src="/components/tinycolorpicker/lib/jquery.tinycolorpicker.min.js")
+    script(src="/jquery.tinycolorpicker.js")
     script(src="/components/bootstrap/js/collapse.js")
 
     | <style>
@@ -95,6 +95,9 @@ html
                       div.colorInner
                     p= "Bg"
                     div.track
+                    div.hex-entry.form-group
+                      label(for="hexEntry") HEX:
+                      input(type="text" class="form-control hexEntry" name="hexEntry")
                     ul.dropdown
                       li
                     input(type="hidden" class="colorInput")

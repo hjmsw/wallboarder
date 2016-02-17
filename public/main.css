@@ -156,7 +156,7 @@ p.btn-inner {
     width:          200px;
     position:       fixed;
     cursor:         crosshair;
-    bottom:         0;
+    bottom:         34px;
     right:          0;
     display:        none;
     z-index:        10;
@@ -202,6 +202,34 @@ p.btn-inner {
 .colorPicker .dropdown li{
     height: 25px;
     cursor: pointer;
+}
+
+.colorPicker .hex-entry {
+    display:none;
+    background: #000;
+    position: fixed;
+    width: 200px;
+    right: 0px;
+    bottom: 0;
+    z-index: 10;
+    margin:0 !important;
+}
+
+.colorPicker .hex-entry label, .colorPicker .hex-entry input {
+    float:left;
+}
+
+.colorPicker .hex-entry label {
+    width:50px;
+    padding: 8px 0 0 8px;
+}
+
+.colorPicker .hex-entry input {
+    width:150px;
+}
+
+.colorPicker .hex-entry label {
+    color:#FFF;
 }
 
 .colorPickers {

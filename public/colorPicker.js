@@ -15,9 +15,11 @@ $(function () {
                 if ($(this).hasClass("colorPickerBG")) {
                     $(this).parent().siblings(".box").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
                     if (typeof elem !== "undefined") elem.css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+
                 } else if ($(this).hasClass("colorPickerTX")) {
                     $(this).parent().siblings(".box").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
                     if (typeof elem !== "undefined") elem.css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+
                 }
             });
         });
@@ -47,5 +49,9 @@ $(function () {
                     </div>";
         }
 
+    });
+
+    $(".colorInner").click(function() {
+        //$("#binIcon").hide();
     });
 });
