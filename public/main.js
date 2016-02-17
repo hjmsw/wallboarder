@@ -1,8 +1,13 @@
 
 $(function () {
 
+    /**
+     * Setup draggable and resizable elements
+     */
     function initWbElems() {
-        $(".draggable").draggable({
+        drg = $(".draggable");
+
+        drg.draggable({
             grid: [10, 10],
             scroll: false,
             stack: "div"
@@ -20,6 +25,77 @@ $(function () {
             grid: [10, 10],
             handles: "e, w"
         });
+
+        drg.bind("dragstart", function() {
+            $("#binIcon").effect("fade", 500, function() {
+                $(this).show();
+            });
+        });
+
+        drg.bind("dragstop", function(event, ui) {
+            $("#binIcon").effect("fade", 500, function() {
+                $(this).hide();
+            });
+            fixZindex();
+        });
+
+        drg.bind("click", function() {
+            fixZindex();
+        });
+
+        $(".editable").bind("dblclick", function() {
+            elem = $(this);
+
+            plt = $("#plt");
+
+            if (plt.css("display") === "none") {
+                plt.effect("fade", function() {
+                    $(this).show();
+                });
+            }
+
+            $("#accordion").hide();
+
+            ez = $("#editZone");
+
+            ez.html(function() {
+
+                el = "<div class='panel panel-default'><div class='panel-heading'>";
+
+                if (elem.hasClass('wb_table')) {
+                    el += "<h3 class='panel-title'>Edit Table</h3></div>";
+                } else if(elem.hasClass('wb_box')) {
+                    el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>" +
+                        "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
+                        elem.text() + "'/></div><div class='colorPickers'></div></div>";
+                } else {
+                    el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
+                        "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
+                        elem.text() + "'/></div><div class='colorPickers'></div></div>";
+                }
+
+                el +=  "</div>";
+
+                return el;
+            });
+
+            $(".edit-text").on("keyup", function() {
+                elem.find(".box-content").text($(this).val());
+            });
+
+            $("#plt").trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
+
+        });
+
+    }
+
+    function fixZindex() {
+        //Make sure side panel (palette) has highest z-index when called
+        z_index = 0;
+        $(".draggable").each(function() {
+            if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
+        });
+        $("#plt").css("z-index", z_index+1);
     }
 
     wb = $(".wb");
@@ -36,28 +112,12 @@ $(function () {
         $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#preview-box").siblings(".colorPickers")]);
     });
 
+    //Custom event - triggered when wallboard update required
     wb.on("update_wb", initWbElems);
 
-    drg = $(".draggable");
 
-    drg.on("dragstart", function() {
-        $("#binIcon").effect("fade", 500, function() {
-            $(this).show();
-        });
-    });
-    drg.on("dragstop", function(event, ui) {
-        $("#binIcon").effect("fade", 500, function() {
-            $(this).hide();
-        });
 
-        //Make sure side panel (palette) has highest z-index on dragstop
-        z_index = 0;
-        $(".draggable").each(function() {
-           if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
-        });
-        $("#plt").css("z-index", z_index+1);
-    });
-
+    //Drag and drop items into bin to remove from wallboard
     $("#binIcon").droppable({
         drop: function(event, ui) {
             $(ui.draggable).effect( "explode", 500, function() {
@@ -83,7 +143,7 @@ $(function () {
             padding: "10px"
         });
 
-        n_elem.addClass("draggable resizable");
+        n_elem.addClass("draggable resizable editable");
 
         elem.text("Text goes here...");
         elem.css({
@@ -99,49 +159,6 @@ $(function () {
 
     });
 
-    $(".editable").dblclick(function () {
-        elem = $(this);
-
-        plt = $("#plt");
-
-        if (plt.css("display") === "none") {
-            plt.effect("fade", function() {
-                $(this).show();
-            });
-        }
-
-        $("#accordion").hide();
-
-        ez = $("#editZone");
-
-        ez.html(function() {
-
-            el = "<div class='panel panel-default'><div class='panel-heading'>";
-
-            if (elem.hasClass('wb_table')) {
-                el += "<h3 class='panel-title'>Edit Table</h3></div>";
-            } else if(elem.hasClass('wb_box')) {
-                el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>" +
-                    "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
-                    elem.text() + "'/></div><div class='colorPickers'></div></div>";
-            } else {
-                el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
-                    "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
-                    elem.text() + "'/></div><div class='colorPickers'></div></div>";
-            }
-
-            el +=  "</div>";
-
-            return el;
-        });
-
-        $(".edit-text").on("keyup", function() {
-            elem.find(".box-content").text($(this).val());
-        });
-
-        $("#plt").trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
-
-    });
 
     $("#boxText").keyup(function() {
        $("#preview-box").text($("#boxText").val());

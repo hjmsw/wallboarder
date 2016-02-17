@@ -40,7 +40,7 @@ $(function() {
             tId = Date.now();
 
             $(".wb").append(
-                "<div id='"+tId+"' class='wb_table draggable resizable-table' style='width:30%;'><table class='table table-striped'><tbody>" +
+                "<div id='"+tId+"' class='wb_table draggable editable resizable-table' style='width:30%;'><table class='table table-striped'><tbody>" +
                 bTR(cc, "th") +
                 bTR(cc, "td") +
                 bTR(cc, "td") +
