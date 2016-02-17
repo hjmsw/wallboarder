@@ -162,7 +162,7 @@
                     event.stopPropagation();
 
                     $track.toggle();
-                    $(".hex-entry").show();
+                    $hexEntry.show();
                 });
 
                 if(!touchEvents) {
@@ -288,7 +288,7 @@
             mouseIsDown = false;
 
             $track.hide();
-            $(".hex-entry").hide();
+            $hexEntry.hide();
         };
 
         /**

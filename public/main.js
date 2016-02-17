@@ -33,13 +33,24 @@ $(function () {
             height: $(window).height()
         });
 
-
+        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#preview-box").siblings(".colorPickers")]);
     });
 
     wb.on("update_wb", initWbElems);
 
-    //Make sure side panel (palette) has highest z-index on dragstop
-    $(".draggable").on("dragstop", function(event, ui) {
+    drg = $(".draggable");
+
+    drg.on("dragstart", function() {
+        $("#binIcon").effect("fade", 500, function() {
+            $(this).show();
+        });
+    });
+    drg.on("dragstop", function(event, ui) {
+        $("#binIcon").effect("fade", 500, function() {
+            $(this).hide();
+        });
+
+        //Make sure side panel (palette) has highest z-index on dragstop
         z_index = 0;
         $(".draggable").each(function() {
            if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
@@ -56,7 +67,8 @@ $(function () {
     });
 
     $("#addTextBox").click(function() {
-        elem = $(this).siblings(".p_box");
+
+        elem = $(this).parent().siblings(".p_box");
 
         id = Date.now();
 
@@ -127,7 +139,7 @@ $(function () {
             elem.find(".box-content").text($(this).val());
         });
 
-        ez.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
+        $("#plt").trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
 
     });
 

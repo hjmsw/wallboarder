@@ -28,7 +28,7 @@ $(function () {
     // Events
     $(window).load(init);
 
-    $("#editZone").on("newColorPickers", function(event, elem, parent) {
+    $("#plt").on("newColorPickers", function(event, elem, parent) {
 
         parent.append(generateMarkup("colorPickerBG", "Bg", $(elem).css("background-color")) +
             generateMarkup("colorPickerTX", "Aa", $(elem).css("color")));
@@ -42,6 +42,10 @@ $(function () {
                       </a> \
                       <p>"+c_text+"</p> \
                       <div class='track'></div> \
+                      <div class='hex-entry form-group'> \
+                        <label>HEX:</label> \
+                        <input type='text' class='form-control hexEntry'/> \
+                      </div> \
                       <ul class='dropdown'> \
                           <li></li> \
                       </ul> \
