@@ -93,6 +93,13 @@ body {
     margin: 0 2px;
 }
 
+#boxDecorationPreview {
+    float: right;
+    top: -24px;
+    position: relative;
+    right: 10px;
+}
+
 #editZone {
     padding:5px;
 }

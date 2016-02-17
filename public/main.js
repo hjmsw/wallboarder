@@ -131,6 +131,13 @@ $(function () {
 
     });
 
+    $("#boxText").keyup(function() {
+       $("#preview-box").text($("#boxText").val());
+    });
+    $("#boxDecoration").keyup(function() {
+        $("#boxDecorationPreview").attr("class", "fa " + $("#boxDecoration").val());
+    });
+
     wb.click(function(e) {
         //Only reset plt if wb parent was clicked
         if ($(e.toElement).hasClass('wb')) {

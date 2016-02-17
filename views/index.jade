@@ -88,7 +88,7 @@ html
                 href="#collapseOne" aria-expanded="true" aria-controls="collapseOne")="Insert Text Box"
             div(id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne")
               div(class="panel-body")
-                div.box.p_box= "Text goes here..."
+                div#preview-box.box.p_box= "Text goes here..."
                 div.colorPickers
                   div.colorPicker.colorPickerBG
                     a.color
@@ -107,8 +107,16 @@ html
                     ul.dropdown
                       li
                     input(type="hidden" class="colorInput")
+                div.form-group
+                  label(for="boxText")="Text:"
+                  input(type="text" id="boxText" name="boxText" placeholder="box text" class="form-control")
+                div.form-group
+                  label(for="boxDecoration")= "Decoration:"
+                  input(type="text" class="form-control" placeholder="fa-icon-name" id="boxDecoration" name="boxDecoration")
+                  i#boxDecorationPreview
 
-                input(type="button" id="addTextBox" class="add btn btn-default", value="Add")
+                div.form-group
+                  input(type="button" id="addTextBox" class="add btn btn-default", value="Add")
 
           div(class="panel panel-default")
             div(class="panel-heading" role="tab" id="headingTwo")
