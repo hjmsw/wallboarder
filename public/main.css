@@ -14,8 +14,8 @@ body {
 .newRow {
     float: right;
     position: absolute;
-    top: 4px;
-    right: 8px;
+    top: 14px;
+    right: 18px;
 }
 
 .draggable {
@@ -35,7 +35,11 @@ body {
 }
 
 .tabledit-view-mode {
-    height: 37px;
+    height: 47px;
+}
+
+.tabledit-span {
+    line-height:30px;
 }
 
 .colNames {
@@ -68,6 +72,8 @@ body {
 .box-content-full-width {
     width:100%;
 }
+
+/*------- Side Panel -------*/
 
 #plt {
     width:200px;
@@ -124,6 +130,78 @@ p.btn-inner {
     padding:10px;
     background:#EFEFEF;
 }
+
+#binIcon {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    text-align: center;
+    display:none;
+}
+
+#binIcon .glyphicon {
+    font-size: 50px;
+    color: #CCC;
+    position: absolute;
+    top: 20px;
+    left: 0;
+}
+
+.ui-resizable-e {
+    border-right: dashed 1px #444;
+}
+.ui-resizable-w {
+    border-left: dashed 1px #444;
+}
+
+.ui-resizable-n {
+    border-top: dashed 1px #444;
+}
+
+.ui-resizable-s {
+    border-bottom: dashed 1px #444;
+}
+
+.ui-accordion .ui-accordion-content {
+    padding:4px;
+}
+
+ul.selectable  {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 160px;
+    height: 80px;
+}
+
+ul.selectable li {
+    height: 24px;
+    width: 24px;
+    background-color: #d9d9d9;
+    margin: 1px;
+    float: left;
+}
+
+ul.selectable .ui-selecting { background: #FECA40; }
+ul.selectable .ui-selected { background: #F39814; }
+
+#tbl-struct-container {
+    height:30px;
+    width:100%;
+}
+#tbl-struct-container .tbl-struct {
+    width:65px;
+    float:left;
+    margin:2px;
+}
+
+#visualGridSelector {
+    margin-bottom:10px;
+}
+
+/*-----Color Pickers------------*/
 
 .colorPickers p {
     float: left;
@@ -236,59 +314,3 @@ p.btn-inner {
 .colorPickers {
     height:60px;
 }
-
-#binIcon {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 80px;
-    width: 100%;
-    text-align: center;
-    display:none;
-}
-
-#binIcon .glyphicon {
-    font-size: 50px;
-    color: #CCC;
-    position: absolute;
-    top: 20px;
-    left: 0;
-}
-
-.ui-resizable-e {
-    border-right: dashed 1px #444;
-}
-.ui-resizable-w {
-    border-left: dashed 1px #444;
-}
-
-.ui-resizable-n {
-    border-top: dashed 1px #444;
-}
-
-.ui-resizable-s {
-    border-bottom: dashed 1px #444;
-}
-
-.ui-accordion .ui-accordion-content {
-    padding:4px;
-}
-
-ul.selectable  {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    width: 160px;
-    height: 80px;
-}
-
-ul.selectable li {
-    height: 24px;
-    width: 24px;
-    background-color: #d9d9d9;
-    margin: 1px;
-    float: left;
-}
-
-ul.selectable .ui-selecting { background: #FECA40; }
-ul.selectable .ui-selected { background: #F39814; }
