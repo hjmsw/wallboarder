@@ -5,7 +5,7 @@ $(function () {
      * Setup draggable and resizable elements
      */
     function initWbElems() {
-        drg = $(".draggable");
+        var drg = $(".draggable");
 
         drg.draggable({
             grid: [10, 10],
@@ -44,9 +44,9 @@ $(function () {
         });
 
         $(".editable").bind("dblclick", function() {
-            elem = $(this);
+            var elem = $(this);
 
-            plt = $("#plt");
+            var plt = $("#plt");
 
             if (plt.css("display") === "none") {
                 plt.effect("fade", function() {
@@ -56,11 +56,11 @@ $(function () {
 
             $("#accordion").hide();
 
-            ez = $("#editZone");
+            var ez = $("#editZone");
 
             ez.html(function() {
 
-                el = "<div class='panel panel-default'><div class='panel-heading'>";
+                var el = "<div class='panel panel-default'><div class='panel-heading'>";
 
                 if (elem.hasClass('wb_table')) {
                     el += "<h3 class='panel-title'>Edit Table</h3></div>";
@@ -91,14 +91,14 @@ $(function () {
 
     function fixZindex() {
         //Make sure side panel (palette) has highest z-index when called
-        z_index = 0;
+        var z_index = 0;
         $(".draggable").each(function() {
             if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
         });
         $("#plt").css("z-index", z_index+1);
     }
 
-    wb = $(".wb");
+    var wb = $(".wb");
 
     $(window).load(function() {
         initWbElems();
@@ -109,7 +109,11 @@ $(function () {
             height: $(window).height()
         });
 
-        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#preview-box").siblings(".colorPickers")]);
+        var plt = $("#plt");
+
+        plt.trigger("newColorPickers", [$("#preview-box"), $("#preview-box").siblings(".colorPickers")]);
+
+        $("#accordion").css("height", $(window).height()-55);
     });
 
     //Custom event - triggered when wallboard update required
@@ -128,12 +132,12 @@ $(function () {
 
     $("#addTextBox").click(function() {
 
-        elem = $(this).parent().siblings(".p_box");
+        var elem = $(this).parent().siblings(".p_box");
 
-        id = Date.now();
+        var id = Date.now();
 
         wb.append(function() {
-            bdv = $("#boxDecoration").val()
+            var bdv = $("#boxDecoration").val()
             if (bdv === "") {
                 return "<div id='"+id+"'>\
                             <div>\
@@ -150,7 +154,7 @@ $(function () {
                         </div>";
             }
         });
-        n_elem = $("#"+id);
+        var n_elem = $("#"+id);
 
         n_elem.find(".box-content").text(elem.text());
 
