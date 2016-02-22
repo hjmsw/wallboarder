@@ -63,7 +63,7 @@ html
             #{elem.tagName}(
               id=elem.id
               class="draggable resizable ui-widget-content wb_box box editable")
-              div
+              div.box-inner
                 if elem.decoration
                   div.box-decoration
                     i(class="fa #{elem.decoration}")
@@ -95,8 +95,8 @@ html
                   input(type="text" id="boxText" name="boxText" placeholder="box text" class="form-control")
                 div.form-group
                   label(for="boxDecoration")= "Decoration:"
-                  input(type="text" class="form-control" placeholder="fa-icon-name" id="boxDecoration" name="boxDecoration")
-                  i#boxDecorationPreview
+                  input(type="text" class="form-control boxDecoration" placeholder="fa-icon-name" name="boxDecoration")
+                  i
 
                 div.form-group
                   input(type="button" id="addTextBox" class="add btn btn-default", value="Add")

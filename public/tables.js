@@ -92,7 +92,9 @@ $(function() {
             if (tableRows.val() > 0) rc = parseInt($("#tableRows").val());
 
             $(".wb").append(
-                "<div id='" + tId + "' class='wb_table draggable editable resizable-table' style='width:30%;'><table class='table table-striped'><tbody>" +
+                "<div id='" + tId + "' class='wb_table draggable editable resizable-table ui-widget-content' style='width:30%;'>" +
+                "<button class='newRow btn btn-sm btn-default'><span class='glyphicon glyphicon-plus'></span></button>" +
+                "<table class='table table-striped'><tbody>" +
                 bTR(cc, 1, "th") +
                 bTR(cc, rc, "td") +
                 "</tbody></table></div>");
@@ -114,12 +116,18 @@ $(function() {
                 }
             };
 
-            var wb_t = $("#" + tId).find("table");
+            var tableContainer = $("#" + tId);
+
+            wb_tables.push({
+                t_elem: tableContainer,
+                params: params
+            });
+
+            var wb_t = tableContainer.find("table");
             wb_t.Tabledit(params);
 
 
-            setTableEvents($("#" + tId));
-
+            setTableEvents(tableContainer);
 
             $("#colNames").append(function () {
                 var rhtml = "";
@@ -133,20 +141,20 @@ $(function() {
 
             var cte = $(".col-th-edit");
 
+            //Update table column header text
             cte.on("keyup", function () {
-                a = elem.attr("id").split("_");
+                a = $(this).attr("id").split("_");
                 col_index = a[a.length - 1];
 
-                $(wb_t.find("th")[col_index]).text(elem.val());
+                $(wb_t.find("th")[col_index]).text($(this).val());
 
                 //Don't show confirm button if column title fields empty
                 cols_populated = true;
                 cte.each(function () {
-                    if (elem.val() === "") cols_populated = false;
+                    if ($(this).val() === "") cols_populated = false;
                 });
                 if (cols_populated) confirmBtn.removeClass("hidden");
             });
-
 
             cancelBtn.click(function () {
                 clearTableForm(true, wb_t)
@@ -155,6 +163,12 @@ $(function() {
                 clearTableForm(false, wb_t)
             });
 
+            tableContainer.find(".newRow").on("click", function() {
+                //Calculate column count for table - 1 for tabledit toolbar
+                var cc = $(this).siblings("table").find("tr").first().children().length -1;
+                $(this).siblings("table").find("tbody").append(bTR(cc,1,"td"));
+                initTableEdit();
+            });
 
         }
     }
@@ -199,21 +213,14 @@ $(function() {
         });
     });
 
-
-
     $("#tableCols").change(function() {
         insertTable($(this));
     });
 
-    var nr = $(".newRow");
-
-    nr.on("newRow", initTableEdit);
-
-    nr.click(function () {
+    $(".newRow").on("click", function() {
         //Calculate column count for table - 1 for tabledit toolbar
         var cc = $(this).siblings("table").find("tr").first().children().length -1;
         $(this).siblings("table").find("tbody").append(bTR(cc,1,"td"));
-        $(this).trigger("newRow");
+        initTableEdit();
     });
-
 });

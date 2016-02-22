@@ -100,7 +100,7 @@ body {
     margin: 0 2px;
 }
 
-#boxDecorationPreview {
+.boxDecorationPreview {
     float: right;
     top: -24px;
     position: relative;
