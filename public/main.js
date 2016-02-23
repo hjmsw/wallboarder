@@ -5,43 +5,8 @@ $(function () {
      * Setup draggable and resizable elements
      */
     function initWbElems() {
-        var drg = $(".draggable");
 
-        drg.draggable({
-            grid: [10, 10],
-            scroll: false,
-            stack: "div"
-        });
-
-
-        $(".resizable").resizable({
-            autoHide: true,
-            grid: [10, 10],
-            handles: "n, ne, e, se, s, sw, w, nw"
-        });
-
-        $(".resizable-table").resizable({
-            autoHide: true,
-            grid: [10, 10],
-            handles: "e, w"
-        });
-
-        drg.on({
-            "dragstart":  function() {
-               $("#binIcon").effect("fade", 500, function () {
-                   $(this).show();
-               })
-            },
-            "dragstop": function() {
-                $("#binIcon").effect("fade", 500, function() {
-                    $(this).hide();
-                });
-                fixZindex();
-            },
-            "click": function() {
-                fixZindex();
-            }
-        });
+        /*-------Moving code to ui.js where applicable----------------------*/
 
         $(".editable").bind("dblclick", function() {
             var elem = $(this);
@@ -137,14 +102,7 @@ $(function () {
         });
     }
 
-    function fixZindex() {
-        //Make sure side panel (palette) has highest z-index when called
-        var z_index = 0;
-        $(".draggable").each(function() {
-            if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
-        });
-        $("#plt").css("z-index", z_index+1);
-    }
+
 
     function buildTextBox(bd, text) {
         var bdv = bd.val();
@@ -175,8 +133,7 @@ $(function () {
         $("#accordion").css("height", $(window).height()-55);
     });
 
-    //Custom event - triggered when wallboard update required
-    wb.on("update_wb", initWbElems);
+
 
 
 

@@ -10,7 +10,6 @@ $(function() {
     var tableRows = $("#tableRows");
     var tableCols = $("#tableCols");
     var colNames = $("#colNames");
-    var cte = $(".col-th-edit");
 
 
     var Table = {
@@ -21,6 +20,7 @@ $(function() {
         containerId: null,
         containerClass: "wb_table draggable editable resizable-table ui-widget-content",
         params: null,
+        cte: $(".col-th-edit"),
 
 
         init: function() {
@@ -46,12 +46,12 @@ $(function() {
 
             this.container.on({
                 mouseenter: function () {
-                    $(this).find(".newRow").show();
-                    $(this).find(".tabledit-delete-button").show();
+                    $(this).find(".tabledit-delete-button, .tabledit-confirm-button, .newRow").css("visibility","visible");
+                    $(this).find("td, th").addClass("wb_table_td_hover");
                 },
                 mouseleave: function () {
-                    $(this).find(".newRow").hide();
-                    $(this).find(".tabledit-delete-button").hide();
+                    $(this).find(".tabledit-delete-button, .tabledit-confirm-button, .newRow").css("visibility","hidden");
+                    $(this).find("td, th").removeClass("wb_table_td_hover");
                 }
             });
 
@@ -65,11 +65,25 @@ $(function() {
             });
 
             cancelBtn.click(function () {
-                console.log(self.container);
-                //wb.trigger("clearTableForm", [true, self.container])
+                wb.trigger("clearTableForm", [true])
             });
             confirmBtn.click(function () {
-                wb.trigger("clearTableForm", [false, self.container])
+                wb.trigger("clearTableForm", [false]);
+            });
+
+            //Update table column header text
+            $(".col-th-edit").on("keyup", function () {
+                var a = $(this).attr("id").split("_");
+                var col_index = a[a.length - 1];
+
+                $(self.container.find("th")[col_index]).text($(this).val());
+
+                //Don't show confirm button if column title fields empty
+                var cols_populated = true;
+                $(".col-th-edit").each(function () {
+                    if ($(this).val() === "") cols_populated = false;
+                });
+                if (cols_populated) confirmBtn.removeClass("hidden");
             });
         },
 
@@ -77,7 +91,7 @@ $(function() {
             markup="";
             for (var i=0; i<rc; i++) {
                 markup += "<tr>";
-                for (var ii=0; ii<cc; ii++) markup += "<"+el+">...</"+el+">";
+                for (var ii=0; ii<cc; ii++) markup += "<"+el+"></"+el+">";
                 markup += "</tr>";
             }
             return markup;
@@ -89,10 +103,10 @@ $(function() {
             return eCols;
         },
 
-        buildHeaderNameForm: function (cc) {
+        buildHeaderNameForm: function (cc, cid) {
             var rhtml = "";
             for (var i = 0; i < cc; i++) {
-                rhtml += "<div class='form-group'><label for='colName_" + i + "'>Column " + i + " Name:</label><input type='text' id='colName_" + i + "' name='colName_" + i + "' class='form-control col-th-edit'></div>";
+                rhtml += "<div class='form-group'><input id='deleteTable' type='hidden' value='"+cid+"'/><label for='colName_" + i + "'>Column " + i + " Name:</label><input type='text' id='colName_" + i + "' name='colName_" + i + "' class='form-control col-th-edit'></div>";
             }
             return rhtml;
         },
@@ -106,13 +120,13 @@ $(function() {
 
             if (tableCols.val() > 0) {
                 this.columnCount = parseInt(tableCols.val());
-                this.tableId = Date.now();
+                this.containerId = Date.now();
 
 
                 if (tableRows.val() > 0) this.rowCount = parseInt(tableRows.val());
 
                 $(".wb").append(
-                    "<div id='" + this.tableId + "' class='"+this.containerClass+"' style='width:30%;'>" +
+                    "<div id='" + this.containerId + "' class='"+this.containerClass+"' style='width:30%;'>" +
                     "<button class='newRow btn btn-sm btn-default'><span class='glyphicon glyphicon-plus'></span></button>" +
                     "<table class='table table-striped'><tbody>" +
                     this.buildRow(this.columnCount, 1, "th") +
@@ -120,7 +134,7 @@ $(function() {
                     "</tbody></table></div>");
 
 
-                this.container = $("#" + this.tableId);
+                this.container = $("#" + this.containerId);
 
                 this.params = {
                     editButton: false,
@@ -141,30 +155,11 @@ $(function() {
                 this.table = this.container.find("table");
                 this.table.Tabledit(this.params);
 
+                colNames.append(this.buildHeaderNameForm(this.columnCount, this.containerId));
+
                 this.setEvents();
 
-                colNames.append(this.buildHeaderNameForm(this.columnCount));
-
                 wb.trigger("update_wb");
-
-
-                //Update table column header text
-                cte.on("keyup", function () {
-                    console.log("keyup fired");
-                    a = $(this).attr("id").split("_");
-                    col_index = a[a.length - 1];
-
-                    $(wb_t.find("th")[col_index]).text($(this).val());
-
-                    //Don't show confirm button if column title fields empty
-                    cols_populated = true;
-                    cte.each(function () {
-                        if ($(this).val() === "") cols_populated = false;
-                    });
-                    if (cols_populated) confirmBtn.removeClass("hidden");
-                });
-
-
             }
         }
     };
@@ -173,7 +168,6 @@ $(function() {
     $(window).load(function() {
 
         wb_tables.forEach(function (i) {
-            console.log(i);
             var table = Object.create(Table);
             table.container = $(i.t_elem);
             table.params = i.params;
