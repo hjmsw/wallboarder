@@ -4,7 +4,6 @@
 var wb_tables = [];
 
 $(function() {
-    var wb = $(".wb");
     var cancelBtn = $("#wb-table-cancel");
     var confirmBtn = $("#wb-table-confirm");
     var tableRows = $("#tableRows");
@@ -21,6 +20,7 @@ $(function() {
         containerClass: "wb_table draggable editable resizable-table ui-widget-content",
         params: null,
         cte: $(".col-th-edit"),
+        wb: $(".wb"),
 
 
         init: function(setEvents) {
@@ -52,6 +52,23 @@ $(function() {
             var self = this;
 
             this.container.on({
+                "dragstart":  function() {
+                    $("#binIcon").effect("fade", 500, function () {
+                        $(this).show();
+                    })
+                },
+                "dragstop": function() {
+                    $("#binIcon").effect("fade", 500, function() {
+                        $(this).hide();
+                    });
+                    self.wb.trigger("fixZindex");
+                },
+                "click": function() {
+                    self.wb.trigger("fixZindex");
+                }
+            });
+
+            this.container.on({
                 mouseenter: function () {
                     $(this).find(".tabledit-delete-button, .tabledit-confirm-button, .newRow").css("visibility","visible");
                     $(this).find("td, th").addClass("wb_table_td_hover");
@@ -72,10 +89,10 @@ $(function() {
             });
 
             cancelBtn.click(function () {
-                wb.trigger("clearTableForm", [true])
+                self.wb.trigger("clearTableForm", [true])
             });
             confirmBtn.click(function () {
-                wb.trigger("clearTableForm", [false]);
+                self.wb.trigger("clearTableForm", [false]);
             });
 
             //Update table column header text
@@ -91,6 +108,10 @@ $(function() {
                     if ($(this).val() === "") cols_populated = false;
                 });
                 if (cols_populated) confirmBtn.removeClass("hidden");
+            });
+
+            this.container.dblclick(function() {
+                self.wb.trigger("startEdit", [$(this)]);
             });
         },
 
@@ -166,7 +187,7 @@ $(function() {
 
                 this.setEvents();
 
-                wb.trigger("update_wb");
+                this.wb.trigger("update_wb");
             }
         }
     };

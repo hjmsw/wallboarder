@@ -14,12 +14,23 @@ $(function () {
             $(this).bind("change", function () {
                 if ($(this).hasClass("colorPickerBG")) {
                     $(this).parent().siblings(".box").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
-                    if (typeof elem !== "undefined") elem.css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                    if (typeof elem !== "undefined") {
+                        if (elem.hasClass("wb_table")) {
+                            elem.find("th").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                        } else {
+                            elem.css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                        }
+                    }
 
                 } else if ($(this).hasClass("colorPickerTX")) {
                     $(this).parent().siblings(".box").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
-                    if (typeof elem !== "undefined") elem.css("color", $(this).data("plugin_tinycolorpicker").colorHex);
-
+                    if (typeof elem !== "undefined") {
+                        if (elem.hasClass("wb_table")) {
+                            elem.find("th").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                        } else {
+                            elem.css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                        }
+                    }
                 }
             });
         });

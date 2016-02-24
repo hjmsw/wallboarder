@@ -22,6 +22,11 @@ html
         - each i in elem.style
           | #{i[0]}:#{i[1]};
         | }
+      if elem.headStyle
+        | ##{elem.id} th {
+        - each i in elem.headStyle
+          | #{i[0]}:#{i[1]};
+        | }
     | </style>
 
   body

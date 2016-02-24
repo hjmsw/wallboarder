@@ -196,7 +196,9 @@ $(function() {
                 var el = "<div class='panel panel-default'><div class='panel-heading'>";
 
                 if (elem.hasClass('wb_table')) {
-                    el += "<h3 class='panel-title'>Edit Table</h3></div>";
+                    el += "<h3 class='panel-title'>Edit Table</h3></div><div class='panel-body'>\
+                           <div class='form-group'><label>Header Colours:</label><div class='colorPickers'></div></div></div>";
+
                 } else if(elem.hasClass('wb_box')) {
                     el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
                         <div class='form-group'><input type='text' class='form-control' id='plt-edit-text' value='" +

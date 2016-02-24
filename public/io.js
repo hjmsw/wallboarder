@@ -72,6 +72,12 @@ $(function() {
                     "identifier": editable[0],
                     "editable": editable
                 };
+
+                elem.headStyle = [
+                    ["background", i.find("th").css("background")],
+                    ["color", i.find("th").css("color")]
+                ];
+
                 elem.style = [
                     ["height", i.css("height")],
                     ["width", i.css("width")],
