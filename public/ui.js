@@ -13,13 +13,14 @@ $(function() {
         wb: $(".wb"),
         plt: $("#plt"),
 
+        init: function(reInit) {
+            if (typeof reInit === "undefined") reInit = false;
 
-        init: function() {
             this.initSelectables();
             this.initDraggables();
             this.initResizables();
             this.initDroppables();
-            this.setEvents();
+            this.setEvents(reInit);
         },
 
         initAccordion: function() {
@@ -98,65 +99,57 @@ $(function() {
             });
         },
 
-        setEvents: function() {
+        setEvents: function(reInit) {
             var self = this;
+
+            //Some events only needed to be initiated once
+            if (!reInit) {
+                //first init
+
+                this.wb.on("fixZindex", function() {
+                    self.fixZindex();
+                });
+
+                this.wb.click(function(e) {
+                    //Only reset plt if wb parent was clicked
+                    if ($(e.toElement).hasClass('wb')) {
+                        $("#editZone").html("");
+                        $("#accordion").show();
+                    }
+                });
+
+                $(".plt-hide").click(function() {
+                    $("#plt").effect("fade", function() {
+                        $(this).hide();
+                    })
+                });
+
+                $("#addTextBox").on("click", function() {
+                    self.wb.trigger("newTextBox", [$(this).parent().siblings(".p_box")]);
+                });
+
+                $("#boxText").keyup(function() {
+                    $("#preview-box").text($("#boxText").val());
+                });
+            }
+
             $("#tableCols").change(function() {
                 $(".wb").trigger("newWbTable");
             });
 
-            $(".wb").on("clearTableForm", function(event, delete_table) {
+            this.wb.off("clearTableForm").on("clearTableForm", function(event, delete_table) {
                 self.clearTableForm(delete_table);
             });
 
-            this.drg.on({
-                "dragstart":  function() {
-                    $("#binIcon").effect("fade", 500, function () {
-                        $(this).show();
-                    })
-                },
-                "dragstop": function() {
-                    $("#binIcon").effect("fade", 500, function() {
-                        $(this).hide();
-                    });
-                    self.fixZindex();
-                },
-                "click": function() {
-                    self.fixZindex();
-                }
-            });
-
             //Custom event - triggered when wallboard update required
-            this.wb.on("update_wb", function() {
-                self.init()
+            this.wb.off("update_wb").on("update_wb", function() {
+                self.init(true);
             });
 
-            $(".editable").on("dblclick", function() {
-                console.log("dblclick fired");
-                self.buildEditSidebar($(this));
+            this.wb.off("startEdit").on("startEdit", function(event, elem) {
+                self.buildEditSidebar(elem);
             });
 
-            $("#boxText").keyup(function() {
-                $("#preview-box").text($("#boxText").val());
-            });
-
-
-            this.wb.click(function(e) {
-                //Only reset plt if wb parent was clicked
-                if ($(e.toElement).hasClass('wb')) {
-                    $("#editZone").html("");
-                    $("#accordion").show();
-                }
-            });
-
-            $(".plt-hide").click(function() {
-                $("#plt").effect("fade", function() {
-                    $(this).hide();
-                })
-            });
-
-            $("#addTextBox").off("click").on("click", function() {
-                self.addTextBox($(this).parent().siblings(".p_box"));
-            });
         },
 
         setSidebarEvents: function(elem) {
@@ -173,8 +166,7 @@ $(function() {
             });
 
             $("#wb-box-confirm").on("click", function() {
-                elem.find(".box-inner").html(self.buildTextBox($(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-content").text()));
-                elem.find("box-inner").css("font-size",fontSize);
+                $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-content").text(), fontSize]);
             });
 
             $(".boxDecoration").on("keyup", function() {
@@ -182,39 +174,7 @@ $(function() {
             });
         },
 
-        addTextBox: function(elem) {
-            var self = this;
 
-            var id = Date.now();
-
-            this.wb.append("<div id='"+id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox($(this).parents(".panel-body").find(".boxDecoration"),"") + "</div></div>");
-            var n_elem = $("#"+id);
-
-            n_elem.find(".box-content").text(elem.text());
-
-            n_elem.css({
-                color: elem.css("color"),
-                background: elem.css("background"),
-                width: elem.css("width"),
-                height: elem.css("height"),
-                padding: "10px"
-            });
-
-            //Reset preview box
-            elem.text("Text goes here...");
-            elem.css({
-                background: "#EFEFEF",
-                color: "#000"
-            });
-
-            //reset color selectors
-            $("#plt").find(".colorInner").each(function(){
-                $(this).css("background-color", "#EFEFEF");
-            });
-
-            //Update wallboard, initialising this element
-            $(".wb").trigger("update_wb");
-        },
 
         buildEditSidebar: function(elem) {
             var self = this;
@@ -267,16 +227,7 @@ $(function() {
 
         },
 
-        buildTextBox: function(bd, text) {
-            var bdv = bd.val();
-            if (bdv === "") {
-                return "<div class='box-content box-content-full-width'>"+text+"</div>";
-            }
-            else {
-                return "<div class='box-decoration'><i class='fa " + bdv + "'></i></div>\
-                    <div class='box-content'>"+text+"</div>";
-            }
-        },
+
 
         buildFontSizeSelect: function(elem) {
             var ret = "<div class='form-group'><label for='plt-font-size'>Font Size:</label><select class='form-control' id='plt-font-size' name='plt-font-size'>";
