@@ -131,6 +131,10 @@ $(function() {
                 $("#boxText").keyup(function() {
                     $("#preview-box").text($("#boxText").val());
                 });
+
+                $(".header").dblclick(function() {
+                    self.wb.trigger("startEdit", [$(this)]);
+                });
             }
 
             $("#tableCols").change(function() {
@@ -156,7 +160,8 @@ $(function() {
             var self = this;
 
             $("#plt-edit-text").on("keyup", function() {
-                elem.find(".box-content").text($(this).val());
+                if (elem.hasClass("wb_box")) elem.find(".box-content").text($(this).val());
+                else if (elem.hasClass("header")) elem.text($(this).val());
             });
 
             var fontSize = "14px";
@@ -200,6 +205,8 @@ $(function() {
                            <div class='form-group'><label>Header Colours:</label><div class='colorPickers'></div></div></div>";
 
                 } else if(elem.hasClass('wb_box')) {
+                    if (typeof decorationClass === "undefined") decorationClass = "";
+
                     el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
                         <div class='form-group'><input type='text' class='form-control' id='plt-edit-text' value='" +
                         elem.find(".box-content").text() + "'/></div><div class='colorPickers'></div>\
@@ -212,7 +219,7 @@ $(function() {
                         </div>";
                 } else {
                     el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
-                        "<div class='form-group'><input type='text' class='form-control edit-text' value='" +
+                        "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text' value='" +
                         elem.text() + "'/></div><div class='colorPickers'></div></div>";
                 }
 
