@@ -23,7 +23,7 @@ $(function() {
         cte: $(".col-th-edit"),
 
 
-        init: function() {
+        init: function(setEvents) {
             if (this.container === null) {
                 this.buildTable();
             } else {
@@ -37,8 +37,15 @@ $(function() {
 
                 this.table.Tabledit(this.params);
 
-                this.setEvents();
+                if (setEvents) this.setEvents();
+                else this.setRowEvents();
             }
+        },
+
+        setRowEvents: function() {
+            this.container.find(".tabledit-confirm-button").on("click", function() {
+                $(this).parents("tr").remove();
+            });
         },
 
         setEvents: function() {
@@ -61,7 +68,7 @@ $(function() {
 
             this.container.find(".newRow").on("click", function() {
                 self.table.find("tbody").append(self.buildRow(self.columnCount,1,"td"));
-                self.init();
+                self.init(false);
             });
 
             cancelBtn.click(function () {
@@ -171,12 +178,12 @@ $(function() {
             var table = Object.create(Table);
             table.container = $(i.t_elem);
             table.params = i.params;
-            table.init();
+            table.init(true);
         });
 
         $(".wb").on("newWbTable", function() {
             var table = Object.create(Table);
-            table.init();
+            table.init(true);
         });
     });
 
