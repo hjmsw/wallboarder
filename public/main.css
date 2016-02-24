@@ -14,8 +14,9 @@ body {
 .newRow {
     float: right;
     position: absolute;
-    top: 14px;
+    top: 20px;
     right: 18px;
+    visibility: hidden;
 }
 
 .draggable {
@@ -31,11 +32,30 @@ body {
 }
 
 .wb_table .btn {
-    display:none;
+    visibility:hidden;
 }
 
-.tabledit-view-mode {
+.wb_table tr {
     height: 47px;
+}
+
+.wb_table th {
+    line-height:30px !important;
+}
+
+
+.tabledit-view-mode {
+
+}
+
+td, th {
+    border-left: 1px solid rgba(255, 255, 255, 0);
+    border-right: 1px solid rgba(255, 255, 255, 0);
+}
+
+.wb_table_td_hover {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
 }
 
 .tabledit-span {
