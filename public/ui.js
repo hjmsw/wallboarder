@@ -21,6 +21,8 @@ $(function() {
             this.initResizables();
             this.initDroppables();
             this.setEvents(reInit);
+            this.setSidebarEvents();
+            this.fixZindex();
         },
 
         initAccordion: function() {
@@ -159,20 +161,22 @@ $(function() {
         setSidebarEvents: function(elem) {
             var self = this;
 
-            $("#plt-edit-text").on("keyup", function() {
-                if (elem.hasClass("wb_box")) elem.find(".box-content").text($(this).val());
-                else if (elem.hasClass("header")) elem.text($(this).val());
-            });
+            if (typeof elem !== "undefined") {
+                $("#plt-edit-text").on("keyup", function() {
+                    if (elem.hasClass("wb_box")) elem.find(".box-content").text($(this).val());
+                    else if (elem.hasClass("header")) elem.text($(this).val());
+                });
 
-            var fontSize = "14px";
-            $("#plt-font-size").on("change", function() {
-                fontSize = $(this).val();
-                elem.css("font-size",fontSize);
-            });
+                var fontSize = "14px";
+                $("#plt-font-size").on("change", function() {
+                    fontSize = $(this).val();
+                    elem.css("font-size",fontSize);
+                });
 
-            $("#wb-box-confirm").on("click", function() {
-                $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-content").text(), fontSize]);
-            });
+                $("#wb-box-confirm").on("click", function() {
+                    $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-content").text(), fontSize]);
+                });
+            }
 
             $(".boxDecoration").on("keyup", function() {
                 $(this).siblings("i").attr("class", "boxDecorationPreview fa " + $(this).val());
@@ -209,7 +213,7 @@ $(function() {
 
                     el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
                         <div class='form-group'><input type='text' class='form-control' id='plt-edit-text' value='" +
-                        elem.find(".box-content").text() + "'/></div><div class='colorPickers'></div>\
+                        elem.find(".box-content").text() + "'/></div><div id='colorPickersContent' class='colorPickers'></div><div id='colorPickersDecoration' class='colorPickers'></div>\
                         <div class='form-group'><label for='boxDecoration'>Decoration:</label>\
                         <input type='text' class='form-control boxDecoration' placeholder='fa-icon-name' name='boxDecoration' value='"+decorationClass+"'/>\
                         <i class='boxDecorationPreview "+decorationClass+"'></i></div>" +
@@ -231,8 +235,12 @@ $(function() {
 
             this.setSidebarEvents(elem);
 
-
-            this.plt.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
+            if (elem.hasClass('wb_box')) {
+                this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), ez.find("#colorPickersDecoration")]);
+                this.plt.trigger("newColorPickers", [elem.find(".box-content"), ez.find("#colorPickersContent")]);
+            } else {
+                this.plt.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
+            }
 
         },
 
@@ -292,6 +300,6 @@ $(function() {
             height: $(window).height()
         });
 
-        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#preview-box").siblings(".colorPickers")]);
+        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#plt").find(".colorPickers")]);
     });
 });

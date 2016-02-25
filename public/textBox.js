@@ -9,6 +9,7 @@ $(function() {
         container: null,
         id: null,
         drg: $(".draggable"),
+        plt: $("#plt"),
 
         init: function() {
             this.setEvents();
@@ -50,10 +51,8 @@ $(function() {
 
             self.id = Date.now();
 
-            this.wb.append("<div id='"+self.id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox($(this).parents(".panel-body").find(".boxDecoration"),"") + "</div></div>");
+            self.wb.append("<div id='"+self.id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox(self.plt.find(".boxDecoration"),elem.text()) + "</div></div>");
             self.container = $("#"+self.id);
-
-            self.container.find(".box-content").text(elem.text());
 
             self.container.css({
                 color: elem.css("color"),
@@ -99,6 +98,7 @@ $(function() {
         $(".wb_box").each(function() {
             var tb = Object.create(TextBox);
             tb.container = $(this);
+            tb.id = $(this).attr("id");
             tb.init();
         });
 

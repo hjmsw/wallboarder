@@ -7,44 +7,47 @@
 $(function () {
 
     //Init all color pickers
-    function init(e, elem) {
-        $(".colorPicker").each(function () {
-            $(this).tinycolorpicker();
+    function init(e, elem, parent) {
 
-            $(this).bind("change", function () {
-                if ($(this).hasClass("colorPickerBG")) {
-                    $(this).parent().siblings(".box").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
-                    if (typeof elem !== "undefined") {
-                        if (elem.hasClass("wb_table")) {
-                            elem.find("th").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
-                        } else {
-                            elem.css("background", $(this).data("plugin_tinycolorpicker").colorHex);
-                        }
-                    }
+            if (typeof parent !== "undefined") {
+                parent.find(".colorPicker").each(function() {
+                    $(this).tinycolorpicker();
 
-                } else if ($(this).hasClass("colorPickerTX")) {
-                    $(this).parent().siblings(".box").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
-                    if (typeof elem !== "undefined") {
-                        if (elem.hasClass("wb_table")) {
-                            elem.find("th").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
-                        } else {
-                            elem.css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                    $(this).off("change").on("change", function () {
+                        if ($(this).hasClass("colorPickerBG")) {
+                            $(this).parent().siblings(".box").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                            if (typeof elem !== "undefined") {
+                                if (elem.hasClass("wb_table")) {
+                                    elem.find("th").css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                                } else {
+                                    elem.css("background", $(this).data("plugin_tinycolorpicker").colorHex);
+                                }
+                            }
+
+                        } else if ($(this).hasClass("colorPickerTX")) {
+                            $(this).parent().siblings(".box").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                            if (typeof elem !== "undefined") {
+                                if (elem.hasClass("wb_table")) {
+                                    elem.find("th").css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                                } else {
+                                    elem.css("color", $(this).data("plugin_tinycolorpicker").colorHex);
+                                }
+                            }
                         }
-                    }
-                }
-            });
-        });
+                    });
+                });
+            }
+
     };
 
     // Events
     $(window).load(init);
 
     $("#plt").on("newColorPickers", function(event, elem, parent) {
-
         parent.append(generateMarkup("colorPickerBG", "Bg", $(elem).css("background-color")) +
             generateMarkup("colorPickerTX", "Aa", $(elem).css("color")));
 
-        init(null, $(elem));
+        init(null, $(elem), $(parent));
 
         function generateMarkup(c_class, c_text, c_color) {
             return  "<div class='colorPicker "+c_class+"'> \
