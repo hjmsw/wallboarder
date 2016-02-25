@@ -24,7 +24,9 @@ $(function() {
                 if (elem.tagName == 'H1') {
                     elem.style = [
                         ["width", "100%"],
-                        ["position", "fixed"]
+                        ["position", "fixed"],
+                        ["background", i.css("background")],
+                        ["color", i.css("color")]
                     ]
                 } else {
                     if(i.find(".box-decoration").length == 1) {
@@ -38,7 +40,9 @@ $(function() {
                         ["position", "absolute"],
                         ["left", i.css("left")],
                         ["top", i.css("top")],
-                        ["background", i.css("background")]
+                        ["background", i.css("background")],
+                        ["font-size", i.css("font-size")],
+                        ["z-index", i.css("z-index")]
                     ]
                 }
             } else {
@@ -52,7 +56,9 @@ $(function() {
                     row = [];
                     //each td or th
                     $(this).children().each(function () {
-                        row.push([$(this).prop("tagName"), $(this).text()]);
+                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) || $(this).hasClass("tabledit-view-mode")) {
+                            row.push([$(this).prop("tagName"), $(this).text()]);
+                        }
                     });
                     if (0 == index) columns = row;
                     rows.push(row);
@@ -83,7 +89,8 @@ $(function() {
                     ["width", i.css("width")],
                     ["position", "absolute"],
                     ["left", i.css("left")],
-                    ["top", i.css("top")]
+                    ["top", i.css("top")],
+                    ["z-index", i.css("z-index")]
                 ];
             }
 
