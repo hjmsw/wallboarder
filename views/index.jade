@@ -27,6 +27,16 @@ html
         - each i in elem.headStyle
           | #{i[0]}:#{i[1]};
         | }
+      if elem.contentStyle
+        | ##{elem.id} .box-content {
+        - each i in elem.contentStyle
+          | #{i[0]}:#{i[1]};
+        | }
+      if elem.decorationStyle
+        | ##{elem.id} .box-decoration {
+        - each i in elem.decorationStyle
+          | #{i[0]}:#{i[1]};
+        | }
     | </style>
 
   body

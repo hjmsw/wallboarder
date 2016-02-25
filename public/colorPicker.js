@@ -6,7 +6,6 @@
 
 $(function () {
 
-    //Init all color pickers
     function init(e, elem, parent) {
 
             if (typeof parent !== "undefined") {
@@ -37,7 +36,6 @@ $(function () {
                     });
                 });
             }
-
     };
 
     // Events

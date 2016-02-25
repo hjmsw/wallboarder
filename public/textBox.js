@@ -59,7 +59,6 @@ $(function() {
                 background: elem.css("background"),
                 width: elem.css("width"),
                 height: elem.css("height"),
-                padding: "10px"
             });
 
             //Reset preview box

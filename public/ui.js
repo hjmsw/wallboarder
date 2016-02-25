@@ -213,7 +213,15 @@ $(function() {
 
                     el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
                         <div class='form-group'><input type='text' class='form-control' id='plt-edit-text' value='" +
-                        elem.find(".box-content").text() + "'/></div><div id='colorPickersContent' class='colorPickers'></div><div id='colorPickersDecoration' class='colorPickers'></div>\
+                        elem.find(".box-content").text() + "'/></div>\
+                        <div class='form-group'>\
+                        <label>Content Colours:</label>\
+                        <div id='colorPickersContent' class='colorPickers'></div>\
+                        </div>\
+                        <div class='form-group'>\
+                        <label>Decoration Colours:</label>\
+                        <div id='colorPickersDecoration' class='colorPickers'></div>\
+                        </div>\
                         <div class='form-group'><label for='boxDecoration'>Decoration:</label>\
                         <input type='text' class='form-control boxDecoration' placeholder='fa-icon-name' name='boxDecoration' value='"+decorationClass+"'/>\
                         <i class='boxDecorationPreview "+decorationClass+"'></i></div>" +
@@ -236,7 +244,11 @@ $(function() {
             this.setSidebarEvents(elem);
 
             if (elem.hasClass('wb_box')) {
-                this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), ez.find("#colorPickersDecoration")]);
+                if(elem.find(".box-decoration").length > 0) {
+                    this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), ez.find("#colorPickersDecoration")]);
+                } else {
+                    ez.find("#colorPickersDecoration").parent(".form-group").remove();
+                }
                 this.plt.trigger("newColorPickers", [elem.find(".box-content"), ez.find("#colorPickersContent")]);
             } else {
                 this.plt.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);

@@ -100,6 +100,7 @@ td, th {
 
 .box-content-full-width {
     width:100%;
+    text-align: left;
 }
 
 /*------- Side Panel -------*/

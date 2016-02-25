@@ -16,38 +16,40 @@ $(function() {
 
             elem = {
                 id: "wb_" + index,
-                tagName: i.prop("tagName"),
-                innerText: i.text()
+                tagName: i.prop("tagName")
             };
 
-            if (i.children("table").length != 1) {
-                if (elem.tagName == 'H1') {
-                    elem.style = [
-                        ["width", "100%"],
-                        ["position", "fixed"],
-                        ["background", i.css("background")],
-                        ["color", i.css("color")]
-                    ]
-                } else {
-                    if(i.find(".box-decoration").length == 1) {
-                        c = i.find("i").attr("class").split(" ");
-                        elem.decoration = c[c.length-1];
-                    }
-                    elem.style = [
-                        ["height", i.css("height")],
-                        ["width", i.css("width")],
-                        ["color", i.css("color")],
-                        ["position", "absolute"],
-                        ["left", i.css("left")],
-                        ["top", i.css("top")],
-                        ["background", i.css("background")],
-                        ["font-size", i.css("font-size")],
-                        ["z-index", i.css("z-index")]
+            if (i.hasClass("wb_box")) {
+                elem.innerText = i.find(".box-content").text();
+
+                if(i.find(".box-decoration").length == 1) {
+                    c = i.find("i").attr("class").split(" ");
+                    elem.decoration = c[c.length-1];
+                    elem.decorationStyle = [
+                        ["color", i.find(".box-decoration").css("color")],
+                        ["background", i.find(".box-decoration").css("background")]
                     ]
                 }
-            } else {
+
+                elem.contentStyle = [
+                    ["color", i.find(".box-content").css("color")],
+                    ["background", i.find(".box-content").css("background")]
+                ];
+
+                elem.style = [
+                    ["height", i.css("height")],
+                    ["width", i.css("width")],
+                    ["position", "absolute"],
+                    ["left", i.css("left")],
+                    ["top", i.css("top")],
+                    ["font-size", i.css("font-size")],
+                    ["color", i.css("color")],
+                    ["background", i.css("background")]
+                    ["z-index", i.css("z-index")]
+                ];
+
+            } else if (i.hasClass("wb_table")) {
                 elem.tagName = "table";
-                delete elem.innerText;
 
                 rows = [];
                 columns = [];
@@ -92,6 +94,16 @@ $(function() {
                     ["top", i.css("top")],
                     ["z-index", i.css("z-index")]
                 ];
+            } else {
+                if (elem.tagName == 'H1') {
+                    elem.innerText = i.text();
+                    elem.style = [
+                        ["width", "100%"],
+                        ["position", "fixed"],
+                        ["background", i.css("background")],
+                        ["color", i.css("color")]
+                    ]
+                }
             }
 
 
