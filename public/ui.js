@@ -231,8 +231,9 @@ $(function() {
                         </div>";
                 } else {
                     el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
-                        "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text' value='" +
-                        elem.text() + "'/></div><div class='colorPickers'></div></div>";
+                        "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text'/></div><div class='colorPickers'></div></div>";
+
+
                 }
 
                 el +=  "</div>";
@@ -240,6 +241,11 @@ $(function() {
                 return el;
             });
 
+            if (elem.is("h1")) {
+                $("#plt-edit-text").val(elem.text());
+            } else if (elem.hasClass("wb_box")) {
+                $("#plt-edit-text").val(elem.text());
+            }
 
             this.setSidebarEvents(elem);
 

@@ -55,17 +55,17 @@ $(function() {
             self.container = $("#"+self.id);
 
             self.container.css({
-                color: elem.css("color"),
-                background: elem.css("background"),
-                width: elem.css("width"),
-                height: elem.css("height"),
+                "color": elem.css("color"),
+                "background-color": elem.css("background-color"),
+                "width": elem.css("width"),
+                "height": elem.css("height")
             });
 
             //Reset preview box
             elem.text("Text goes here...");
             elem.css({
-                background: "#EFEFEF",
-                color: "#000"
+                "background-color": "#EFEFEF",
+                "color": "#000"
             });
 
             //reset color selectors
@@ -73,8 +73,12 @@ $(function() {
                 $(this).css("background-color", "#EFEFEF");
             });
 
+            //reset insert form inputs
+            $("#boxText").val("");
+            $("#boxDecoration").val("");
+
             //Update wallboard, initialising this element
-            $(".wb").trigger("update_wb");
+            self.wb.trigger("update_wb");
 
             self.init();
         },

@@ -4,7 +4,7 @@
 
 $(function() {
     $(".save").click(function () {
-        wb = {
+        var wb = {
             title: "Test Wallboard",
             _id: "wallboard1",
             elems: []
@@ -27,13 +27,13 @@ $(function() {
                     elem.decoration = c[c.length-1];
                     elem.decorationStyle = [
                         ["color", i.find(".box-decoration").css("color")],
-                        ["background", i.find(".box-decoration").css("background")]
-                    ]
+                        ["background-color", i.find(".box-decoration").css("background-color")]
+                    ];
                 }
 
                 elem.contentStyle = [
                     ["color", i.find(".box-content").css("color")],
-                    ["background", i.find(".box-content").css("background")]
+                    ["background-color", i.find(".box-content").css("background-color")]
                 ];
 
                 elem.style = [
@@ -44,7 +44,7 @@ $(function() {
                     ["top", i.css("top")],
                     ["font-size", i.css("font-size")],
                     ["color", i.css("color")],
-                    ["background", i.css("background")]
+                    ["background-color", i.css("background-color")],
                     ["z-index", i.css("z-index")]
                 ];
 

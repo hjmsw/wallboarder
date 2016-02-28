@@ -65,7 +65,6 @@ html
               |          columns: !{JSON.stringify(elem.tableEditColumns)}
               |        }
               |      });
-              |     //$("##{elem.id} table").Tabledit(params);
               |   });
               | </script>
           else if elem.tagName == "H1"
@@ -110,7 +109,7 @@ html
                   input(type="text" id="boxText" name="boxText" placeholder="box text" class="form-control")
                 div.form-group
                   label(for="boxDecoration")= "Decoration:"
-                  input(type="text" class="form-control boxDecoration" placeholder="fa-icon-name" name="boxDecoration")
+                  input(type="text" id="boxDecoration" class="form-control boxDecoration" placeholder="fa-icon-name" name="boxDecoration")
                   i
 
                 div.form-group

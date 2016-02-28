@@ -48,6 +48,10 @@ body {
 
 }
 
+table {
+    font-size:22px;
+}
+
 td, th {
     border-left: 1px solid rgba(255, 255, 255, 0);
     border-right: 1px solid rgba(255, 255, 255, 0);

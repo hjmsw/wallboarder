@@ -225,9 +225,10 @@
                     $dropdown.hide();
                 });
             }
-            $hexEntry.bind("keyup", function(event) {
-                res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec($(".hex-entry input").val());
+            $hexEntry.on("keyup", function(event) {
+                var res = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec($hexEntry.find("input").val());
                 if (res !== null) {
+                    console.log(res);
                     self.setColor($hexEntry.find("input").val());
                     $container.trigger("change", [self.colorHex, self.colorRGB]);
                     self.close();
