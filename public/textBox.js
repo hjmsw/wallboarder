@@ -61,6 +61,9 @@ $(function() {
                 "height": elem.css("height")
             });
 
+            self.container.find(".box-content").css("background-color", elem.css("background-color"));
+            self.container.find(".box-decoration").css("background-color", elem.css("background-color"));
+
             //Reset preview box
             elem.text("Text goes here...");
             elem.css({
