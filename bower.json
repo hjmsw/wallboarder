@@ -8,11 +8,7 @@
   "license": "MIT",
   "homepage": "https://github.com/hjamesw93/wallboarder",
   "moduleType": [
-    "amd",
-    "es6",
-    "globals",
-    "node",
-    "yui"
+    "amd"
   ],
   "private": true,
   "ignore": [

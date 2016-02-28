@@ -5,8 +5,9 @@
 $(function() {
     $(".save").click(function () {
         var wb = {
-            title: "Test Wallboard",
+            title: $("body").find("h1").text(),
             _id: "wallboard1",
+            url_slug: "/",
             elems: []
         };
 

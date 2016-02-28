@@ -29,12 +29,12 @@ WallboardProvider.prototype.save = function(wallboard, callback) {
     });
 };
 
-WallboardProvider.prototype.findOne = function(callback ) {
+WallboardProvider.prototype.findOne = function(slug, callback ) {
   this.getCollection(function(error, wallboard_collection) {
-    if( error ) callback(error)
+    if( error ) callback(error);
     else {
-      wallboard_collection.findOne(function(error, result) {
-        if(error) callback(error)
+      wallboard_collection.findOne({url_slug: slug},function(error, result) {
+        if(error) callback(error);
         else callback(null, result)
       });
     }
@@ -43,10 +43,10 @@ WallboardProvider.prototype.findOne = function(callback ) {
 
 WallboardProvider.prototype.findById = function(id, callback) {
     this.getCollection(function(error, wallboard_collection) {
-      if( error ) callback(error)
+      if( error ) callback(error);
       else {
         wallboard_collection.findOne({_id: wallboard_collection.db.bson_serializer.ObjectID.createFromHexString(id)}, function(error, result) {
-          if( error ) callback(error)
+          if( error ) callback(error);
           else callback(null, result)
         });
       }
