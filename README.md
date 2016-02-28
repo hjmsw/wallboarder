@@ -1,6 +1,6 @@
 # Wallboarder
 
-Wallboarder, a WYSIWYG Editor for Wallboards and Dashboards
+A WYSIWYG Editor for Wallboards and Dashboards.
 
 ## Requirements
 
