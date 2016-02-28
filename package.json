@@ -1,9 +1,17 @@
 {
   "name": "wallboarder",
+  "description": "Wallboarder - WYSIWYG Editor for Wallboards",
+  "authors": [
+    "James Harding <james@jamesharding.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/hjamesw93/wallboarder",
   "main": "server.js",
   "dependencies": {
     "body-parser": "~1.0.1",
+    "bower": "^1.7.7",
     "express": "~4.0.0",
+    "forever": "^0.15.1",
     "jade": "^1.11.0",
     "jsonfile": "^2.2.3",
     "kerberos": "0.0.17",

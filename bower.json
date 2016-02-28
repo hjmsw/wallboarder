@@ -1,6 +1,6 @@
 {
   "name": "wallboarder",
-  "description": "",
+  "description": "Wallboarder - WYSIWYG Editor for Wallboards",
   "main": "server.js",
   "authors": [
     "James Harding <james@jamesharding.me>"
