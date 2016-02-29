@@ -1,6 +1,6 @@
 {
   "name": "wallboarder",
-  "description": "",
+  "description": "Wallboarder - WYSIWYG Editor for Wallboards",
   "main": "server.js",
   "authors": [
     "James Harding <james@jamesharding.me>"
@@ -8,11 +8,7 @@
   "license": "MIT",
   "homepage": "https://github.com/hjamesw93/wallboarder",
   "moduleType": [
-    "amd",
-    "es6",
-    "globals",
-    "node",
-    "yui"
+    "amd"
   ],
   "private": true,
   "ignore": [

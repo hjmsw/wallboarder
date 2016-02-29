@@ -1,0 +1,354 @@
+{
+  "title": "Example Wallboard",
+  "_id": "wallboard1",
+  "url_slug": "\/",
+  "elems": [
+    {
+      "id": "wb_0",
+      "tagName": "H1",
+      "innerText": "Example Wallboard",
+      "style": [
+        [
+          "width",
+          "100%"
+        ],
+        [
+          "position",
+          "fixed"
+        ],
+        [
+          "background",
+          "rgb(251, 171, 24) none repeat scroll 0% 0% \/ auto padding-box border-box"
+        ],
+        [
+          "color",
+          "rgb(255, 255, 255)"
+        ]
+      ]
+    },
+    {
+      "id": "wb_1",
+      "tagName": "DIV",
+      "innerText": "This is a text box. drag me around...",
+      "contentStyle": [
+        [
+          "color",
+          "rgb(255, 255, 255)"
+        ],
+        [
+          "background-color",
+          "rgb(31, 148, 203)"
+        ]
+      ],
+      "style": [
+        [
+          "height",
+          "80px"
+        ],
+        [
+          "width",
+          "150px"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "left",
+          "80px"
+        ],
+        [
+          "top",
+          "350px"
+        ],
+        [
+          "font-size",
+          "14px"
+        ],
+        [
+          "color",
+          "rgb(255, 255, 255)"
+        ],
+        [
+          "background-color",
+          "rgb(31, 148, 203)"
+        ],
+        [
+          "z-index",
+          "81"
+        ]
+      ]
+    },
+    {
+      "id": "wb_2",
+      "tagName": "DIV",
+      "innerText": "I'm a textbox with a decoration",
+      "decoration": "fa-bus",
+      "decorationStyle": [
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(239, 239, 239)"
+        ]
+      ],
+      "contentStyle": [
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(239, 239, 239)"
+        ]
+      ],
+      "style": [
+        [
+          "height",
+          "90px"
+        ],
+        [
+          "width",
+          "320px"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "left",
+          "410px"
+        ],
+        [
+          "top",
+          "150px"
+        ],
+        [
+          "font-size",
+          "24px"
+        ],
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(239, 239, 239)"
+        ],
+        [
+          "z-index",
+          "85"
+        ]
+      ]
+    },
+    {
+      "id": "wb_3",
+      "tagName": "DIV",
+      "innerText": "Double click me to edit...",
+      "contentStyle": [
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(252, 185, 40)"
+        ]
+      ],
+      "style": [
+        [
+          "height",
+          "80px"
+        ],
+        [
+          "width",
+          "150px"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "left",
+          "1000px"
+        ],
+        [
+          "top",
+          "220px"
+        ],
+        [
+          "font-size",
+          "14px"
+        ],
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(140, 197, 62)"
+        ],
+        [
+          "z-index",
+          "87"
+        ]
+      ]
+    },
+    {
+      "id": "wb_4",
+      "tagName": "table",
+      "struct": {
+        "rows": [
+          [
+            [
+              "TH",
+              "A"
+            ],
+            [
+              "TH",
+              "Table"
+            ]
+          ],
+          [
+            [
+              "TD",
+              "I'm"
+            ],
+            [
+              "TD",
+              "a"
+            ]
+          ],
+          [
+            [
+              "TD",
+              "table"
+            ],
+            [
+              "TD",
+              "123"
+            ]
+          ]
+        ]
+      },
+      "tableEditColumns": {
+        "identifier": [
+          "0",
+          "A"
+        ],
+        "editable": [
+          [
+            "0",
+            "A"
+          ],
+          [
+            "1",
+            "Table"
+          ]
+        ]
+      },
+      "headStyle": [
+        [
+          "background",
+          "rgba(0, 0, 0, 0) none repeat scroll 0% 0% \/ auto padding-box border-box"
+        ],
+        [
+          "color",
+          "rgb(51, 51, 51)"
+        ]
+      ],
+      "style": [
+        [
+          "height",
+          "167px"
+        ],
+        [
+          "width",
+          "432px"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "left",
+          "390px"
+        ],
+        [
+          "top",
+          "340px"
+        ],
+        [
+          "z-index",
+          "83"
+        ]
+      ]
+    },
+    {
+      "id": "wb_5",
+      "tagName": "DIV",
+      "innerText": "Fancy text box with decoration",
+      "decoration": "fa-user",
+      "decorationStyle": [
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(243, 236, 25)"
+        ]
+      ],
+      "contentStyle": [
+        [
+          "color",
+          "rgb(255, 255, 255)"
+        ],
+        [
+          "background-color",
+          "rgb(18, 114, 172)"
+        ]
+      ],
+      "style": [
+        [
+          "height",
+          "150px"
+        ],
+        [
+          "width",
+          "850px"
+        ],
+        [
+          "position",
+          "absolute"
+        ],
+        [
+          "left",
+          "170px"
+        ],
+        [
+          "top",
+          "560px"
+        ],
+        [
+          "font-size",
+          "48px"
+        ],
+        [
+          "color",
+          "rgb(0, 0, 0)"
+        ],
+        [
+          "background-color",
+          "rgb(239, 239, 239)"
+        ],
+        [
+          "z-index",
+          "84"
+        ]
+      ]
+    }
+  ]
+}
