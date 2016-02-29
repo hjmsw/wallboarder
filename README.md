@@ -11,19 +11,28 @@ A WYSIWYG Editor for Wallboards and Dashboards.
 ## Installation
 
 Install node dependencies:
-```npm install```
+```
+npm install
+```
 
 Install Bower dependencies: (e.g. jquery)
-```./node_modules/bower/bin/bower install```
+```
+./node_modules/bower/bin/bower install
+```
 
 ## Usage
 
 Start Wallboarder:
-```./node_modules/forever/bin/forever start server.js```
+```
+./node_modules/forever/bin/forever start server.js
+```
 
 Stop Wallboarder:
-```./node_modules/forever/bin/forever stop server.js```
+```
+./node_modules/forever/bin/forever stop server.js
+```
 
+Visit in your browser:```http://<your-ip-or-domain>:8081``` e.g ```http://localhost:8081```
 
 ## Contributing
 
