@@ -4,6 +4,8 @@ var router = express.Router();
 var WallboardProvider = require('../providers/WallboardProvider').WallboardProvider;
 WallboardProvider = new WallboardProvider('localhost', 27017);
 
+var config = require('../config/config');
+
 router.get('/', function (req, res) {
 
     WallboardProvider.findOne("/", function (error, wallboard) {
@@ -32,9 +34,18 @@ router.post('/save', function (req, res) {
     WallboardProvider.save(
         req.body.wb,
         function (error, docs) {
-            console.log(error);
+            if (error) {
+                console.log(error);
+                res.json({saved: false});
+            } else {
+                res.json({saved: true});
+            }
         }
     );
+});
+
+router.get('/get/auto-ref-conf', function(req, res) {
+    res.json(config);
 });
 
 module.exports = router;

@@ -2,6 +2,8 @@
  * Created by james on 22/02/2016.
  */
 
+wbChange = false;
+
 $(function() {
 
     var Ui = {
@@ -34,7 +36,10 @@ $(function() {
             $(".draggable").draggable({
                 grid: [10, 10],
                 scroll: false,
-                stack: "div"
+                stack: "div",
+                stop: function( event, ui ) {
+                    wbChange = true;
+                }
             });
         },
 
@@ -42,13 +47,19 @@ $(function() {
             $(".resizable").resizable({
                 autoHide: true,
                 grid: [10, 10],
-                handles: "n, ne, e, se, s, sw, w, nw"
+                handles: "n, ne, e, se, s, sw, w, nw",
+                stop: function( event, ui ) {
+                    wbChange = true;
+                }
             });
 
             $(".resizable-table").resizable({
                 autoHide: true,
                 grid: [10, 10],
-                handles: "e, w"
+                handles: "e, w",
+                stop: function( event, ui ) {
+                    wbChange = true;
+                }
             });
         },
 
@@ -137,6 +148,8 @@ $(function() {
                 $(".header").dblclick(function() {
                     self.wb.trigger("startEdit", [$(this)]);
                 });
+            } else {
+                wbChanged = true;
             }
 
             $("#tableCols").change(function() {
