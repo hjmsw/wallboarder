@@ -117,15 +117,17 @@ $(function() {
 
     $.get( "/get/auto-ref-conf", function( data ) {
 
-        setTimeout(function() {
-            //Refresh wallboard if no changes, autosave if changes
-            if (!wbChange) {
-                location.reload();
-            } else {
-                $(".save").trigger("click");
-            }
+        if (data.autoRefresh.enabled) {
+            setTimeout(function() {
+                //Refresh wallboard if no changes, autosave if changes
+                if (!wbChange) {
+                    location.reload();
+                } else {
+                    $(".save").trigger("click");
+                }
 
-        }, data.autoRefresh.timeout);
+            }, data.autoRefresh.timeout);
+        }
 
     });
 

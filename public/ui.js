@@ -131,7 +131,20 @@ $(function() {
                     }
                 });
 
-                $(".plt-hide").click(function() {
+                var mt = $("#miniToolbar");
+                $(".header").hover(function(event, ui) {
+                    if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
+                }, function(event, ui) {
+                    if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
+                });
+
+                $("#plt-show").click(function() {
+                    $("#plt").effect("fade", function() {
+                        $(this).show();
+                    })
+                });
+
+                $("#plt-hide").click(function() {
                     $("#plt").effect("fade", function() {
                         $(this).hide();
                     })
@@ -149,7 +162,7 @@ $(function() {
                     self.wb.trigger("startEdit", [$(this)]);
                 });
             } else {
-                wbChanged = true;
+                wbChange = true;
             }
 
             $("#tableCols").change(function() {
@@ -200,6 +213,8 @@ $(function() {
 
         buildEditSidebar: function(elem) {
             var self = this;
+
+            wbChange = true;
 
             if (this.plt.css("display") === "none") {
                 this.plt.effect("fade", function() {
