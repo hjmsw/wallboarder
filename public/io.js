@@ -3,7 +3,7 @@
  */
 
 $(function() {
-    $(".save").click(function () {
+    $(".save").on("click", function () {
         var wb = {
             title: $("body").find("h1").text(),
             _id: "wallboard1",
@@ -114,4 +114,19 @@ $(function() {
             $.post('/save', {wb: wb});
         });
     });
+
+    $.get( "/get/auto-ref-conf", function( data ) {
+
+        setTimeout(function() {
+            //Refresh wallboard if no changes, autosave if changes
+            if (!wbChange) {
+                location.reload();
+            } else {
+                $(".save").trigger("click");
+            }
+
+        }, data.autoRefresh.timeout);
+
+    });
+
 });
