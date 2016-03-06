@@ -86,12 +86,18 @@ html
                 else
                   div(class="box-content box-content-full-width" contentEditable="true")= elem.innerText
 
+    div#miniToolbar
+      div(class="save btn btn-default")
+        span.btn-inner.glyphicon.glyphicon-floppy-save
+      div(id="plt-show" class="plt-show btn btn-default")
+        span.btn-inner.glyphicon.glyphicon-th-list
+
     div#plt
         div#pltToolbar
           div(class="save btn btn-default")
             span.btn-inner.glyphicon.glyphicon-floppy-save
             p.btn-inner="Save"
-          div(class="plt-hide btn btn-default")
+          div(id="plt-hide" class="plt-hide btn btn-default")
             span.btn-inner.glyphicon.glyphicon-remove-circle
             p.btn-inner="Hide"
 
@@ -149,7 +155,6 @@ html
         div#binIcon
           span.glyphicon.glyphicon-trash
 
-    script(src="/main.js")
     script(src="/ui.js")
     script(src="/colorPicker.js")
     script(src="/tables.js")

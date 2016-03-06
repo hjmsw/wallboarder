@@ -2,6 +2,8 @@
  * Created by james on 22/02/2016.
  */
 
+wbChange = false;
+
 $(function() {
 
     var Ui = {
@@ -34,7 +36,10 @@ $(function() {
             $(".draggable").draggable({
                 grid: [10, 10],
                 scroll: false,
-                stack: "div"
+                stack: "div",
+                stop: function( event, ui ) {
+                    wbChange = true;
+                }
             });
         },
 
@@ -42,13 +47,19 @@ $(function() {
             $(".resizable").resizable({
                 autoHide: true,
                 grid: [10, 10],
-                handles: "n, ne, e, se, s, sw, w, nw"
+                handles: "n, ne, e, se, s, sw, w, nw",
+                stop: function( event, ui ) {
+                    wbChange = true;
+                }
             });
 
             $(".resizable-table").resizable({
                 autoHide: true,
                 grid: [10, 10],
-                handles: "e, w"
+                handles: "e, w",
+                stop: function( event, ui ) {
+                    wbChange = true;
+                }
             });
         },
 
@@ -120,7 +131,20 @@ $(function() {
                     }
                 });
 
-                $(".plt-hide").click(function() {
+                var mt = $("#miniToolbar");
+                $(".header").hover(function(event, ui) {
+                    if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
+                }, function(event, ui) {
+                    if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
+                });
+
+                $("#plt-show").click(function() {
+                    $("#plt").effect("fade", function() {
+                        $(this).show();
+                    })
+                });
+
+                $("#plt-hide").click(function() {
                     $("#plt").effect("fade", function() {
                         $(this).hide();
                     })
@@ -137,6 +161,8 @@ $(function() {
                 $(".header").dblclick(function() {
                     self.wb.trigger("startEdit", [$(this)]);
                 });
+            } else {
+                wbChange = true;
             }
 
             $("#tableCols").change(function() {
@@ -187,6 +213,8 @@ $(function() {
 
         buildEditSidebar: function(elem) {
             var self = this;
+
+            wbChange = true;
 
             if (this.plt.css("display") === "none") {
                 this.plt.effect("fade", function() {
