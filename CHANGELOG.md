@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.2.0](https://github.com/hjamesw93/wallboarder/tree/0.2.0) (2016-03-06)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.1.1...0.2.0)
+
+**Closed issues:**
+
+- Auto refresh [\#3](https://github.com/hjamesw93/wallboarder/issues/3)
+- Add Extra UI Features [\#2](https://github.com/hjamesw93/wallboarder/issues/2)
+
 ## [0.1.1](https://github.com/hjamesw93/wallboarder/tree/0.1.1) (2016-02-29)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.1.0...0.1.1)
 
