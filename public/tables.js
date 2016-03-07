@@ -65,6 +65,7 @@ $(function() {
                 },
                 "click": function() {
                     self.wb.trigger("fixZindex");
+                    wbChange = true;
                 }
             });
 

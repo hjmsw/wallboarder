@@ -3,7 +3,7 @@
  */
 
 $(function() {
-    $(".save").on("click", function () {
+    function save() {
         var wb = {
             title: $("body").find("h1").text(),
             _id: "wallboard1",
@@ -113,6 +113,10 @@ $(function() {
         }).promise().done(function () {
             $.post('/save', {wb: wb});
         });
+    }
+
+    $(".save").on("click", function () {
+        save();
     });
 
     $.get( "/get/auto-ref-conf", function( data ) {
@@ -123,7 +127,7 @@ $(function() {
                 if (!wbChange) {
                     location.reload();
                 } else {
-                    $(".save").trigger("click");
+                    save();
                 }
 
             }, data.autoRefresh.timeout);
