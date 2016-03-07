@@ -4,6 +4,10 @@
 
 $(function() {
     function save() {
+
+    }
+
+    $(".save").on("click", function () {
         var wb = {
             title: $("body").find("h1").text(),
             _id: "wallboard1",
@@ -113,21 +117,15 @@ $(function() {
         }).promise().done(function () {
             $.post('/save', {wb: wb});
         });
-    }
-
-    $(".save").on("click", function () {
-        save();
     });
 
     $.get( "/get/auto-ref-conf", function( data ) {
 
         if (data.autoRefresh.enabled) {
             setTimeout(function() {
-                //Refresh wallboard if no changes, autosave if changes
+                //Refresh wallboard if no changes
                 if (!wbChange) {
                     location.reload();
-                } else {
-                    save();
                 }
 
             }, data.autoRefresh.timeout);
