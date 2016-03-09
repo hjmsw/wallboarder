@@ -33,23 +33,29 @@ $(function() {
         },
 
         initDraggables: function() {
+            var self = this;
+
             $(".draggable").draggable({
                 grid: [10, 10],
                 scroll: false,
                 stack: "div",
                 stop: function( event, ui ) {
                     wbChange = true;
+                    self.wb.trigger("edit");
                 }
             });
         },
 
         initResizables: function() {
+            var self = this;
+
             $(".resizable").resizable({
                 autoHide: true,
                 grid: [10, 10],
                 handles: "n, ne, e, se, s, sw, w, nw",
                 stop: function( event, ui ) {
                     wbChange = true;
+                    self.wb.trigger("edit");
                 }
             });
 
@@ -59,6 +65,7 @@ $(function() {
                 handles: "e, w",
                 stop: function( event, ui ) {
                     wbChange = true;
+                    self.wb.trigger("edit");
                 }
             });
         },
@@ -119,6 +126,26 @@ $(function() {
             if (!reInit) {
                 //first init
 
+                this.wb.on("read-only", function() {
+                    $("#shield").css({
+                        "height": $(window).height(),
+                        "width": $(window).width(),
+                        "z-index": self.plt.css("z-index") + 1
+                    });
+                });
+
+                this.wb.on("new-status-message", function(event, message) {
+                    var sm = $("#statusMessage");
+
+
+                    sm.find("p").text(message);
+
+                    sm.effect("fade", function() {
+                        sm.css("display", "block");
+                    });
+
+                });
+
                 this.wb.on("fixZindex", function() {
                     self.fixZindex();
                 });
@@ -163,6 +190,7 @@ $(function() {
                 });
             } else {
                 wbChange = true;
+                self.wb.trigger("edit");
             }
 
             $("#tableCols").change(function() {
@@ -215,6 +243,7 @@ $(function() {
             var self = this;
 
             wbChange = true;
+            self.wb.trigger("edit");
 
             if (this.plt.css("display") === "none") {
                 this.plt.effect("fade", function() {

@@ -1,9 +1,19 @@
-body {
-    overflow:hidden;
-}
 
 .wb {
     padding:0;
+}
+
+#shield {
+    position: fixed;
+}
+
+#statusMessage {
+    position: fixed;
+    left:0;
+    bottom:0;
+    display: none;
+    font-weight:bold;
+    padding:5px;
 }
 
 .header {

@@ -3,9 +3,6 @@
  */
 
 $(function() {
-    function save() {
-
-    }
 
     $(".save").on("click", function () {
         var wb = {
@@ -116,21 +113,7 @@ $(function() {
 
         }).promise().done(function () {
             $.post('/save', {wb: wb});
+            $(".wb").trigger("saved");
         });
     });
-
-    $.get( "/get/auto-ref-conf", function( data ) {
-
-        if (data.autoRefresh.enabled) {
-            setTimeout(function() {
-                //Refresh wallboard if no changes
-                if (!wbChange) {
-                    location.reload();
-                }
-
-            }, data.autoRefresh.timeout);
-        }
-
-    });
-
 });

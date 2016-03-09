@@ -44,8 +44,4 @@ router.post('/save', function (req, res) {
     );
 });
 
-router.get('/get/auto-ref-conf', function(req, res) {
-    res.json(config);
-});
-
 module.exports = router;

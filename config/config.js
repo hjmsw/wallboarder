@@ -3,8 +3,5 @@
  */
 
 module.exports = {
-    autoRefresh: {
-        enabled: true,
-        timeout: 30000
-    }
+
 };
