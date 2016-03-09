@@ -24,6 +24,7 @@
     "bootstrap": "^3.3.6",
     "tinycolorpicker": "^0.9.5",
     "font-awesome": "^4.5.0",
-    "jquery-tabledit": "^1.2.3"
+    "jquery-tabledit": "^1.2.3",
+    "socket.io-client": "^1.4.5"
   }
 }

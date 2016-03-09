@@ -66,6 +66,7 @@ $(function() {
                 "click": function() {
                     self.wb.trigger("fixZindex");
                     wbChange = true;
+                    self.wb.trigger("edit");
                 }
             });
 

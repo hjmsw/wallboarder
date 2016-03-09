@@ -14,6 +14,7 @@ html
     script(src="/components/jquery-tabledit/jquery.tabledit.min.js")
     script(src="/jquery.tinycolorpicker.js")
     script(src="/components/bootstrap/js/collapse.js")
+    script(src="components/socket.io-client/socket.io.js")
 
     | <style>
     | .ui-widget-content { border: none !important; }
@@ -41,6 +42,7 @@ html
     | </style>
 
   body
+    div#shield
     div.container-fluid.wb
       - each elem in elems
           if elem.tagName == "table"
@@ -155,8 +157,12 @@ html
         div#binIcon
           span.glyphicon.glyphicon-trash
 
+    div#statusMessage
+      p
+
     script(src="/ui.js")
     script(src="/colorPicker.js")
     script(src="/tables.js")
     script(src="/textBox.js")
     script(src="/io.js")
+    script(src="/socketio.js")
