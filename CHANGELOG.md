@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.3.0](https://github.com/hjamesw93/wallboarder/tree/0.3.0) (2016-03-09)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.2.2...0.3.0)
+
 ## [0.2.2](https://github.com/hjamesw93/wallboarder/tree/0.2.2) (2016-03-07)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.2.1...0.2.2)
 
