@@ -7,7 +7,6 @@ $(function() {
     $(".save").on("click", function () {
         var wb = {
             title: $("body").find("h1").text(),
-            _id: "wallboard1",
             url_slug: "/",
             elems: []
         };
