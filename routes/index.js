@@ -25,6 +25,41 @@ router.get('/', function (req, res) {
 
 });
 
+router.get('/revisions', function(req, res) {
+
+    WallboardProvider.find('/', function(err, wallboards) {
+        console.log(wallboards);
+
+        var revisions = [];
+
+        wallboards.forEach(function(i) {
+            var epoch = new Date(i.created_at).getTime();
+
+            revisions.push({
+                datetime: i.created_at,
+                url: '/revision/' + epoch
+            });
+        });
+
+        res.json(revisions);
+    });
+});
+
+router.get('/revision/:epoch', function(req, res) {
+    var datetime = new Date(parseInt(req.params.epoch));
+    WallboardProvider.findOneWithDate("/", datetime, function (error, wallboard) {
+
+        if (error) console.log(error);
+
+        if (wallboard == null) {
+            res.json("revision not found");
+        } else {
+            console.log("restoring from db");
+            res.render('index', {title: 'REVISION: ' + wallboard.title, elems: wallboard.elems});
+        }
+    });
+});
+
 router.post('/', function (req, res) {
     res.json(req.body);
 

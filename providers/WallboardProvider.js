@@ -76,8 +76,8 @@ WallboardProvider = function() {
 //WallboardProvider.prototype.wallboardSchema = mongoose.Schema({
 wallboardSchema = mongoose.Schema({
   title: String,
-  _id: String,
   url_slug: String,
+  created_at: Date,
   elems: [
     {
       id: String,
@@ -102,11 +102,50 @@ wallboardSchema = mongoose.Schema({
 WallboardProvider.prototype.wallboard = mongoose.model('wallboards', wallboardSchema);
 
 WallboardProvider.prototype.findOne = function(slug, callback ) {
-  this.wallboard.findOne({ 'url_slug': slug }, function (err, result) {
-    console.log(util.inspect(result, false, null));
+  this.wallboard.findOne({ 'url_slug': slug }, {}, { sort: { 'created_at' : -1 } }, function (err, result) {
+    //console.log(util.inspect(result, false, null));
     if(err) callback(err);
     else callback(null, result)
   });
+};
+
+WallboardProvider.prototype.findOneWithDate = function(slug, datetime, callback ) {
+
+  console.log(datetime);
+  this.wallboard.findOne({ 'url_slug': slug, 'created_at':  datetime}, function (err, result) {
+    //console.log(util.inspect(result, false, null));
+    if(err) callback(err);
+    else callback(null, result)
+  });
+};
+
+WallboardProvider.prototype.save = function(wallboard, callback) {
+  var self = this;
+
+  var wb = new this.wallboard(wallboard);
+
+  wb.created_at = new Date();
+
+  wb.save(function(err, wb) {
+    if (err) return console.error(err);
+    else {
+      console.log("save successful: " + wb.created_at);
+
+
+      callback(null, wb);
+    }
+  });
+};
+
+
+WallboardProvider.prototype.find = function(slug, callback) {
+  this.wallboard.find({ 'url_slug': slug }, function (err, wallboards) {
+    if (err) return console.error(err);
+    else {
+      callback(null, wallboards);
+    }
+  });
+
 };
 
 exports.WallboardProvider = WallboardProvider;
