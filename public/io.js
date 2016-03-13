@@ -3,8 +3,10 @@
  */
 
 $(function() {
+    var manualReload = false;
 
-    $(".save").on("click", function () {
+    function save() {
+        console.log("saving");
         var wb = {
             title: $("body").find("h1").text(),
             url_slug: "/",
@@ -111,8 +113,26 @@ $(function() {
             wb.elems.push(elem);
 
         }).promise().done(function () {
+            console.log(wb);
             $.post('/save', {wb: wb});
             $(".wb").trigger("saved");
+            if (manualReload) location.assign("/");
         });
+    }
+
+    $(".save").on("click", function () {
+        save();
     });
+
+    $("#revision").on("click", function(event) {
+        event.preventDefault();
+        manualReload = true;
+        save();
+    });
+
+    if ($("#revisionsList").length === 1) {
+        $.get("/revisions", function(data) {
+            $(".wb").trigger("init-revision-pages", [data]);
+        });
+    }
 });

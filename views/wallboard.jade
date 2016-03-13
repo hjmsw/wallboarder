@@ -1,0 +1,45 @@
+div#shield
+div.container-fluid.wb
+    - each elem in elems
+        if elem.tagName == "table"
+
+            div(id=elem.id class="draggable resizable-table ui-widget-content wb_table editable")
+                button.newRow.btn.btn-sm.btn-default
+                    span.glyphicon.glyphicon-plus
+
+                table#exampleTable.table.table-striped
+                    - each row in elem.struct.rows
+                        tr
+                            - each i in row
+                                #{i[0]} #{i[1]}
+                | <script>
+                |  $(function() {
+                |     wb_tables.push({
+                |        t_elem:  #{elem.id},
+                |        params:  {
+                |          editButton: false,
+                |          deleteButton: true,
+                |          hideIdentifier: false,
+                |          toolbar: true,
+                |          columns: !{JSON.stringify(elem.tableEditColumns)}
+                |        }
+                |      });
+                |   });
+                | </script>
+        else if elem.tagName == "H1"
+            #{elem.tagName}(
+            id=elem.id
+            class="editable header"
+            )= elem.innerText
+
+        else
+            #{elem.tagName}(
+            id=elem.id
+            class="draggable resizable ui-widget-content wb_box box editable")
+                div.box-inner
+                    if elem.decoration
+                        div.box-decoration
+                            i(class="fa #{elem.decoration}")
+                        div(class="box-content" contentEditable="true")= elem.innerText
+                    else
+                        div(class="box-content box-content-full-width" contentEditable="true")= elem.innerText

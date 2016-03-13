@@ -6,8 +6,6 @@ $(function(){
     var socket = io();
     var wb = $(".wb");
 
-    console.log(socket);
-
     socket.emit("wb-client-get-edit-status");
 
     wb.on("edit", function() {
