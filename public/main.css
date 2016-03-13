@@ -366,3 +366,39 @@ ul.selectable .ui-selected { background: #F39814; }
 .colorPickers {
     height:60px;
 }
+
+/* Revisions sidebar */
+#plt.plt-revisions {
+    display:block;
+    background-color:	rgba(34, 34, 34, 0.9);
+    padding:10px;
+}
+
+#plt.plt-revisions #revisionsList, h3 {
+    color:#9d9d9d;
+}
+
+#plt.plt-revisions  #revisionsList ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+#plt.plt-revisions  #revisionsList a {
+    color:#FFF;
+    line-height:28px;
+}
+
+#revisionControl {
+    position: fixed;
+    bottom:0;
+    right:18px;
+}
+
+.rev-set, .pg-control a {
+    color:#000 !important;
+}
+.rev-set.active {
+    background-color: #AAA !important;
+    color:#FFF !important;
+}

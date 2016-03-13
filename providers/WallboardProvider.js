@@ -81,7 +81,7 @@ WallboardProvider.prototype.save = function(wallboard, callback) {
 
 
 WallboardProvider.prototype.find = function(slug, callback) {
-  this.wallboard.find({ 'url_slug': slug }, function (err, wallboards) {
+  this.wallboard.find({ 'url_slug': slug }, {}, { sort: { 'created_at' : -1 }}, function (err, wallboards) {
     if (err) return console.error(err);
     else {
       callback(null, wallboards);

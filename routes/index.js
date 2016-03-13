@@ -36,7 +36,7 @@ router.get('/revisions', function(req, res) {
             var epoch = new Date(i.created_at).getTime();
 
             revisions.push({
-                datetime: i.created_at,
+                datetime: epoch,
                 url: '/revision/' + epoch
             });
         });
@@ -46,7 +46,9 @@ router.get('/revisions', function(req, res) {
 });
 
 router.get('/revision/:epoch', function(req, res) {
-    var datetime = new Date(parseInt(req.params.epoch));
+    var epoch = parseInt(req.params.epoch);
+    var datetime = new Date(epoch);
+
     WallboardProvider.findOneWithDate("/", datetime, function (error, wallboard) {
 
         if (error) console.log(error);
@@ -55,7 +57,13 @@ router.get('/revision/:epoch', function(req, res) {
             res.json("revision not found");
         } else {
             console.log("restoring from db");
-            res.render('index', {title: 'REVISION: ' + wallboard.title, elems: wallboard.elems});
+            res.render('index', {
+                title: 'REVISION: ' + wallboard.title,
+                elems: wallboard.elems,
+                revision: true,
+                datetime: wallboard.created_at,
+                epoch: epoch
+            });
         }
     });
 });

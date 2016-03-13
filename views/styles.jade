@@ -1,0 +1,30 @@
+
+link(rel="stylesheet" href="/components/jquery-ui/themes/base/jquery-ui.min.css")
+link(rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css")
+link(rel="stylesheet" href="/components/font-awesome/css/font-awesome.min.css")
+link(rel="stylesheet" href="/main.css")
+
+| <style>
+| .ui-widget-content { border: none !important; }
+- each elem in elems
+    if elem.style
+        | ##{elem.id} {
+        - each i in elem.style
+            | #{i[0]}:#{i[1]};
+        | }
+    if elem.headStyle && elem.headStyle.length != 0
+        | ##{elem.id} th {
+        - each i in elem.headStyle
+            | #{i[0]}:#{i[1]};
+        | }
+    if elem.contentStyle && elem.contentStyle.length != 0
+        | ##{elem.id} .box-content {
+        - each i in elem.contentStyle
+            | #{i[0]}:#{i[1]};
+        | }
+    if elem.decorationStyle && elem.decorationStyle.length != 0
+        | ##{elem.id} .box-decoration {
+        - each i in elem.decorationStyle
+            | #{i[0]}:#{i[1]};
+        | }
+| </style>

@@ -1,0 +1,18 @@
+
+div#plt.plt-revisions
+    h3= "Revisions"
+    div#revisionsList
+        ul
+    nav
+        ul.pagination
+            li#pg-prev.pg-control
+                a(href="#" aria-label="Previous")
+                    | <span aria-hidden="true">&laquo;</span>
+            li#pg-next.pg-control
+                a(href="#" aria-label="Next")
+                    | <span aria-hidden="true">&raquo;</span>
+
+    form#revisionControl
+        input(type="hidden" id="currentRevision" value=epoch)
+        div.form-group
+            button#revision.btn.btn-danger= "Restore This Revision"
