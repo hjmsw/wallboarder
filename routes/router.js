@@ -28,7 +28,6 @@ router.get('/', function (req, res) {
 router.get('/revisions', function(req, res) {
 
     WallboardProvider.find('/', function(err, wallboards) {
-        console.log(wallboards);
 
         var revisions = [];
 

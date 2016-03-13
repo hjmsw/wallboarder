@@ -8,10 +8,6 @@ WallboardProvider = function() {
 
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function() {
-    console.log("connect");
-
-  });
 
 };
 
@@ -53,7 +49,6 @@ WallboardProvider.prototype.findOne = function(slug, callback ) {
 
 WallboardProvider.prototype.findOneWithDate = function(slug, datetime, callback ) {
 
-  console.log(datetime);
   this.wallboard.findOne({ 'url_slug': slug, 'created_at':  datetime}, function (err, result) {
     //console.log(util.inspect(result, false, null));
     if(err) callback(err);
@@ -71,9 +66,6 @@ WallboardProvider.prototype.save = function(wallboard, callback) {
   wb.save(function(err, wb) {
     if (err) return console.error(err);
     else {
-      console.log("save successful: " + wb.created_at);
-
-
       callback(null, wb);
     }
   });

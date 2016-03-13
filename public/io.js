@@ -6,7 +6,6 @@ $(function() {
     var manualReload = false;
 
     function save() {
-        console.log("saving");
         var wb = {
             title: $("body").find("h1").text(),
             url_slug: "/",
@@ -113,7 +112,6 @@ $(function() {
             wb.elems.push(elem);
 
         }).promise().done(function () {
-            console.log(wb);
             $.post('/save', {wb: wb});
             $(".wb").trigger("saved");
             if (manualReload) location.assign("/");
