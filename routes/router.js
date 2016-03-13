@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
             res.render('index', {title: wb.title, elems: wb.elems});
         } else {
             console.log("restoring from db");
-            res.render('index', {title: wallboard.title, elems: wallboard.elems});
+            res.render('index', {title: wallboard.title, elems: wallboard.elems, datetime: wallboard.created_at.getTime()});
         }
 
     });

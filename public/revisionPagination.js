@@ -15,26 +15,36 @@ $(function() {
         init: function() {
             var self = this;
 
+            //Get page number from query string
+            if (document.location.search !== "") {
+                var queries = {};
+                $.each(document.location.search.substr(1).split("&"),function(c,q){
+                    var i = q.split("=");
+                    queries[i[0].toString()] = i[1].toString();
+                });
+                self.page = parseInt(queries.page);
+            }
+
+            //Break up our revision data into sets
             for(var i=0; i<self.data.length; i++) {
 
                 self.set.push(self.data[i]);
 
-                if((i + 1) % 10 == 0 || (i + 1) >= self.data.length) {
+                if((i + 1) % 20 == 0 || (i + 1) >= self.data.length) {
                     self.setCounter++;
                     self.sets.push(self.set);
                     self.set = [];
                 }
             }
 
+            //Build pagination buttons
             $("#pg-prev").after(function() {
                 var mrkp = "";
                 for (var i=0; i<self.sets.length; i++) {
-                    mrkp += "<li><a id='rev-set-" + i + "' href='#' class='rev-set " + (i==0 ? "active" : "") + "' rev-set='" + (i) + "'>" + (i+1) + "</a></li>"
+                    mrkp += "<li><a id='rev-set-" + i + "' href='#' class='rev-set " + (i==self.page ? "active" : "") + "' rev-set='" + (i) + "'>" + (i+1) + "</a></li>"
                 }
                 return mrkp;
             });
-
-            $("#" + $("#currentRevision").val()).css({"font-weight": 800, "text-decoration": "underline"});
 
             self.buildPage(self.page);
             self.setEvents();
@@ -80,10 +90,12 @@ $(function() {
                 self.sets[index].forEach(function(i) {
                     var d = new Date(i.datetime);
                     var rul = $("#revisionsList").find("ul");
-                    mrkp += "<li id='"+i.datetime+"'><a href='" + i.url + "'>" + d.toLocaleTimeString() + " - " + d.toLocaleDateString() + "</a></li>";
+                    mrkp += "<li id='"+i.datetime+"'><a href='" + i.url + "?page=" + index + "'>" + d.toLocaleTimeString() + " - " + d.toLocaleDateString() + "</a></li>";
                 });
                 return mrkp;
             });
+
+            $("#" + $("#currentRevision").val()).css({"font-weight": 800, "text-decoration": "underline"});
         }
     };
 
