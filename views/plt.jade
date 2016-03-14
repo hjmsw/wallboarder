@@ -63,8 +63,9 @@ div#plt
                         input(type="button" id="wb-table-confirm" name="wb-table-confirm" value="Confirm" class="btn btn-default form-control hidden")
                     div.form-group
                         input(type="button" id="wb-table-cancel" name="wb-table-cancel" value="Cancel" class="btn btn-default form-control hidden")
+        div#viewRevisions
+            a(href="/revision/#{datetime}" class="btn btn-default")= "View Revisions"
+
     div#editZone
-    div#viewRevisions
-        a(href="/revision/#{datetime}")= "View Revisions"
     div#binIcon
         span.glyphicon.glyphicon-trash

@@ -253,6 +253,10 @@ ul.selectable .ui-selected { background: #F39814; }
     margin-bottom:10px;
 }
 
+#viewRevisions {
+    margin-top: 10px;
+}
+
 /*-----Color Pickers------------*/
 
 .colorPickers p {
