@@ -3,11 +3,11 @@
  */
 
 $(function() {
+    var manualReload = false;
 
-    $(".save").on("click", function () {
+    function save() {
         var wb = {
             title: $("body").find("h1").text(),
-            _id: "wallboard1",
             url_slug: "/",
             elems: []
         };
@@ -114,6 +114,23 @@ $(function() {
         }).promise().done(function () {
             $.post('/save', {wb: wb});
             $(".wb").trigger("saved");
+            if (manualReload) location.assign("/");
         });
+    }
+
+    $(".save").on("click", function () {
+        save();
     });
+
+    $("#revision").on("click", function(event) {
+        event.preventDefault();
+        manualReload = true;
+        save();
+    });
+
+    if ($("#revisionsList").length === 1) {
+        $.get("/revisions", function(data) {
+            $(".wb").trigger("init-revision-pages", [data]);
+        });
+    }
 });
