@@ -1,9 +1,12 @@
-/**
- * Created by james on 24/02/2016.
- */
 
 $(function() {
 
+    /**
+     * TextBox object
+     * @param container
+     * @param id
+     * @constructor
+     */
     function TextBox(container, id) {
         this.wb = $(".wb");
         this.container = container;
@@ -12,6 +15,9 @@ $(function() {
         this.plt = $("#plt");
     }
 
+    /**
+     * Set events for the textbox
+     */
     TextBox.prototype.setEvents = function() {
         var self = this;
 
@@ -37,18 +43,22 @@ $(function() {
         });
 
         this.container.on("rebuildTextBox", function(event, boxDecoration, boxContent, fontSize) {
-            self.container.find(".box-inner").html(self.buildTextBox(boxDecoration,boxContent));
+            self.container.find(".box-inner").html(self.buildTextBox(boxDecoration.val(),boxContent));
             self.container.find("box-inner").css("font-size",fontSize);
         });
 
     };
 
+    /**
+     * Add textbox to the wallboard
+     * @param      {Object}   elem  - The wallboard element to be added
+     */
     TextBox.prototype.addTextBox = function(elem) {
         var self = this;
 
         self.id = Date.now();
 
-        self.wb.append("<div id='"+self.id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox(self.plt.find(".boxDecoration"),elem.text()) + "</div></div>");
+        self.wb.append("<div id='"+self.id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox(self.plt.find(".boxDecoration").val(),elem.text()) + "</div></div>");
         self.container = $("#"+self.id);
 
         self.container.css({
@@ -83,13 +93,19 @@ $(function() {
         self.setEvents();
     };
 
-    TextBox.prototype.buildTextBox = function(bd, text) {
-        var bdv = bd.val();
-        if (bdv === "") {
+    /**
+     * Construct the text and decoration inside the textbox elem
+     * @param      {String}   text - The text to be added to the textbox
+     * @param      {String}   decoration - The font-awesome class for the textbox decoration
+     * @return     {String} The markup to be added to the textbox elem
+     */
+    TextBox.prototype.buildTextBox = function(decoration, text) {
+
+        if (decoration === "") {
             return "<div class='box-content box-content-full-width'>"+text+"</div>";
         }
         else {
-            return "<div class='box-decoration'><i class='fa " + bdv + "'></i></div>\
+            return "<div class='box-decoration'><i class='fa " + decoration + "'></i></div>\
                 <div class='box-content'>"+text+"</div>";
         }
     };
