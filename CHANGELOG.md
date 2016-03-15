@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.4.0](https://github.com/hjamesw93/wallboarder/tree/0.4.0) (2016-03-14)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.3.0...0.4.0)
+
+**Closed issues:**
+
+- WallboardProvider Refactor [\#7](https://github.com/hjamesw93/wallboarder/issues/7)
+- Audit history [\#6](https://github.com/hjamesw93/wallboarder/issues/6)
+
 ## [0.3.0](https://github.com/hjamesw93/wallboarder/tree/0.3.0) (2016-03-09)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.2.2...0.3.0)
 
