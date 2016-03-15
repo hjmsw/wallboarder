@@ -159,7 +159,8 @@ $(function() {
                 });
 
                 var mt = $("#miniToolbar");
-                $(".header").hover(function(event, ui) {
+                var hd = $(".header");
+                hd.hover(function(event, ui) {
                     if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
                 }, function(event, ui) {
                     if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
@@ -185,7 +186,7 @@ $(function() {
                     $("#preview-box").text($("#boxText").val());
                 });
 
-                $(".header").dblclick(function() {
+                hd.dblclick(function() {
                     self.wb.trigger("startEdit", [$(this)]);
                 });
             } else {
@@ -363,7 +364,10 @@ $(function() {
             $(".draggable").each(function() {
                 if ($(this).css("z-index") >= z_index) z_index = $(this).css("z-index");
             });
-            $("#plt").css("z-index", z_index+1);
+            $("#plt").css("z-index", z_index+2);
+            $("#miniToolbar").css("z-index", z_index+2);
+            $("#statusMessage").css("z-index", z_index+1);
+            $(".header").css("z-index", z_index+1);
         }
     };
 
