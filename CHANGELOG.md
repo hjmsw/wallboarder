@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.4.2](https://github.com/hjamesw93/wallboarder/tree/0.4.2) (2016-03-18)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.1...0.4.2)
+
+**Merged pull requests:**
+
+- Add npm shortcuts for easy installation/startup of wallboarder [\#12](https://github.com/hjamesw93/wallboarder/pull/12) ([msmy](https://github.com/msmy))
+
 ## [0.4.1](https://github.com/hjamesw93/wallboarder/tree/0.4.1) (2016-03-15)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.0...0.4.1)
 
