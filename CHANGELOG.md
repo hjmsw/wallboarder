@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.4.1](https://github.com/hjamesw93/wallboarder/tree/0.4.1) (2016-03-15)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.0...0.4.1)
+
+**Closed issues:**
+
+- package.json does not include Mongoose js [\#9](https://github.com/hjamesw93/wallboarder/issues/9)
+- "Edit in progress" z-index [\#8](https://github.com/hjamesw93/wallboarder/issues/8)
+
 ## [0.4.0](https://github.com/hjamesw93/wallboarder/tree/0.4.0) (2016-03-14)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.3.0...0.4.0)
 

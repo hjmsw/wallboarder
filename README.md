@@ -20,16 +20,21 @@ Install Bower dependencies: (e.g. jquery)
 ./node_modules/bower/bin/bower install
 ```
 
+Install MongoDB (Mac OSX with Homebrew installed only)
+```
+npm run mongodb:install
+```
+
 ## Usage
 
 Start Wallboarder:
 ```
-./node_modules/forever/bin/forever start server.js
+npm start
 ```
 
 Stop Wallboarder:
 ```
-./node_modules/forever/bin/forever stop server.js
+npm stop
 ```
 
 Visit in your browser:```http://<your-ip-or-domain>:8081``` e.g ```http://localhost:8081```
