@@ -1,12 +1,11 @@
 {
   "name": "wallboarder",
   "description": "Wallboarder - WYSIWYG Editor for Wallboards",
-  "authors": [
-    "James Harding <james@jamesharding.me>"
-  ],
+  "author": "James Harding <james@jamesharding.me>",
   "license": "MIT",
   "repository": "https://github.com/hjamesw93/wallboarder",
   "main": "server.js",
+  "version": "0.0.1",
   "dependencies": {
     "body-parser": "~1.0.1",
     "bower": "^1.7.7",
@@ -18,5 +17,13 @@
     "mongodb": "^2.1.0",
     "mongoose": "^4.4.7",
     "socket.io": "^1.4.5"
+  },
+  "scripts" : {
+    "start": "npm run mongod:start && forever start server.js",
+    "stop": "npm run mongod:stop && forever stop server.js",
+    "forever": "forever",
+    "mongod:install": "brew install mongodb",
+    "mongod:start": "mongod --config /usr/local/etc/mongod.conf &",
+    "mongod:stop": "pkill mongod"
   }
 }
