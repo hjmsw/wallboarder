@@ -2,7 +2,7 @@
  * Created by james on 15/02/2016.
  */
 
-$(function() {
+(function() {
     var manualReload = false;
 
     function save() {
@@ -61,7 +61,8 @@ $(function() {
                     row = [];
                     //each td or th
                     $(this).children().each(function () {
-                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) || $(this).hasClass("tabledit-view-mode")) {
+                        //Rather horrible if - We just want to make sure we don't save the tabledit toolbar
+                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) || $(this).hasClass("tabledit-view-mode") && $(this).children(".tabledit-toolbar").length === 0 ) {
                             row.push([$(this).prop("tagName"), $(this).text()]);
                         }
                     });
@@ -130,9 +131,12 @@ $(function() {
         save();
     });
 
-    if ($("#revisionsList").length === 1) {
-        $.get("/revisions", function(data) {
-            $(".wb").trigger("init-revision-pages", [data]);
-        });
-    }
-});
+    $(function() {
+        if ($("#revisionsList").length === 1) {
+            $.get("/revisions", function(data) {
+                $(".wb").trigger("init-revision-pages", [data]);
+            });
+        }
+    });
+
+})();

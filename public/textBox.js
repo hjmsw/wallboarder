@@ -1,5 +1,5 @@
 
-$(function() {
+(function() {
 
     /**
      * TextBox object
@@ -111,7 +111,7 @@ $(function() {
     };
 
     //Events
-    $(window).load(function() {
+    $(function() {
         $(".wb_box").each(function() {
             var tb = new TextBox($(this), $(this).attr("id"));
             tb.setEvents();
@@ -124,4 +124,4 @@ $(function() {
     });
 
 
-});
+})();

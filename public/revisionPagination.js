@@ -3,15 +3,20 @@
  */
 
 
-$(function() {
+(function() {
 
+    /**
+     * Creates a new revisions pagination object
+     * @param data
+     * @constructor
+     */
     function RevisionsPagination(data) {
         this.sets = this.splitData(data);
         this.page = 0;
 
         var self = this;
 
-        //Get page number from query string
+        //Get page number from query string if exists
         if (document.location.search !== "") {
             var queries = {};
             $.each(document.location.search.substr(1).split("&"),function(c,q){
@@ -27,9 +32,12 @@ $(function() {
         self.setEvents();
     }
 
+    /**
+     * Break up our revision data into sets
+     * @param data
+     * @returns {Array}
+     */
     RevisionsPagination.prototype.splitData = function(data) {
-        //Break up our revision data into sets
-
         var set = [];
         var sets = [];
         var setCounter = 0;
@@ -44,10 +52,13 @@ $(function() {
                 set = [];
             }
         }
-
         return sets;
     };
 
+    /**
+     * Build the pagination nav
+     * @returns mrkp
+     */
     RevisionsPagination.prototype.buildPaginationNav = function() {
         var self = this;
 
@@ -61,6 +72,9 @@ $(function() {
         });
     };
 
+    /**
+     * Set events for our pagination
+     */
     RevisionsPagination.prototype.setEvents = function() {
         var self = this;
 
@@ -93,6 +107,10 @@ $(function() {
         });
     };
 
+    /**
+     * Populate page
+     * @param index
+     */
     RevisionsPagination.prototype.buildPage = function(index) {
         var self = this;
 
@@ -113,4 +131,4 @@ $(function() {
         var rp = new RevisionsPagination(data);
     });
 
-});
+})();
