@@ -8,7 +8,7 @@
     function save() {
         var wb = {
             title: $("body").find("h1").text(),
-            url_slug: "/",
+            url_slug: $("#url_slug").val(),
             elems: []
         };
 
@@ -131,7 +131,8 @@
 
     $(function() {
         if ($("#revisionsList").length === 1) {
-            $.get("/revisions", function(data) {
+
+            $.get("/revisions/" + $("#url_slug").val(), function(data) {
                 $(".wb").trigger("init-revision-pages", [data]);
             });
         }
