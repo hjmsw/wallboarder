@@ -11,9 +11,9 @@ wbChange = false;
         this.confirmButton = $("#wb-table-confirm");
         this.tableCols = $("#tableCols");
         this.tableRows = $("#tableRows");
-        this.drg = $(".draggable");
         this.wb = $(".wb");
         this.plt = $("#plt");
+        this.ez = $("#editZone");
 
         this.init();
     }
@@ -225,14 +225,22 @@ wbChange = false;
                 else if (elem.hasClass("header")) elem.text($(this).val());
             });
 
-            var fontSize = "14px";
+            var fontSize = elem.css("font-size");
             $("#plt-font-size").on("change", function() {
                 fontSize = $(this).val();
+                console.log(elem);
                 elem.css("font-size",fontSize);
             });
 
             $("#wb-box-confirm").on("click", function() {
-                $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-content").text(), fontSize]);
+                $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-decoration"),elem.find(".box-content"), fontSize]);
+                self.ez.html("");
+                $("#accordion").show();
+            });
+
+            $("#wb-box-cancel").on("click", function() {
+                self.ez.html("");
+                $("#accordion").show();
             });
         }
 
@@ -255,11 +263,11 @@ wbChange = false;
 
         $("#accordion").hide();
 
-        var ez = $("#editZone");
+
 
         var decorationClass = elem.find(".fa").attr("class");
 
-        ez.html(function() {
+        self.ez.html(function() {
 
             var el = "<div class='panel panel-default'><div class='panel-heading'>";
 
@@ -310,13 +318,13 @@ wbChange = false;
 
         if (elem.hasClass('wb_box')) {
             if(elem.find(".box-decoration").length > 0) {
-                this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), ez.find("#colorPickersDecoration")]);
+                this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), self.ez.find("#colorPickersDecoration")]);
             } else {
-                ez.find("#colorPickersDecoration").parent(".form-group").remove();
+                self.ez.find("#colorPickersDecoration").parent(".form-group").remove();
             }
-            this.plt.trigger("newColorPickers", [elem.find(".box-content"), ez.find("#colorPickersContent")]);
+            this.plt.trigger("newColorPickers", [elem.find(".box-content"), self.ez.find("#colorPickersContent")]);
         } else {
-            this.plt.trigger("newColorPickers", [elem, ez.find(".colorPickers")]);
+            this.plt.trigger("newColorPickers", [elem, self.ez.find(".colorPickers")]);
         }
     };
 

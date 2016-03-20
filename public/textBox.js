@@ -42,9 +42,27 @@
             self.wb.trigger("startEdit", [$(this)]);
         });
 
-        this.container.on("rebuildTextBox", function(event, boxDecoration, boxContent, fontSize) {
-            self.container.find(".box-inner").html(self.buildTextBox(boxDecoration.val(),boxContent));
-            self.container.find("box-inner").css("font-size",fontSize);
+        this.container.on("rebuildTextBox", function(event, decorationInput, boxDecoration, boxContent, fontSize) {
+
+            var colors = {
+                "bdColor": boxDecoration.css("color"),
+                "bdBackground": boxDecoration.css("background-color"),
+                "bcColor": boxContent.css("color"),
+                "bcBackground": boxContent.css("background-color")
+            };
+
+            self.container.find(".box-inner").html(self.buildTextBox(decorationInput.val(),boxContent.text()));
+            self.container.find(".box-inner").css("font-size",fontSize);
+
+            self.container.find(".box-decoration").css({
+                "color": colors.bdColor,
+                "background-color": colors.bdBackground
+            });
+
+            self.container.find(".box-content").css({
+                "color": colors.bcColor,
+                "background-color": colors.bcBackground
+            });
         });
 
     };
