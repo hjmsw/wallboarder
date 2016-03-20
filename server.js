@@ -25,36 +25,44 @@ var c_client = "";
 io.on('connection', function(socket) {
     console.log('client connected');
 
-    socket.on('wb-client-edit', function (data) {
-        if (!editing) {
-            editing = true;
-            c_client = data;
+    socket.on('wb_nsp', function (data) {
+        socket.emit('acc', {wb_nsp: data.wb_nsp});
+        var nsp = io.of('/' + data.wb_nsp);
+        nsp.on('connection', function (socket) {
+            socket.once('wb-client-edit', function (data) {
+                if (!editing) {
+                    editing = true;
+                    c_client = data;
 
-            io.emit('wb-server-io-event', {type: 'edit', client: c_client});
-        }
-    });
+                    nsp.emit('wb-server-io-event', {type: 'edit', client: c_client});
+                }
+            });
 
-    socket.on('wb-client-save', function (data) {
-        if (c_client === data) {
+            socket.once('wb-client-save', function (data) {
+                if (c_client === data) {
 
-            io.emit('wb-server-io-event', {type: 'save', client: c_client});
+                    nsp.emit('wb-server-io-event', {type: 'save', client: c_client});
 
-            editing = false;
-            c_client = "";
-        }
-    });
+                    editing = false;
+                    c_client = "";
+                }
+            });
 
-    socket.on('wb-client-get-edit-status', function() {
-        socket.emit('wb-server-io-status', editing);
-    });
+            socket.once('wb-client-get-edit-status', function () {
+                socket.emit('wb-server-io-status', editing);
+            });
 
-    socket.on("disconnect", function(data) {
-        if (editing && c_client === socket.conn.id) {
-            editing = false;
-            c_client = "";
+            socket.once("disconnect", function (data) {
+                if (editing && c_client === socket.conn.id) {
+                    editing = false;
+                    c_client = "";
 
-            io.emit('wb-server-io-event', {type: 'editor-quit', client: c_client});
-        }
+                    socket = null;
+
+                    nsp.emit('wb-server-io-event', {type: 'editor-quit', client: c_client});
+                }
+            });
+        });
     });
 });
 

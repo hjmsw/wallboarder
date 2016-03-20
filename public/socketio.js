@@ -3,41 +3,48 @@
  */
 
 $(function(){
-    var socket = io();
+    var global_socket = io();
     var wb = $(".wb");
 
-    socket.emit("wb-client-get-edit-status");
+    var wb_nsp = $("#url_slug").val();
 
-    wb.on("edit", function() {
-        socket.emit("wb-client-edit", socket.id);
-    });
+    global_socket.emit('wb_nsp', { wb_nsp: wb_nsp});
+    global_socket.on('acc', function (data) {
+        var socket = io('/' + data.wb_nsp);
 
-    wb.on("saved", function() {
-        socket.emit("wb-client-save", socket.id);
-    });
+        socket.emit("wb-client-get-edit-status");
 
-    socket.on("wb-server-io-status", function(status) {
-        if (status) {
-            wb.trigger("new-status-message", ["Edit in progress..."]);
-            wb.trigger("read-only");
-        }
-    });
+        wb.on("edit", function() {
+            socket.emit("wb-client-edit", socket.id);
+        });
 
-    socket.on("wb-server-io-event", function(data) {
-        if (data.type === "edit") {
-            if (data.client !== socket.id) {
+        wb.on("saved", function() {
+            socket.emit("wb-client-save", socket.id);
+        });
+
+
+        socket.on("wb-server-io-status", function(status) {
+            if (status) {
                 wb.trigger("new-status-message", ["Edit in progress..."]);
                 wb.trigger("read-only");
             }
-        } else if (data.type === "save") {
-            if (data.client !== socket.id) {
-                wb.trigger("new-status-message", ["Edit finished. Reloading..."]);
-            }
-            location.reload();
-        } else if (data.type === "editor-quit") {
-            wb.trigger("new-status-message", ["Edit aborted. Reloading..."]);
-            location.reload();
-        }
-    });
+        });
 
+        socket.on("wb-server-io-event", function(data) {
+            if (data.type === "edit") {
+                if (data.client !== socket.id) {
+                    wb.trigger("new-status-message", ["Edit in progress..."]);
+                    wb.trigger("read-only");
+                }
+            } else if (data.type === "save") {
+                if (data.client !== socket.id) {
+                    wb.trigger("new-status-message", ["Edit finished. Reloading..."]);
+                }
+                location.reload();
+            } else if (data.type === "editor-quit") {
+                wb.trigger("new-status-message", ["Edit aborted. Reloading..."]);
+                location.reload();
+            }
+        });
+    });
 });

@@ -6,7 +6,7 @@ wbChange = false;
 
 (function() {
 
-    Ui = function() {
+    function Ui() {
         this.cancelButton = $("#wb-table-cancel");
         this.confirmButton = $("#wb-table-confirm");
         this.tableCols = $("#tableCols");
@@ -16,7 +16,7 @@ wbChange = false;
         this.plt = $("#plt");
 
         this.init();
-    };
+    }
 
     Ui.prototype.init = function(reInit) {
         if (typeof reInit === "undefined") reInit = false;
@@ -368,8 +368,7 @@ wbChange = false;
     };
 
 
-    $(function() {
-
+    $(window).load(function() {
 
         var ui = new Ui();
 
