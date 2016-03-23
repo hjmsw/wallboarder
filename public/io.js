@@ -29,13 +29,15 @@
                     elem.decoration = c[c.length-1];
                     elem.decorationStyle = [
                         ["color", i.find(".box-decoration").css("color")],
-                        ["background-color", i.find(".box-decoration").css("background-color")]
+                        ["background-color", i.find(".box-decoration").css("background-color")],
+                        ["width", i.find(".box-decoration").css("width")]
                     ];
                 }
 
                 elem.contentStyle = [
                     ["color", i.find(".box-content").css("color")],
-                    ["background-color", i.find(".box-content").css("background-color")]
+                    ["background-color", i.find(".box-content").css("background-color")],
+                    ["width", i.find(".box-content").css("width")]
                 ];
 
                 elem.style = [
