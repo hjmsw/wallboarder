@@ -1,15 +1,11 @@
 # Change Log
 
-## [Unreleased](https://github.com/hjamesw93/wallboarder/tree/HEAD)
-
-[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.5.0...HEAD)
+## [0.5.0](https://github.com/hjamesw93/wallboarder/tree/0.5.0) (2016-04-03)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.2...0.5.0)
 
 **Closed issues:**
 
 - TODO: Multi-wallboard support [\#11](https://github.com/hjamesw93/wallboarder/issues/11)
-
-## [0.5.0](https://github.com/hjamesw93/wallboarder/tree/0.5.0) (2016-04-03)
-[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.2...0.5.0)
 
 ## [0.4.2](https://github.com/hjamesw93/wallboarder/tree/0.4.2) (2016-03-18)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.1...0.4.2)
