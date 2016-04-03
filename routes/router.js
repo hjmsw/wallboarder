@@ -10,12 +10,23 @@ router.get('/', function(req, res) {
     res.redirect('/wb/default'); //Redirect to default wallboard
 });
 
+router.get('/wb', function(req, res) {
+
+    WallboardProvider.listWallboards(function(error, list) {
+        console.log(list);
+        res.render('wbList', {
+            wallboards: list
+        });
+    });
+
+});
+
 router.get('/wb/:url_slug', function (req, res) {
 
     // default = / for backwards compatibility
     var url_slug = (req.params.url_slug === 'default' ? '/' : req.params.url_slug);
 
-    WallboardProvider.findOne(url_slug, function (error, wallboard) {
+    WallboardProvider.findOne(url_slug, {}, function (error, wallboard) {
 
         if (error) console.log(error);
 

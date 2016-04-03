@@ -11,8 +11,9 @@ div.container-fluid.wb
                 table#exampleTable.table.table-striped
                     - each row in elem.struct.rows
                         tr
-                            - each i in row
-                                #{i[0]} #{i[1]}
+                            if row
+                                - each i in row
+                                    #{i[0]} #{i[1]}
                 | <script>
                 |  $(function() {
                 |     wb_tables.push({
