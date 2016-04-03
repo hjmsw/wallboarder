@@ -13,7 +13,6 @@ router.get('/', function(req, res) {
 router.get('/wb', function(req, res) {
 
     WallboardProvider.listWallboards(function(error, list) {
-        console.log(list);
         res.render('wbList', {
             wallboards: list
         });

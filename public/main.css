@@ -253,7 +253,7 @@ ul.selectable .ui-selected { background: #F39814; }
     margin-bottom:10px;
 }
 
-#viewRevisions {
+#viewRevisions, #viewAllWallboards {
     margin-top: 10px;
 }
 
