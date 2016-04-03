@@ -1,118 +1,145 @@
-/**
- * Created by james on 24/02/2016.
- */
 
-$(function() {
+(function() {
 
-    var TextBox = {
-        wb: $(".wb"),
-        container: null,
-        id: null,
-        drg: $(".draggable"),
-        plt: $("#plt"),
+    /**
+     * TextBox object
+     * @param container
+     * @param id
+     * @constructor
+     */
+    function TextBox(container, id) {
+        this.wb = $(".wb");
+        this.container = container;
+        this.id = id;
+        this.drg = $(".draggable");
+        this.plt = $("#plt");
+    }
 
-        init: function() {
-            this.setEvents();
-        },
-        
-        setEvents: function() {
-            var self = this;
+    /**
+     * Set events for the textbox
+     */
+    TextBox.prototype.setEvents = function() {
+        var self = this;
 
-            this.container.on({
-                "dragstart":  function() {
-                    $("#binIcon").effect("fade", 500, function () {
-                        $(this).show();
-                    })
-                },
-                "dragstop": function() {
-                    $("#binIcon").effect("fade", 500, function() {
-                        $(this).hide();
-                    });
-                    self.wb.trigger("fixZindex");
-                },
-                "click": function() {
-                    self.wb.trigger("fixZindex");
-                }
-            });
-
-            this.container.dblclick(function() {
-                self.wb.trigger("startEdit", [$(this)]);
-            });
-
-            this.container.on("rebuildTextBox", function(event, boxDecoration, boxContent, fontSize) {
-                self.container.find(".box-inner").html(self.buildTextBox(boxDecoration,boxContent));
-                self.container.find("box-inner").css("font-size",fontSize);
-            });
-
-        },
-
-        addTextBox: function(elem) {
-            var self = this;
-
-            self.id = Date.now();
-
-            self.wb.append("<div id='"+self.id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox(self.plt.find(".boxDecoration"),elem.text()) + "</div></div>");
-            self.container = $("#"+self.id);
-
-            self.container.css({
-                "color": elem.css("color"),
-                "background-color": elem.css("background-color"),
-                "width": elem.css("width"),
-                "height": elem.css("height")
-            });
-
-            self.container.find(".box-content").css("background-color", elem.css("background-color"));
-            self.container.find(".box-decoration").css("background-color", elem.css("background-color"));
-
-            //Reset preview box
-            elem.text("Text goes here...");
-            elem.css({
-                "background-color": "#EFEFEF",
-                "color": "#000"
-            });
-
-            //reset color selectors
-            $("#plt").find(".colorInner").each(function(){
-                $(this).css("background-color", "#EFEFEF");
-            });
-
-            //reset insert form inputs
-            $("#boxText").val("");
-            $("#boxDecoration").val("");
-
-            //Update wallboard, initialising this element
-            self.wb.trigger("update_wb");
-
-            self.init();
-        },
-
-        buildTextBox: function(bd, text) {
-            var bdv = bd.val();
-            if (bdv === "") {
-                return "<div class='box-content box-content-full-width'>"+text+"</div>";
+        this.container.on({
+            "dragstart":  function() {
+                $("#binIcon").effect("fade", 500, function () {
+                    $(this).show();
+                })
+            },
+            "dragstop": function() {
+                $("#binIcon").effect("fade", 500, function() {
+                    $(this).hide();
+                });
+                self.wb.trigger("fixZindex");
+            },
+            "click": function() {
+                self.wb.trigger("fixZindex");
             }
-            else {
-                return "<div class='box-decoration'><i class='fa " + bdv + "'></i></div>\
-                    <div class='box-content'>"+text+"</div>";
-            }
-        }
+        });
+
+        this.container.dblclick(function() {
+            self.wb.trigger("startEdit", [$(this)]);
+        });
+
+        this.container.on("rebuildTextBox", function(event, decorationInput, boxDecoration, boxContent, fontSize) {
+
+            var colors = {
+                "bdColor": boxDecoration.css("color"),
+                "bdBackground": boxDecoration.css("background-color"),
+                "bcColor": boxContent.css("color"),
+                "bcBackground": boxContent.css("background-color")
+            };
+
+            self.container.find(".box-inner").html(self.buildTextBox(decorationInput.val(),boxContent.text()));
+            self.container.find(".box-inner").css("font-size",fontSize);
+
+            self.container.find(".box-decoration").css({
+                "color": colors.bdColor,
+                "background-color": colors.bdBackground
+            });
+
+            self.container.find(".box-content").css({
+                "color": colors.bcColor,
+                "background-color": colors.bcBackground
+            });
+        });
 
     };
 
+    /**
+     * Add textbox to the wallboard
+     * @param      {Object}   elem  - The wallboard element to be added
+     */
+    TextBox.prototype.addTextBox = function(elem) {
+        var self = this;
+
+        self.id = Date.now();
+
+        self.wb.append("<div id='"+self.id+"' class='draggable resizable editable wb_box'><div class='box-inner'>" + self.buildTextBox(self.plt.find(".boxDecoration").val(),elem.text()) + "</div></div>");
+        self.container = $("#"+self.id);
+
+        self.container.css({
+            "color": elem.css("color"),
+            "background-color": elem.css("background-color"),
+            "width": elem.css("width"),
+            "height": elem.css("height")
+        });
+
+        self.container.find(".box-content").css("background-color", elem.css("background-color"));
+        self.container.find(".box-decoration").css("background-color", elem.css("background-color"));
+
+        //Reset preview box
+        elem.text("Text goes here...");
+        elem.css({
+            "background-color": "#EFEFEF",
+            "color": "#000"
+        });
+
+        //reset color selectors
+        $("#plt").find(".colorInner").each(function(){
+            $(this).css("background-color", "#EFEFEF");
+        });
+
+        //reset insert form inputs
+        $("#boxText").val("");
+        $("#boxDecoration").val("");
+
+        //Update wallboard, initialising this element
+        self.wb.trigger("update_wb");
+
+        self.setEvents();
+    };
+
+    /**
+     * Construct the text and decoration inside the textbox elem
+     * @param      {String}   text - The text to be added to the textbox
+     * @param      {String}   decoration - The font-awesome class for the textbox decoration
+     * @return     {String} The markup to be added to the textbox elem
+     */
+    TextBox.prototype.buildTextBox = function(decoration, text) {
+
+        if (decoration === "") {
+            return "<div class='box-content box-content-full-width'>"+text+"</div>";
+        }
+        else {
+            return "<div class='box-decoration'><i class='fa " + decoration + "'></i></div>\
+                <div class='box-content'>"+text+"</div>";
+        }
+    };
+
     //Events
-    $(window).load(function() {
+    $(function() {
         $(".wb_box").each(function() {
-            var tb = Object.create(TextBox);
-            tb.container = $(this);
-            tb.id = $(this).attr("id");
-            tb.init();
+            var tb = new TextBox($(this), $(this).attr("id"));
+            tb.setEvents();
         });
 
         $(".wb").on("newTextBox", function(event, elem) {
-            var tb = Object.create(TextBox);
+            var tb = new TextBox(null, null);
             tb.addTextBox(elem);
         });
     });
 
 
-});
+})();

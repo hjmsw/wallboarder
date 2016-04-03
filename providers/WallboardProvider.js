@@ -39,8 +39,8 @@ wallboardSchema = mongoose.Schema({
 
 WallboardProvider.prototype.wallboard = mongoose.model('wallboards', wallboardSchema);
 
-WallboardProvider.prototype.findOne = function(slug, callback ) {
-  this.wallboard.findOne({ 'url_slug': slug }, {}, { sort: { 'created_at' : -1 } }, function (err, result) {
+WallboardProvider.prototype.findOne = function(slug, projection, callback ) {
+  this.wallboard.findOne({ 'url_slug': slug }, projection, { sort: { 'created_at' : -1 } }, function (err, result) {
     //console.log(util.inspect(result, false, null));
     if(err) callback(err);
     else callback(null, result)
@@ -80,6 +80,29 @@ WallboardProvider.prototype.find = function(slug, callback) {
     }
   });
 
+};
+
+WallboardProvider.prototype.listWallboards = function(callback) {
+  var self = this;
+
+  self.wallboard.distinct('url_slug', function(err, result) {
+    if (err) {
+      callback(err, null);
+    } else {
+
+      var wbList = [];
+
+      result.forEach(function(elem) {
+        self.findOne(elem, {title: 1, url_slug: 1, created_at: 1}, function(err, wallboard) {
+          if (err) console.log(err);
+          else {
+            wbList.push(wallboard);
+            if (result.length === wbList.length) callback(null, wbList);
+          }
+        });
+      });
+    }
+  });
 };
 
 exports.WallboardProvider = WallboardProvider;

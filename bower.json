@@ -25,6 +25,7 @@
     "tinycolorpicker": "^0.9.5",
     "font-awesome": "^4.5.0",
     "jquery-tabledit": "^1.2.3",
-    "socket.io-client": "^1.4.5"
+    "socket.io-client": "^1.4.5",
+    "datatables-bootstrap3-plugin": "^0.4.0"
   }
 }

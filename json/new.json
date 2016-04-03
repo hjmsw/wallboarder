@@ -1,0 +1,27 @@
+{
+  "title": "New Wallboard",
+  "url_slug": "",
+  "elems": [{
+    "id": "wb_0",
+    "tagName": "H1",
+    "innerText": "New Wallboard",
+    "style": [
+      [
+        "width",
+        "100%"
+      ],
+      [
+        "position",
+        "fixed"
+      ],
+      [
+        "background",
+        "rgb(251, 171, 24) none repeat scroll 0% 0% \/ auto padding-box border-box"
+      ],
+      [
+        "color",
+        "rgb(255, 255, 255)"
+      ]
+    ]
+  }]
+}

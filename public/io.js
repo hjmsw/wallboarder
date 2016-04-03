@@ -2,13 +2,13 @@
  * Created by james on 15/02/2016.
  */
 
-$(function() {
+(function() {
     var manualReload = false;
 
     function save() {
         var wb = {
             title: $("body").find("h1").text(),
-            url_slug: "/",
+            url_slug: $("#url_slug").val(),
             elems: []
         };
 
@@ -29,13 +29,15 @@ $(function() {
                     elem.decoration = c[c.length-1];
                     elem.decorationStyle = [
                         ["color", i.find(".box-decoration").css("color")],
-                        ["background-color", i.find(".box-decoration").css("background-color")]
+                        ["background-color", i.find(".box-decoration").css("background-color")],
+                        ["width", i.find(".box-decoration").css("width")]
                     ];
                 }
 
                 elem.contentStyle = [
                     ["color", i.find(".box-content").css("color")],
-                    ["background-color", i.find(".box-content").css("background-color")]
+                    ["background-color", i.find(".box-content").css("background-color")],
+                    ["width", i.find(".box-content").css("width")]
                 ];
 
                 elem.style = [
@@ -60,7 +62,8 @@ $(function() {
                     row = [];
                     //each td or th
                     $(this).children().each(function () {
-                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) || $(this).hasClass("tabledit-view-mode")) {
+                        //Rather horrible if - We just want to make sure we don't save the tabledit toolbar
+                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) || $(this).hasClass("tabledit-view-mode") && $(this).children(".tabledit-toolbar").length === 0 ) {
                             row.push([$(this).prop("tagName"), $(this).text()]);
                         }
                     });
@@ -128,9 +131,13 @@ $(function() {
         save();
     });
 
-    if ($("#revisionsList").length === 1) {
-        $.get("/revisions", function(data) {
-            $(".wb").trigger("init-revision-pages", [data]);
-        });
-    }
-});
+    $(function() {
+        if ($("#revisionsList").length === 1) {
+
+            $.get("/revisions/" + $("#url_slug").val(), function(data) {
+                $(".wb").trigger("init-revision-pages", [data]);
+            });
+        }
+    });
+
+})();

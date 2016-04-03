@@ -1,0 +1,37 @@
+doctype html
+html
+    head
+        title= title
+
+        script(src="/components/jquery/dist/jquery.min.js")
+        script(src="/components/jquery-ui/jquery-ui.min.js")
+        script(src="/components/datatables-bootstrap3-plugin/media/js/datatables-bootstrap3.min.js")
+        script(src="/dataTables.js")
+
+        link(rel="stylesheet" href="/components/jquery-ui/themes/base/jquery-ui.min.css")
+        link(rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" href="/components/font-awesome/css/font-awesome.min.css")
+        link(rel="stylesheet" href="bower_components/datatables-bootstrap3-plugin/media/css/datatables-bootstrap3.css")
+        link(rel="stylesheet" href="/main.css")
+
+
+    body
+        div.container
+            div.row
+                div.col-md-12
+                    table#wbListTable.table.table-striped.table-bordered
+                        thead
+                            tr
+                                td="Name"
+                                td="Link"
+                                td="Last modified"
+
+                        tbody
+                            - each wallboard in wallboards
+                                if wallboard.url_slug == "/"
+                                    - wallboard.url_slug = "default"
+                                tr
+                                    td=wallboard.title
+                                    td
+                                        a(href="/wb/" + wallboard.url_slug)="/wb/" + wallboard.url_slug
+                                    td=wallboard.created_at
