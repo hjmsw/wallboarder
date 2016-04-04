@@ -7,7 +7,7 @@ var WallboardProvider = require('../providers/WallboardProvider').WallboardProvi
 WallboardProvider = new WallboardProvider(config.db.host);
 
 router.get('/', function(req, res) {
-    res.redirect('/wb/default'); //Redirect to default wallboard
+    res.redirect('/wb'); //Redirect to default wallboard
 });
 
 router.get('/wb', function(req, res) {
