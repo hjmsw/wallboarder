@@ -1,4 +1,4 @@
 
 $(function() {
-    $('#wbListTable').dataTable();
+    $('#wbListTable').DataTable();
 });

@@ -6,6 +6,8 @@ var io = require('socket.io')(server);
 
 var routes = require('./routes/router');
 
+var config = require('./config/config');
+
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,7 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/', routes);
 
-server.listen(8081);
+server.listen(config.app.port, config.app.host);
 
 app.use(express.static('public'));
 app.use('/components', express.static('bower_components'));
@@ -49,7 +51,7 @@ io.on('connection', function(socket) {
             });
 
             socket.once('wb-client-get-edit-status', function () {
-                socket.emit('wb-server-io-status', editing);
+                nsp.emit('wb-server-io-status', editing);
             });
 
             socket.once("disconnect", function (data) {

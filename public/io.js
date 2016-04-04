@@ -30,14 +30,14 @@
                     elem.decorationStyle = [
                         ["color", i.find(".box-decoration").css("color")],
                         ["background-color", i.find(".box-decoration").css("background-color")],
-                        ["width", i.find(".box-decoration").css("width")]
+                        ["width", (i.find(".box-decoration").outerWidth() / i.find(".box-decoration").parent().outerWidth() * 100) + "%"]
                     ];
                 }
 
                 elem.contentStyle = [
                     ["color", i.find(".box-content").css("color")],
                     ["background-color", i.find(".box-content").css("background-color")],
-                    ["width", i.find(".box-content").css("width")]
+                    ["width", (i.find(".box-content").outerWidth() / i.find(".box-content").parent().outerWidth() * 100) + "%"]
                 ];
 
                 elem.style = [
