@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.5.1](https://github.com/hjamesw93/wallboarder/tree/0.5.1) (2016-04-04)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.5.0...0.5.1)
+
+**Closed issues:**
+
+- Resizing problems [\#15](https://github.com/hjamesw93/wallboarder/issues/15)
+
 ## [0.5.0](https://github.com/hjamesw93/wallboarder/tree/0.5.0) (2016-04-03)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.2...0.5.0)
 
