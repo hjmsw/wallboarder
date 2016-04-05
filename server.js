@@ -5,6 +5,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 var routes = require('./routes/router');
+var api = require('./routes/api');
 
 var config = require('./config/config');
 
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', routes);
+app.use('/api/v1', api);
 
 server.listen(config.app.port, config.app.host);
 

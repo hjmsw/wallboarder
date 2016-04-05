@@ -115,7 +115,7 @@
             wb.elems.push(elem);
 
         }).promise().done(function () {
-            $.post('/save', {wb: wb});
+            $.post('/api/v1/save', {wb: wb});
             $(".wb").trigger("saved");
             if (manualReload) location.assign("/");
         });
@@ -134,7 +134,7 @@
     $(function() {
         if ($("#revisionsList").length === 1) {
 
-            $.get("/revisions/" + $("#url_slug").val(), function(data) {
+            $.get("/api/v1/revisions/" + $("#url_slug").val(), function(data) {
                 $(".wb").trigger("init-revision-pages", [data]);
             });
         }
