@@ -4,7 +4,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var routes = require('./routes/router');
+var routes = require('./routes/app');
 var api = require('./routes/api');
 
 var config = require('./config/config');
