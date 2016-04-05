@@ -1,16 +1,15 @@
 var express = require('express');
 var router = express.Router();
-
 var config = require('../config/config');
-
 var request = require('request');
+var appUrl = config.app.host + (config.app.port === 80 ? '' : ':' + config.app.port);
 
 router.get('/', function(req, res) {
     res.redirect('/wb'); //Redirect to wallboard list
 });
 
 router.get('/wb', function(req, res) {
-    request('http://localhost:8081/api/v1/wb', function (error, response, body) {
+    request('http://' + appUrl + '/api/v1/wb', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             res.render('wbList', {
                 wallboards: JSON.parse(body)
@@ -22,7 +21,7 @@ router.get('/wb', function(req, res) {
 
 router.get('/wb/:url_slug', function (req, res) {
 
-    request('http://localhost:8081/api/v1/wb/' + req.params.url_slug, function (error, response, body) {
+    request('http://' + appUrl + '/api/v1/wb/' + req.params.url_slug, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
             var wallboard = JSON.parse(body);
@@ -44,17 +43,13 @@ router.get('/wb/:url_slug', function (req, res) {
         }
     });
 
-
-
-
 });
-
 
 router.get('/revisions/:url_slug/:epoch', function(req, res) {
     var epoch = parseInt(req.params.epoch);
     var url_slug = req.params.url_slug;
 
-    request('http://localhost:8081/api/v1/revisions/' + url_slug + '/' + epoch, function (error, response, body) {
+    request('http://' + appUrl + '/api/v1/revisions/' + url_slug + '/' + epoch, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
             var wallboard = JSON.parse(body);
@@ -76,7 +71,6 @@ router.get('/revisions/:url_slug/:epoch', function(req, res) {
 
 router.post('/wb/:url_slug', function (req, res) {
     res.json(req.body);
-
 });
 
 

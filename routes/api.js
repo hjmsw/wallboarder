@@ -21,29 +21,28 @@ router.get('/wb/:url_slug', function (req, res) {
     WallboardProvider.findOne(url_slug, {}, function (error, wallboard) {
         if (error) res.status(404).json({success: false, errorCode: 404, error: error});
         else res.json(wallboard);
-
     });
-
 });
 
 router.get('/revisions/:url_slug', function(req, res) {
 
     var url_slug = req.params.url_slug;
 
-    WallboardProvider.find(url_slug, function(err, wallboards) {
+    WallboardProvider.find(url_slug, function(error, wallboards) {
+        if (error) res.status(500).json({success: false, errorCode: 500, error: error});
+        else {
+            var revisions = [];
 
-        var revisions = [];
-
-        wallboards.forEach(function(i) {
-            var epoch = new Date(i.created_at).getTime();
-
-            revisions.push({
-                datetime: epoch,
-                url: '/revisions/' + i.url_slug + '/' + epoch
+            wallboards.forEach(function(i) {
+                var epoch = new Date(i.created_at).getTime();
+                revisions.push({
+                    datetime: epoch,
+                    url: '/revisions/' + i.url_slug + '/' + epoch
+                });
             });
-        });
 
-        res.json(revisions);
+            res.json(revisions);
+        }
     });
 });
 
@@ -53,33 +52,20 @@ router.get('/revisions/:url_slug/:epoch', function(req, res) {
     var datetime = new Date(epoch);
 
     WallboardProvider.findOneWithDate(url_slug, datetime, function (error, wallboard) {
-
-        if (error) console.log(error);
-
-        if (wallboard == null) {
-            res.status(404).json({success: false, errorCode: 404});
-        } else {
-            console.log("restoring from db");
-            res.json(wallboard)
-        }
+        if (error) res.status(500).json({success: false, errorCode: 500, error: error});
+        if (wallboard == null) res.status(404).json({success: false, errorCode: 404});
+        else res.json(wallboard)
     });
 });
 
 
 router.post('/save', function (req, res) {
     var wb = req.body.wb;
-    
-    WallboardProvider.save(
-        wb,
-        function (error, docs) {
-            if (error) {
-                console.log(error);
-                res.json({saved: false});
-            } else {
-                res.json({saved: true});
-            }
-        }
-    );
+
+    WallboardProvider.save(wb, function (error) {
+        if (error) res.status(500).json({success: false, errorCode: 500, error: error});
+        else res.json({saved: true});
+    });
 });
 
 router.get('/convert-legacy-routes', function(req, res) {
