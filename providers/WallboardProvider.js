@@ -105,6 +105,13 @@ WallboardProvider.prototype.listWallboards = function(callback) {
   });
 };
 
+WallboardProvider.prototype.convertLegacyRoutes = function(callback) {
+  this.wallboard.update({ url_slug: '/' }, { $set: { url_slug: 'default' }}, { multi: true }, function(err, numAffected) {
+    if (err) callback(err, null);
+    else callback(null, numAffected);
+  });
+};
+
 exports.WallboardProvider = WallboardProvider;
 
 
