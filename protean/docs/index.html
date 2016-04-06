@@ -144,6 +144,17 @@
             </div>
           </div>
         </a>
+      </li><li>
+        <a data-sw-href="#id" href="#post-wallboarder-api-v1-upsert" style="padding:3px 10px 3px 10px;clear:both;">
+          <div class="row">
+            <div class="col-md-2" style="width:46px;">
+              <span class="label label-info" data-sw-text="method">post</span>
+            </div>
+            <div class="col-md-10">
+              <span data-sw-text="path">wallboarder/api/v1/upsert</span>
+            </div>
+          </div>
+        </a>
       </li>
     </ul>
   </div>
@@ -1006,7 +1017,7 @@
           </div>
         </div>
         <h4>Sample curl command</h4>
-        <pre class="prettyprint" data-sw-text="curl">curl -i 'http://host:1234/wallboarder/api/v1/revisions/${url_slug}/8'</pre>
+        <pre class="prettyprint" data-sw-text="curl">curl -i 'http://host:1234/wallboarder/api/v1/revisions/${url_slug}/3'</pre>
         <h4><span class="label label-success">Success</span> responses</h4>
         
   <ul class="list-unstyled">
@@ -1183,6 +1194,268 @@
           <td>
             <div class="body-example-link">
               <a href="#schema-404" data-toggle="modal" data-sw-href="#rsp-body-schema-id" data-sw-text="rsp-body-schema-title">N/A</a>
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </li>
+  </ul>
+
+
+
+      </section>
+    </li><li>
+      <section nav="api/v1/wb" content="" id="post-wallboarder-api-v1-upsert" data-sw-nav="wallboarder/api/v1/upsert" data-sw-data-sw-nav="path" data-sw-id="id" data-sw-content="">
+        <div class="page-header">
+          <h2>
+            <span class="label label-info" data-sw-text="method">post</span>
+            <span data-sw-text="path">wallboarder/api/v1/upsert</span>
+          </h2>
+        </div>
+        <h3 data-sw-text="doc">Update / Insert a wallboard</h3>
+        <pre class="text" data-sw-text="desc"></pre>
+        <h4>Headers</h4>
+        
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td data-sw-text="title">Content-Type</td>
+        <td data-sw-text="value">application/json; charset=utf-8</td>
+      </tr>
+    </tbody>
+  
+
+
+</table>
+        <h4>Parameters</h4>
+        
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <td data-sw-text="title"></td>
+        <td>
+          <a href="#" data-sw-text="type" data-toggle="tooltip" data-sw-title="regx"></a>
+        </td>
+        <td data-sw-text="doc"></td>
+        <td data-sw-text="attr"></td>
+      </tr>
+    </tbody>
+  
+
+
+</table>
+        <h4>Body Examples</h4>
+        
+  <ul class="list-unstyled">
+    <li>
+      <div class="body-example-link">
+        <a href="#c4b499d1-326c-43da-a14d-adfdc0e81330" data-toggle="modal" data-sw-href="#id" data-sw-text="title">upsert</a>
+      </div>
+      <div id="c4b499d1-326c-43da-a14d-adfdc0e81330" class="modal fade" data-sw-id="id" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">x</span><span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">
+                <span data-sw-text="title">upsert</span>
+              </h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                <span class="label label-info" data-sw-text="method">post</span>
+                <span data-sw-text="path">wallboarder/api/v1/upsert</span>
+              </p>
+              <pre class="prettyprint" data-sw-text="value">{
+  &quot;title&quot;: &quot;Wallboard 1&quot;,
+  &quot;url_slug&quot;: &quot;test3&quot;,
+  &quot;autoLayout&quot;: true,
+  &quot;autoStyle&quot;: true,
+  &quot;elems&quot;: [
+    {
+      &quot;id&quot;: &quot;wb_0&quot;,
+      &quot;tagName&quot;: &quot;H1&quot;,
+      &quot;innerText&quot;: &quot;Wallboard 1&quot;
+    },
+    {
+      &quot;id&quot;: &quot;wb_1&quot;,
+      &quot;tagName&quot;: &quot;DIV&quot;,
+      &quot;innerText&quot;: &quot;Some text.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;wb_2&quot;,
+      &quot;tagName&quot;: &quot;table&quot;,
+      &quot;struct&quot;: {
+        &quot;rows&quot;: [
+          [
+            [&quot;TH&quot;, &quot;A&quot;],
+            [&quot;TH&quot;, &quot;Table&quot;]
+          ],
+          [
+            [&quot;TD&quot;, &quot;1&quot;],
+            [&quot;TD&quot;, &quot;2&quot;]
+          ],
+          [
+            [&quot;TD&quot;, &quot;3&quot;],
+            [&quot;TD&quot;, &quot;4&quot;]
+          ]
+        ]
+      }
+    }
+  ]
+}
+</pre>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
+
+        <h4>Schema</h4>
+        <div class="body-example-link">
+          <a href="#schema-post-wallboarder-api-v1-upsert" data-toggle="modal" data-sw-href="#req-body-schema-id" data-sw-text="req-body-schema-title">wallboard.schema</a>
+        </div>
+        <div id="schema-post-wallboarder-api-v1-upsert" class="modal fade" data-sw-id="req-body-schema-id" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">x</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">
+                  <span data-sw-text="req-body-schema-title">wallboard.schema</span>
+                </h4>
+              </div>
+              <div class="modal-body">
+                <p>
+                  <span class="label label-info" data-sw-text="method">post</span>
+                  <span data-sw-text="path">wallboarder/api/v1/upsert</span>
+                </p>
+                <pre class="prettyprint" data-sw-text="req-body-schema">{
+  &quot;$schema&quot;: &quot;http://json-schema.org/draft-04/schema#&quot;,
+  &quot;type&quot;: &quot;object&quot;,
+  &quot;title&quot;: &quot;wallboard&quot;,
+  &quot;description&quot;: &quot;wallboard representation&quot;,
+  &quot;properties&quot;: {
+    &quot;title&quot;: {&quot;type&quot;: &quot;string&quot;},
+    &quot;url_slug&quot;: {&quot;type&quot;: &quot;string&quot;},
+    &quot;autoLayout&quot;: {&quot;type&quot;: &quot;boolean&quot;},
+    &quot;autoStyle&quot;: {&quot;type&quot;: &quot;boolean&quot;},
+    &quot;elems&quot;: {&quot;type&quot;: &quot;array&quot;}
+  }
+}
+</pre>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h4>Sample curl command</h4>
+        <pre class="prettyprint" data-sw-text="curl">curl -i -X POST -H 'Content-Type: application/json; charset=utf-8' --data '{ &quot;title&quot;: &quot;Wallboard 1&quot;, &quot;url_slug&quot;: &quot;test3&quot;, &quot;autoLayout&quot;: true, &quot;autoStyle&quot;: true, &quot;elems&quot;: [ { &quot;id&quot;: &quot;wb_0&quot;, &quot;tagName&quot;: &quot;H1&quot;, &quot;innerText&quot;: &quot;Wallboard 1&quot; }, { &quot;id&quot;: &quot;wb_1&quot;, &quot;tagName&quot;: &quot;DIV&quot;, &quot;innerText&quot;: &quot;Some text.&quot; }, { &quot;id&quot;: &quot;wb_2&quot;, &quot;tagName&quot;: &quot;table&quot;, &quot;struct&quot;: { &quot;rows&quot;: [ [ [&quot;TH&quot;, &quot;A&quot;], [&quot;TH&quot;, &quot;Table&quot;] ], [ [&quot;TD&quot;, &quot;1&quot;], [&quot;TD&quot;, &quot;2&quot;] ], [ [&quot;TD&quot;, &quot;3&quot;], [&quot;TD&quot;, &quot;4&quot;] ] ] } } ] }' 'http://host:1234/wallboarder/api/v1/upsert'</pre>
+        <h4><span class="label label-success">Success</span> responses</h4>
+        
+  <ul class="list-unstyled">
+    <li>
+      <table class="table response">
+        <tbody><tr class="success">
+          <td class="small">Status</td>
+          <td data-sw-text="code">200</td>
+        </tr>
+        <tr class="success">
+          <td class="small">Description</td>
+          <td data-sw-text="doc">N/A</td>
+        </tr>
+        <tr class="success">
+          <td class="small">Headers</td>
+          <td data-sw-text="headers">{&quot;Access-Control-Allow-Origin&quot; &quot;*&quot;, &quot;Content-Type&quot; &quot;application/json; charset=utf-8&quot;}</td>
+        </tr>
+        <tr class="success">
+          <td class="small">Sample response</td>
+          <td>
+            <pre class="prettyprint" data-sw-text="sample-response">{&quot;saved&quot;: true}
+</pre>
+          </td>
+        </tr>
+        <tr class="success">
+          <td class="small">Response Schema</td>
+          <td>
+            <div class="body-example-link">
+              <a href="#schema-200" data-toggle="modal" data-sw-href="#rsp-body-schema-id" data-sw-text="rsp-body-schema-title">N/A</a>
+            </div>
+            <div id="schema-200" class="modal fade" data-sw-id="rsp-body-schema-id" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">x</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">
+                      <span data-sw-text="rsp-body-schema-title">N/A</span>
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      <span class="label label-info" data-sw-text="method">method</span>
+                      <span data-sw-text="path">path</span>
+                    </p>
+                    <pre class="prettyprint" data-sw-text="rsp-body-schema">N/A</pre>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody></table>
+    </li>
+  </ul>
+
+
+
+        <h4><span class="label label-danger">Error</span> responses</h4>
+        
+  <ul class="list-unstyled">
+    <li>
+      <table class="table response">
+        <tbody><tr class="danger">
+          <td class="small">Status</td>
+          <td data-sw-text="code">500</td>
+        </tr>
+        <tr class="danger">
+          <td class="small">Description</td>
+          <td data-sw-text="doc">N/A</td>
+        </tr>
+        <tr class="danger">
+          <td class="small">Headers</td>
+          <td data-sw-text="headers">{&quot;Access-Control-Allow-Origin&quot; &quot;*&quot;, &quot;Content-Type&quot; &quot;application/json; charset=utf-8&quot;}</td>
+        </tr>
+        <tr class="danger">
+          <td class="small">Sample response</td>
+          <td>
+            <pre class="prettyprint" data-sw-text="sample-response">{
+  &quot;success&quot;: false,
+  &quot;errorCode&quot;: 500,
+  &quot;error&quot;: &quot;Wallboard could not be inserted / updated&quot;
+}
+</pre>
+          </td>
+        </tr>
+        <tr class="danger">
+          <td class="small">Response Schema</td>
+          <td>
+            <div class="body-example-link">
+              <a href="#schema-500" data-toggle="modal" data-sw-href="#rsp-body-schema-id" data-sw-text="rsp-body-schema-title">N/A</a>
             </div>
           </td>
         </tr>

@@ -70,22 +70,22 @@
       }
     }
 
-    ; "api/v1/upsert" {
-    ;   :post {
-    ;     :doc "Update / Insert a wallboard"
-    ;     :req {
-    ;       :body-schema "data/schemas/wallboard.schema.json"
-    ;       :body-example ["data/requests/upsert.json"]
-    ;     }
-    ;     :rsp {
-    ;       :200 {
-    ;         :body-example ["data/responses/upsert/200.json"]
-    ;       }
-    ;       :500 {
-    ;         :body-example ["data/responses/upsert/500.json"]
-    ;       }
-    ;     }
-    ;   }
-    ; }
+    "api/v1/upsert" {
+      :post {
+        :doc "Update / Insert a wallboard"
+        :req {
+          :body-schema "data/schemas/wallboard.schema.json"
+          :body-example ["data/requests/upsert.json"]
+        }
+        :rsp {
+          :200 {
+            :body-example ["data/responses/upsert/200.json"]
+          }
+          :500 {
+            :body-example ["data/responses/upsert/500.json"]
+          }
+        }
+      }
+    }
   }
 }
