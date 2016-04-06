@@ -75,5 +75,9 @@ router.post('/wb/:url_slug', function (req, res) {
     res.json(req.body);
 });
 
+router.get('/ping', function (req, res) {
+    res.send('pong');
+});
+
 
 module.exports = router;

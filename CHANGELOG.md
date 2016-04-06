@@ -1,5 +1,26 @@
 # Change Log
 
+## [0.5.1](https://github.com/hjamesw93/wallboarder/tree/0.5.1) (2016-04-04)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.5.0...0.5.1)
+
+**Closed issues:**
+
+- Resizing problems [\#15](https://github.com/hjamesw93/wallboarder/issues/15)
+
+## [0.5.0](https://github.com/hjamesw93/wallboarder/tree/0.5.0) (2016-04-03)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.2...0.5.0)
+
+**Closed issues:**
+
+- TODO: Multi-wallboard support [\#11](https://github.com/hjamesw93/wallboarder/issues/11)
+
+## [0.4.2](https://github.com/hjamesw93/wallboarder/tree/0.4.2) (2016-03-18)
+[Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.1...0.4.2)
+
+**Merged pull requests:**
+
+- Add npm shortcuts for easy installation/startup of wallboarder [\#12](https://github.com/hjamesw93/wallboarder/pull/12) ([msmy](https://github.com/msmy))
+
 ## [0.4.1](https://github.com/hjamesw93/wallboarder/tree/0.4.1) (2016-03-15)
 [Full Changelog](https://github.com/hjamesw93/wallboarder/compare/0.4.0...0.4.1)
 

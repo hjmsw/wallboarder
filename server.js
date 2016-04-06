@@ -23,47 +23,49 @@ app.use(express.static('public'));
 app.use('/components', express.static('bower_components'));
 
 
-var editing = false;
-var c_client = "";
+var editing = {};
+var c_client = {};
 
 io.on('connection', function(socket) {
-    console.log('client connected');
 
     socket.on('wb_nsp', function (data) {
-        socket.emit('acc', {wb_nsp: data.wb_nsp});
-        var nsp = io.of('/' + data.wb_nsp);
-        nsp.on('connection', function (socket) {
-            socket.once('wb-client-edit', function (data) {
-                if (!editing) {
-                    editing = true;
-                    c_client = data;
+        var nspString =  data.wb_nsp;
+        socket.emit('acc', {wb_nsp: nspString});
 
-                    nsp.emit('wb-server-io-event', {type: 'edit', client: c_client});
+        var nsp = io.of('/' + nspString);
+        nsp.once('connection', function (socket) {
+            if (typeof editing[nspString] === 'undefined') editing[nspString] = false;
+            if (typeof c_client[nspString] === 'undefined') c_client[nspString] = "";
+
+            socket.once('wb-client-edit', function (data) {
+
+                if (!editing[nspString]) {
+                    editing[nspString] = true;
+                    c_client[nspString] = data;
+
+                    nsp.emit('wb-server-io-event', {type: 'edit', client: c_client[nspString]});
                 }
             });
 
             socket.once('wb-client-save', function (data) {
-                if (c_client === data) {
+                if (c_client[nspString] === data) {
 
-                    nsp.emit('wb-server-io-event', {type: 'save', client: c_client});
-
-                    editing = false;
-                    c_client = "";
+                    nsp.emit('wb-server-io-event', {type: 'save', client: c_client[nspString]});
+                    editing[nspString] = false;
+                    c_client[nspString] = "";
                 }
             });
 
             socket.once('wb-client-get-edit-status', function () {
-                nsp.emit('wb-server-io-status', editing);
+                nsp.emit('wb-server-io-status', {status: editing[nspString], client: c_client[nspString]});
             });
 
             socket.once("disconnect", function (data) {
-                if (editing && c_client === socket.conn.id) {
-                    editing = false;
-                    c_client = "";
-
+                if (editing[nspString] && c_client[nspString] === socket.conn.id) {
                     socket = null;
-
-                    nsp.emit('wb-server-io-event', {type: 'editor-quit', client: c_client});
+                    nsp.emit('wb-server-io-event', {type: 'editor-quit', client: c_client[nspString]});
+                    editing[nspString] = false;
+                    c_client[nspString] = "";
                 }
             });
         });
