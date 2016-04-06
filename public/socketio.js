@@ -23,8 +23,8 @@ $(function(){
         });
 
 
-        socket.on("wb-server-io-status", function(status) {
-            if (status) {
+        socket.on("wb-server-io-status", function(data) {
+            if (data.status && data.client !== socket.id) {
                 wb.trigger("new-status-message", ["Edit in progress..."]);
                 wb.trigger("read-only");
             }
@@ -47,4 +47,24 @@ $(function(){
             }
         });
     });
+
+    global_socket.on("disconnect", function() {
+        wb.trigger("new-status-message", ["Server down, waiting for reconnect..."]);
+        wb.trigger("read-only");
+        var connected = false;
+        retryConnect();
+
+        function retryConnect() {
+            setTimeout(function() {
+                $.get("/ping", function(data) {
+                    if(!connected) {
+                        location.reload();
+                    }
+                });
+                retryConnect();
+            }, 3000);
+        }
+    });
+
+
 });
