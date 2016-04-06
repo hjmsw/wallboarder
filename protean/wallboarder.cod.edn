@@ -1,0 +1,91 @@
+{
+  :includes [ "defaults.edn" ]
+
+  :title "Wallboarder API Docs"
+  :doc "API for Wallboarder CRUD Operations"
+
+  :rsp {:headers {"Access-Control-Allow-Origin" "*"}}
+
+  "wallboarder" {
+
+    :types {
+      :Epoch "[0-9]"
+    }
+    :vars {
+      "url_slug" {:type :String :doc "url slug of wallboard" :gen false}
+      "epoch" {:type :Epoch :doc "unix timestamp"}
+    }
+
+
+    "api/v1/wb" {
+      :get {
+        :doc "Lists all wallboards"
+        :rsp {
+          :200 {
+            :body-example ["data/responses/wb/200.json"]
+          }
+          :404 {
+            :body-example ["data/responses/wb/404.json"]
+          }
+        }
+      }
+    }
+
+    "api/v1/wb/${url_slug}" {
+      :get {
+        :doc "Get a wallboard"
+        :rsp {
+          :200 {
+            :body-example ["data/responses/wb/wallboard1/200.json"]
+          }
+          :404 {
+            :body-example ["data/responses/wb/wallboard1/404.json"]
+          }
+        }
+      }
+    }
+
+    "api/v1/revisions/${url_slug}" {
+      :get {
+        :doc "Get list of revisions for a wallboard (audit trail)"
+        :rsp {
+          :200 {
+            :body-example ["data/responses/revisions/wallboard1/200.json"]
+          }
+        }
+      }
+    }
+
+    "api/v1/revisions/${url_slug}/${epoch}" {
+      :get {
+        :doc "Get revision of a wallboard"
+        :rsp {
+          :200 {
+            :body-example ["data/responses/wb/wallboard1/200.json"]
+          }
+          :404 {
+            :body-example ["data/responses/wb/wallboard1/404.json"]
+          }
+        }
+      }
+    }
+
+    ; "api/v1/upsert" {
+    ;   :post {
+    ;     :doc "Update / Insert a wallboard"
+    ;     :req {
+    ;       :body-schema "data/schemas/wallboard.schema.json"
+    ;       :body-example ["data/requests/upsert.json"]
+    ;     }
+    ;     :rsp {
+    ;       :200 {
+    ;         :body-example ["data/responses/upsert/200.json"]
+    ;       }
+    ;       :500 {
+    ;         :body-example ["data/responses/upsert/500.json"]
+    ;       }
+    ;     }
+    ;   }
+    ; }
+  }
+}
