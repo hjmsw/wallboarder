@@ -23,8 +23,8 @@ $(function(){
         });
 
 
-        socket.on("wb-server-io-status", function(status) {
-            if (status) {
+        socket.on("wb-server-io-status", function(data) {
+            if (data.status && data.client !== socket.id) {
                 wb.trigger("new-status-message", ["Edit in progress..."]);
                 wb.trigger("read-only");
             }
