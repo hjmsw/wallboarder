@@ -119,4 +119,8 @@ router.post('/save', function (req, res) {
     );
 });
 
+router.get('/ping', function (req, res) {
+  res.send('pong');
+});
+
 module.exports = router;

@@ -47,4 +47,24 @@ $(function(){
             }
         });
     });
+
+    global_socket.on("disconnect", function() {
+        wb.trigger("new-status-message", ["Server down, waiting for reconnect..."]);
+        wb.trigger("read-only");
+        var connected = false;
+        retryConnect();
+
+        function retryConnect() {
+            setTimeout(function() {
+                $.get("/ping", function(data) {
+                    if(!connected) {
+                        location.reload();
+                    }
+                });
+                retryConnect();
+            }, 3000);
+        }
+    });
+
+
 });
