@@ -59,7 +59,7 @@ router.get('/revisions/:url_slug/:epoch', function(req, res) {
 });
 
 
-router.post('/save', function (req, res) {
+router.post('/upsert', function (req, res) {
     var wb = req.body.wb;
 
     WallboardProvider.save(wb, function (error) {

@@ -21,7 +21,9 @@ router.get('/wb', function(req, res) {
 
 router.get('/wb/:url_slug', function (req, res) {
 
-    request('http://' + appUrl + '/api/v1/wb/' + req.params.url_slug, function (error, response, body) {
+    var url_slug = req.params.url_slug;
+
+    request('http://' + appUrl + '/api/v1/wb/' + url_slug, function (error, response, body) {
 
         if (!error && response.statusCode == 200) {
             var wallboard = JSON.parse(body);
