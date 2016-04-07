@@ -4,7 +4,7 @@ var router = express.Router();
 var config = require('../config/config');
 
 var WallboardProvider = require('../providers/WallboardProvider').WallboardProvider;
-WallboardProvider = new WallboardProvider(config.db.host);
+WallboardProvider = new WallboardProvider(config.db);
 
 router.get('/', function(req, res) {
     res.redirect('/wb'); //Redirect to default wallboard
