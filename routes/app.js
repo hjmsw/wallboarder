@@ -40,7 +40,7 @@ router.get('/wb/:url_slug', function (req, res) {
 
             } else {
                 var datetime = new Date(wallboard.created_at);
-                res.render('index', {title: wallboard.title, elems: wallboard.elems, url_slug: wallboard.url_slug, datetime: datetime.getTime()});
+                res.render('index', {title: wallboard.title, autoLayout: wallboard.autoLayout, elems: wallboard.elems, url_slug: wallboard.url_slug, datetime: datetime.getTime()});
             }
         }
     });
@@ -67,6 +67,15 @@ router.get('/revisions/:url_slug/:epoch', function(req, res) {
         } else if (response.statusCode == 404) {
             res.render('404');
         }
+    });
+
+});
+
+router.post('/save', function(req, res) {
+    var wb = req.body.wb;
+    
+    request.post({url:'http://' + appUrl + '/api/v1/upsert', form: {internal: true, wb: wb}}, function(err,httpResponse,body){
+        console.log(body);
     });
 
 });

@@ -1,10 +1,13 @@
 input(type="hidden" id="url_slug" value="#{url_slug}")
+input(type="hidden" id="autoLayout" value="#{autoLayout}")
 div#shield
 div.container-fluid.wb
     - each elem in elems
         if elem.tagName == "table"
-
             div(id=elem.id class="draggable resizable-table ui-widget-content wb_table editable")
+                if elem.title
+                    div.tableTitle
+                        h2=elem.title
                 button.newRow.btn.btn-sm.btn-default
                     span.glyphicon.glyphicon-plus
 

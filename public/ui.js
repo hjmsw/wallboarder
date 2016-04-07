@@ -14,6 +14,9 @@ wbChange = false;
         this.wb = $(".wb");
         this.plt = $("#plt");
         this.ez = $("#editZone");
+        this.autoLayout = ($("#autoLayout").val() === "undefined" ? false : $("#autoLayout").val());
+
+        console.log(this.autoLayout);
 
         this.init();
     }
@@ -21,13 +24,22 @@ wbChange = false;
     Ui.prototype.init = function(reInit) {
         if (typeof reInit === "undefined") reInit = false;
 
-        this.initSelectables();
-        this.initDraggables();
-        this.initResizables();
-        this.initDroppables();
-        this.setEvents(reInit);
-        this.setSidebarEvents();
-        this.fixZindex();
+        if (!this.autoLayout) {
+            this.initSelectables();
+            this.initDraggables();
+            this.initResizables();
+            this.initDroppables();
+            this.setEvents(reInit);
+            this.setSidebarEvents();
+            this.fixZindex();
+        } else {
+            this.initAutoLayout();
+        }
+
+    };
+
+    Ui.prototype.initAutoLayout = function() {
+        this.wb.addClass("autoLayout");
     };
 
     Ui.prototype.initAccordion = function() {

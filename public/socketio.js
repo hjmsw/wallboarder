@@ -21,8 +21,7 @@ $(function(){
         wb.on("saved", function() {
             socket.emit("wb-client-save", socket.id);
         });
-
-
+        
         socket.on("wb-server-io-status", function(data) {
             if (data.status && data.client !== socket.id) {
                 wb.trigger("new-status-message", ["Edit in progress..."]);

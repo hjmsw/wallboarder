@@ -9,6 +9,7 @@
         var wb = {
             title: $("body").find("h1").text(),
             url_slug: $("#url_slug").val(),
+            autoLayout: false,
             elems: []
         };
 
@@ -115,7 +116,7 @@
             wb.elems.push(elem);
 
         }).promise().done(function () {
-            $.post('/api/v1/save', {wb: wb});
+            $.post('/save', {wb: wb});
             $(".wb").trigger("saved");
             if (manualReload) location.assign("/");
         });

@@ -60,12 +60,28 @@ router.get('/revisions/:url_slug/:epoch', function(req, res) {
 
 
 router.post('/upsert', function (req, res) {
-    var wb = req.body.wb;
+
+    var wb;
+    var requestType;
+
+    if (req.body.internal) {
+        console.log("Internal upsert request");
+        requestType = "internal";
+        wb = req.body.wb;
+
+    } else {
+        console.log("External upsert request");
+        requestType = "external";
+        wb = req.body;
+        console.log(wb);
+    }
 
     WallboardProvider.save(wb, function (error) {
         if (error) res.status(500).json({success: false, errorCode: 500, error: error});
-        else res.json({saved: true});
+        else res.json({saved: true, requestType: requestType});
     });
+
+
 });
 
 router.get('/convert-legacy-routes', function(req, res) {

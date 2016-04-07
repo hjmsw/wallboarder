@@ -16,6 +16,18 @@
     padding:5px;
 }
 
+.autoLayout .wb_box {
+    float:left;
+    position: relative !important;
+    margin:1em;
+    background-color: #f9f9f9;
+}
+.autoLayout .wb_table {
+    float:left;
+    position: relative !important;
+    margin:1em;
+}
+
 .header {
     margin:0;
     padding:20px;
