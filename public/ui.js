@@ -14,7 +14,11 @@ wbChange = false;
         this.wb = $(".wb");
         this.plt = $("#plt");
         this.ez = $("#editZone");
-        this.autoLayout = ($("#autoLayout").val() === "undefined" ? false : $("#autoLayout").val());
+        this.autoLayout = (function(alv) {
+            if (alv === "undefined") return false;
+            if (alv === "false") return false;
+            if (alv === "true") return true;
+        })($("#autoLayout").val());
 
         console.log(this.autoLayout);
 
