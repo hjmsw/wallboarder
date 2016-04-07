@@ -18,8 +18,14 @@ app.use('/', routes);
 server.listen(config.app.port, config.app.host);
 
 app.use(express.static('public'));
-app.use('/components', express.static('bower_components'));
-
+app.use('/components/jquery', express.static('node_modules/jquery'));
+app.use('/components/jquery-ui', express.static('node_modules/jquery-ui'));
+app.use('/components/jquery-tabledit', express.static('node_modules/jquery-tabledit'));
+app.use('/components/bootstrap/', express.static('node_modules/bootstrap'));
+app.use('/components/socket.io-client/', express.static('node_modules/socket.io-client'));
+app.use('/components/bootstrap/dist/css/', express.static('node_modules/bootstrap/dist/css/'));
+app.use('/components/font-awesome/', express.static('node_modules/font-awesome/'));
+app.use('/components/datatables-bootstrap3-plugin/', express.static('node_modules/datatables-bootstrap3-plugin'));
 
 var editing = false;
 var c_client = "";
