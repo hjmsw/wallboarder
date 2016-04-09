@@ -4,7 +4,7 @@ var router = express.Router();
 var config = require('../config/config');
 
 var WallboardProvider = require('../providers/WallboardProvider').WallboardProvider;
-WallboardProvider = new WallboardProvider(config.db.host);
+WallboardProvider = new WallboardProvider(config.db);
 
 
 router.get('/wb', function(req, res) {

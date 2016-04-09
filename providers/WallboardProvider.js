@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var util = require('util');
 
 
-WallboardProvider = function(host) {
-  mongoose.connect('mongodb://' + host + '/node-mongo-wallboarder');
+WallboardProvider = function(uri) {
+  mongoose.connect(uri);
 
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
