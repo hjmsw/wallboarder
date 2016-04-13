@@ -84,6 +84,30 @@ router.post('/upsert', function (req, res) {
 
 });
 
+router.post('/event', function(req, res) {
+    // {
+    //     "wb": "default",
+    //     "message": "Lorem ipsum"
+    // }
+
+    console.log(req.body);
+    
+    var socket = require('socket.io-client')('http://localhost:8081');
+    socket.on('connect', function(){
+        if (req.body.message) {
+            if (!req.body.wb || req.body.wb === "GLOBAL") {
+                socket.emit('api-event', {scope: "global", message: req.body.message});
+            } else {
+                socket.emit('api-event', {scope: req.body.wb, message: req.body.message});
+            }
+            res.json({status: "ok"});
+        }
+    });
+
+
+
+});
+
 router.get('/convert-legacy-routes', function(req, res) {
     WallboardProvider.convertLegacyRoutes(function(error, result) {
         if (error) res.status(500).json({success: false, errorCode: 500, error: error});

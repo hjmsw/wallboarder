@@ -34,6 +34,11 @@ var c_client = {};
 
 io.on('connection', function(socket) {
 
+    socket.on('api-event', function(data) {
+        console.log("socketio");
+        console.log(data);
+    });
+
     socket.on('wb_nsp', function (data) {
         var nspString =  data.wb_nsp;
         socket.emit('acc', {wb_nsp: nspString});
