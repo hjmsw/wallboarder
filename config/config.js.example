@@ -9,5 +9,11 @@ module.exports = {
     },
     db: {
         host: 'localhost'
+    },
+    ipfilter: {
+        enabled: false,
+        whitelist: [
+            "127.0.0.1",
+        ]
     }
 };
