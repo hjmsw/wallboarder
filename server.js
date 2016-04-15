@@ -14,6 +14,11 @@ app.set('view engine', 'jade');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+if (config.ipfilter.enabled) {
+    ipfilter = require('express-ipfilter');
+    app.use(ipfilter(config.ipfilter.whitelist, {mode: 'allow'}));
+}
+
 app.use('/', routes);
 app.use('/api/v1', api);
 
