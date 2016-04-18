@@ -1,0 +1,75 @@
+div#miniToolbar
+    div(class="save btn btn-default")
+        span.btn-inner.glyphicon.glyphicon-floppy-save
+    div(id="plt-show" class="plt-show btn btn-default")
+        span.btn-inner.glyphicon.glyphicon-th-list
+
+div#plt
+    div#pltToolbar
+        a(id="save" class="save btn btn-default")
+            span.btn-inner.glyphicon.glyphicon-floppy-save
+            p.btn-inner="Save"
+        a(id="plt-hide" class="plt-hide btn btn-default")
+            span.btn-inner.glyphicon.glyphicon-remove-circle
+            p.btn-inner="Hide"
+
+    div(class="panel-group" id="accordion" role="tablist" aria-multiselectable="true")
+        div(class="panel panel-default")
+            div(class="panel-heading" role="tab" id="headingOne")
+                h4
+                    a(role="button" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseOne" aria-expanded="true" aria-controls="collapseOne")="Insert Text Box"
+            div(id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne")
+                div(class="panel-body")
+                    form#insertTextBox
+                        div#preview-box.box.p_box= "Text goes here..."
+                        div.colorPickers
+                        div.form-group
+                            label(for="boxText")="Text:"
+                            input(type="text" id="boxText" name="boxText" placeholder="box text" class="form-control")
+                        div.form-group
+                            label(for="boxDecoration")= "Decoration:"
+                            input(type="text" id="boxDecoration" class="form-control boxDecoration" placeholder="fa-icon-name" name="boxDecoration")
+                            i
+
+                        div.form-group
+                            input(type="submit" id="addTextBox" class="add btn btn-default", value="Add")
+
+        div(class="panel panel-default")
+            div(class="panel-heading" role="tab" id="headingTwo")
+                h4
+                    a(role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo")="Insert Table"
+            div(id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo")
+                div(class="panel-body")
+                    form#insertTable
+                        div.form-group#tbl-struct-container
+                            input(type="text" class="form-control tbl-struct" id="tableCols" name="tableCols" placeholder="Cols")
+                            input(type="text" class="form-control tbl-struct" id="tableRows" name="tableRows" placeholder="Rows")
+                        div#visualGridSelector
+                            - var i = 0
+                            ul.selectable
+                                while i < 18
+                                    if i >=0
+                                        - var rs = "a"
+                                    if i>=6
+                                        - var rs = "b"
+                                    if i>=12
+                                        - var rs = "c"
+                                    if i == 0
+                                        li(class="startPoint" data-row=rs id=i++)
+                                    else
+                                        li(class="secondary #{rs}" data-row=rs id=i++)
+                        div#colNames
+                        div.form-group
+                            input(type="submit" id="wb-table-confirm" name="wb-table-confirm" value="Confirm" class="btn btn-default form-control hidden")
+                        div.form-group
+                            input(type="submit" id="wb-table-cancel" name="wb-table-cancel" value="Cancel" class="btn btn-default form-control hidden")
+        div#viewRevisions
+            a(href="/revisions/#{url_slug}/#{datetime}" class="btn btn-default" id="viewRevisionsLink")= "View Revisions"
+        div#viewAllWallboards
+            a(href="/wb" class="btn btn-default" id="viewAllWallboardsLink")= "View All Wallboards"
+
+    div#editZone
+    div#binIcon
+        span.glyphicon.glyphicon-trash

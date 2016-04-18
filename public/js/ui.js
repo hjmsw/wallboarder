@@ -19,7 +19,7 @@ wbChange = false;
             if (alv === "false") return false;
             if (alv === "true") return true;
         })($("#autoLayout").val());
-        
+
         this.init();
     }
 
@@ -218,7 +218,8 @@ wbChange = false;
                 })
             });
 
-            $("#addTextBox").on("click", function() {
+            $("#addTextBox").on("click", function(event) {
+                event.preventDefault();
                 self.wb.trigger("newTextBox", [$(this).parent().siblings(".p_box")]);
             });
 
@@ -268,16 +269,19 @@ wbChange = false;
                 elem.css("font-size",fontSize);
             });
 
-            $("#wb-box-confirm").on("click", function() {
+            $("#wb-box-confirm").on("click", function(event) {
+                event.preventDefault();
                 $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-decoration"),elem.find(".box-content"), fontSize]);
                 self.ez.html("");
                 $("#accordion").show();
             });
 
-            $("#wb-box-cancel").on("click", function() {
+            $(".dummyConfirmCancel").on("click", function(event) {
+                event.preventDefault();
                 self.ez.html("");
                 $("#accordion").show();
-            });
+            })
+
         }
 
         $(".boxDecoration").on("keyup", function() {
@@ -309,13 +313,14 @@ wbChange = false;
 
             if (elem.hasClass('wb_table')) {
                 el += "<h3 class='panel-title'>Edit Table</h3></div><div class='panel-body'>\
-                           <div class='form-group'><label>Header Colours:</label><div class='colorPickers'></div></div></div>";
+                           <form id='editTable'><div class='form-group'><label>Header Colours:</label><div class='colorPickers'></div></div>"+
+                        "<input type='submit' class='dummyConfirmCancel btn btn-default form-control' id='wb-table-confirm' value='Confirm'></form></div>";
 
             } else if(elem.hasClass('wb_box')) {
                 if (typeof decorationClass === "undefined") decorationClass = "";
 
                 el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
-                        <div class='form-group'><input type='text' class='form-control' id='plt-edit-text' value='" +
+                        <form id='editTextBox'><div class='form-group'><input type='text' class='form-control' id='plt-edit-text' name='plt-edit-text' value='" +
                     elem.find(".box-content").text() + "'/></div>\
                         <div class='form-group'>\
                         <label>Content Colours:</label>\
@@ -326,17 +331,15 @@ wbChange = false;
                         <div id='colorPickersDecoration' class='colorPickers'></div>\
                         </div>\
                         <div class='form-group'><label for='boxDecoration'>Decoration:</label>\
-                        <input type='text' class='form-control boxDecoration' placeholder='fa-icon-name' name='boxDecoration' value='"+decorationClass+"'/>\
+                        <input type='text' class='form-control boxDecoration' placeholder='fa-icon-name' id='boxDecoration' name='boxDecoration' value='"+decorationClass+"'/>\
                         <i class='boxDecorationPreview "+decorationClass+"'></i></div>" +
                     self.buildFontSizeSelect(elem) +
-                    "<div class='form-group'><input type='button' id='wb-box-confirm' name='wb-box-confirm' value='Confirm' class='btn btn-default form-control'/></div>\
-                    <div class='form-group'><input type='button' id='wb-box-cancel' name='wb-box-cancel' value='Cancel' class='btn btn-default form-control'/></div>\
-                    </div>";
+                    "<div class='form-group'><input type='submit' id='wb-box-confirm' name='wb-box-confirm' value='Confirm' class='btn btn-default form-control'/></div>\
+                    <div class='form-group'><input type='submit' id='wb-box-cancel' name='wb-box-cancel' value='Cancel' class='btn btn-default form-control dummyConfirmCancel'/></div>\
+                    </form></div>";
             } else {
-                el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'>" +
-                    "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text'/></div><div class='colorPickers'></div></div>";
-
-
+                el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'><form id='editTitle'>" +
+                    "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text'/></div><div class='colorPickers'></div><input type='submit' class='dummyConfirmCancel btn btn-default form-control' id='wb-title-confirm' value='Confirm'></form></div>";
             }
 
             el +=  "</div>";

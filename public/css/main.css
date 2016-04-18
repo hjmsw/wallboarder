@@ -193,7 +193,7 @@ td, th {
     background-color: #AAA;
 }
 
-#pltToolbar div {
+#pltToolbar a {
     margin: 0 2px;
 }
 
