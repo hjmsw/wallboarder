@@ -24,7 +24,9 @@ app.use('/api/v1', api);
 
 server.listen(config.app.port, config.app.host);
 
-app.use(express.static('public'));
+app.use('/js', express.static('public/js'));
+app.use('/css', express.static('public/css'));
+app.use('/img', express.static('public/img'));
 app.use('/components/jquery', express.static('node_modules/jquery'));
 app.use('/components/jquery-ui', express.static('node_modules/jquery-ui'));
 app.use('/components/jquery-tabledit', express.static('node_modules/jquery-tabledit'));

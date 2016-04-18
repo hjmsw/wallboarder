@@ -331,7 +331,7 @@ ul.selectable .ui-selected { background: #F39814; }
 }
 
 .colorPicker .track {
-    background:     url(/cp.png) no-repeat 50% 50%;
+    background:     url(/img/cp.png) no-repeat 50% 50%;
     height:         200px;
     width:          200px;
     position:       fixed;

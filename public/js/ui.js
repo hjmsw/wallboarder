@@ -19,9 +19,7 @@ wbChange = false;
             if (alv === "false") return false;
             if (alv === "true") return true;
         })($("#autoLayout").val());
-
-        console.log(this.autoLayout);
-
+        
         this.init();
     }
 
