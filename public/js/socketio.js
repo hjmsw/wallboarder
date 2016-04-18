@@ -8,6 +8,10 @@ $(function(){
 
     var wb_nsp = $("#url_slug").val();
 
+    global_socket.on('wb-event', function(data) {
+        if (data.wb === wb_nsp || data.wb === "global") wb.trigger("new-wb-event", [data.message, false]);
+    });
+
     global_socket.emit('wb_nsp', { wb_nsp: wb_nsp});
     global_socket.on('acc', function (data) {
         var socket = io('/' + data.wb_nsp);
@@ -21,8 +25,7 @@ $(function(){
         wb.on("saved", function() {
             socket.emit("wb-client-save", socket.id);
         });
-
-
+        
         socket.on("wb-server-io-status", function(data) {
             if (data.status && data.client !== socket.id) {
                 wb.trigger("new-status-message", ["Edit in progress..."]);

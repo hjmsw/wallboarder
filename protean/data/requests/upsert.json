@@ -1,0 +1,38 @@
+{
+  "title": "Wallboard 1",
+  "url_slug": "test3",
+  "autoLayout": true,
+  "autoStyle": true,
+  "elems": [
+    {
+      "id": "wb_0",
+      "tagName": "H1",
+      "innerText": "Wallboard 1"
+    },
+    {
+      "id": "wb_1",
+      "tagName": "DIV",
+      "innerText": "Some text."
+    },
+    {
+      "id": "wb_2",
+      "tagName": "table",
+      "struct": {
+        "rows": [
+          [
+            ["TH", "A"],
+            ["TH", "Table"]
+          ],
+          [
+            ["TD", "1"],
+            ["TD", "2"]
+          ],
+          [
+            ["TD", "3"],
+            ["TD", "4"]
+          ]
+        ]
+      }
+    }
+  ]
+}

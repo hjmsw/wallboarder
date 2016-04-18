@@ -1,0 +1,82 @@
+{
+  "_id": "57054f944ac79ecc51a7e4a4",
+  "created_at": "2016-04-06T18:04:04.634Z",
+  "title": "Wallboard 1",
+  "url_slug": "wallboard1",
+  "__v": 0,
+  "elems": [
+    {
+      "id": "wb_0",
+      "tagName": "H1",
+      "innerText": "Wallboard 1",
+      "style": [
+        ["width", "100%"],
+        ["position", "fixed"],
+        ["background", "rgb(251, 171, 24) none repeat scroll 0% 0% \/ auto padding-box border-box"],
+        ["color", "rgb(255, 255, 255)"]
+      ]
+    },
+    {
+      "id": "wb_1",
+      "tagName": "DIV",
+      "innerText": "Some text.",
+      "_id": "57054f944ac79ecc51a7e4a6",
+      "style": [
+        ["height", "80px"],
+        ["width", "150px"],
+        ["position", "absolute"],
+        ["left", "60px"],
+        ["top", "190px"],
+        ["font-size", "14px"],
+        ["color", "rgb(51, 51, 51)"],
+        ["background-color", "rgb(69, 140, 204)"],
+        ["z-index", "57"]
+      ],
+      "contentStyle": [
+        ["color", "rgb(51, 51, 51)"],
+        ["background-color", "rgb(69, 140, 204)"],
+        ["width", "100%"]
+      ]
+    },
+    {
+      "id": "wb_2",
+      "tagName": "table",
+      "_id": "57054f944ac79ecc51a7e4a5",
+      "tableEditColumns": {
+        "editable": [
+          ["0", "A"],
+          ["1", "Table"]
+        ],
+        "identifier": ["0", "A"]
+      },
+      "struct": {
+        "rows": [
+          [
+            ["TH", "A"],
+            ["TH", "Table"]
+          ],
+          [
+            ["TD", "1"],
+            ["TD", "2"]
+          ],
+          [
+            ["TD", "3"],
+            ["TD", "4"]
+          ]
+        ]
+      },
+      "style": [
+        ["height", "167px"],
+        ["width", "430px"],
+        ["position", "absolute"],
+        ["left", "440px"],
+        ["top", "210px"],
+        ["z-index", "61"]
+      ],
+      "headStyle": [
+        ["background", "rgba(0, 0, 0, 0) none repeat scroll 0% 0% \/ auto padding-box border-box"],
+        ["color", "rgb(51, 51, 51)"]
+      ]
+    }
+  ]
+}

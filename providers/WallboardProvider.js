@@ -3,8 +3,8 @@ var mongoose = require('mongoose');
 var util = require('util');
 
 
-WallboardProvider = function(host) {
-  mongoose.connect('mongodb://' + host + '/node-mongo-wallboarder');
+WallboardProvider = function(uri) {
+  mongoose.connect(uri);
 
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error:'));
@@ -16,9 +16,11 @@ wallboardSchema = mongoose.Schema({
   title: String,
   url_slug: String,
   created_at: Date,
+  autoLayout: Boolean,
   elems: [
     {
       id: String,
+      title: String,
       tagName: String,
       innerText: String,
       decoration: String,
@@ -102,6 +104,13 @@ WallboardProvider.prototype.listWallboards = function(callback) {
         });
       });
     }
+  });
+};
+
+WallboardProvider.prototype.convertLegacyRoutes = function(callback) {
+  this.wallboard.update({ url_slug: '/' }, { $set: { url_slug: 'default' }}, { multi: true }, function(err, numAffected) {
+    if (err) callback(err, null);
+    else callback(null, numAffected);
   });
 };
 

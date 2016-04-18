@@ -106,10 +106,12 @@ var wb_tables = [];
             self.init(false);
         });
 
-        self.cancelBtn.click(function () {
+        self.cancelBtn.click(function (event) {
+            event.preventDefault();
             self.wb.trigger("clearTableForm", [true])
         });
-        self.confirmBtn.click(function () {
+        self.confirmBtn.click(function (event) {
+            event.preventDefault();
             self.wb.trigger("clearTableForm", [false]);
         });
 

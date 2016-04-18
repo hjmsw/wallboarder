@@ -6,18 +6,29 @@
   "repository": "https://github.com/hjamesw93/wallboarder",
   "main": "server.js",
   "version": "0.4.2",
+  "engines": {
+    "node": "5.10.1"
+  },
   "dependencies": {
     "body-parser": "~1.0.1",
-    "bower": "^1.7.7",
+    "bootstrap": "^3.3.6",
+    "datatables-bootstrap3-plugin": "^0.4.0",
     "express": "~4.0.0",
+    "font-awesome": "^4.5.0",
     "express-ipfilter": "0.0.25",
     "forever": "^0.15.1",
+    "install": "^0.6.1",
     "jade": "^1.11.0",
+    "jquery": "^2.2.2",
+    "jquery-ui": "^1.10.5",
     "jsonfile": "^2.2.3",
     "kerberos": "0.0.17",
     "mongodb": "^2.1.0",
     "mongoose": "^4.4.7",
-    "socket.io": "^1.4.5"
+    "request": "^2.70.0",
+    "socket.io": "^1.4.5",
+    "socket.io-client": "^1.4.5",
+    "tinycolorpicker": "^0.9.5"
   },
   "scripts": {
     "start": "npm run mongod:start && forever start server.js",
@@ -25,6 +36,13 @@
     "forever": "forever",
     "mongod:install": "brew install mongodb",
     "mongod:start": "mongod --config /usr/local/etc/mongod.conf &",
-    "mongod:stop": "pkill mongod"
+    "mongod:stop": "pkill mongod",
+    "install": "napa"
+  },
+  "napa": {
+    "jquery-tabledit": "markcell/jquery-tabledit#v1.2.3"
+  },
+  "devDependencies": {
+    "napa": "^2.3.0"
   }
 }

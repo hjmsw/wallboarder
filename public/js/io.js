@@ -9,6 +9,7 @@
         var wb = {
             title: $("body").find("h1").text(),
             url_slug: $("#url_slug").val(),
+            autoLayout: false,
             elems: []
         };
 
@@ -121,7 +122,7 @@
         });
     }
 
-    $(".save").on("click", function () {
+    $("#save").on("click", function () {
         save();
     });
 
@@ -134,7 +135,7 @@
     $(function() {
         if ($("#revisionsList").length === 1) {
 
-            $.get("/revisions/" + $("#url_slug").val(), function(data) {
+            $.get("/api/v1/revisions/" + $("#url_slug").val(), function(data) {
                 $(".wb").trigger("init-revision-pages", [data]);
             });
         }

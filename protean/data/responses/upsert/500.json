@@ -1,0 +1,5 @@
+{
+  "success": false,
+  "errorCode": 500,
+  "error": "Wallboard could not be inserted / updated"
+}

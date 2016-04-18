@@ -16,6 +16,51 @@
     padding:5px;
 }
 
+#eventBox {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color:#DDD;
+    z-index:99999;
+    margin:20px;
+    border-radius:10px;
+    border:solid #444 2px;
+}
+
+#eventBoxDecoration {
+    float:left;
+    min-width:80px;
+}
+
+#eventBoxText {
+    float:left;
+    height:65px;
+    overflow: hidden;
+}
+
+#eventBox i {
+    font-size:52px;
+    margin:20px 20px 10px 30px;
+}
+
+#eventBox h1 {
+    margin-left:20px;
+    margin-right:20px;
+}
+
+.autoLayout .wb_box {
+    float:left;
+    position: relative !important;
+    margin:1em;
+    background-color: #f9f9f9;
+}
+.autoLayout .wb_table {
+    float:left;
+    position: relative !important;
+    margin:1em;
+}
+
 .header {
     margin:0;
     padding:20px;
@@ -148,7 +193,7 @@ td, th {
     background-color: #AAA;
 }
 
-#pltToolbar div {
+#pltToolbar a {
     margin: 0 2px;
 }
 
@@ -286,7 +331,7 @@ ul.selectable .ui-selected { background: #F39814; }
 }
 
 .colorPicker .track {
-    background:     url(/cp.png) no-repeat 50% 50%;
+    background:     url(/img/cp.png) no-repeat 50% 50%;
     height:         200px;
     width:          200px;
     position:       fixed;
