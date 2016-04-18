@@ -85,17 +85,10 @@ router.post('/upsert', function (req, res) {
 });
 
 router.post('/event', function(req, res) {
-    // {
-    //     "wb": "default",
-    //     "message": "Lorem ipsum"
-    // }
-
-    console.log(req.body);
-    
-    var socket = require('socket.io-client')('http://localhost:8081');
+    var socket = require('socket.io-client')('http://'+config.app.host+':'+config.app.port);
     socket.on('connect', function(){
         if (req.body.message) {
-            if (!req.body.wb || req.body.wb === "GLOBAL") {
+            if (!req.body.wb || req.body.wb === "global") {
                 socket.emit('api-event', {scope: "global", message: req.body.message});
             } else {
                 socket.emit('api-event', {scope: req.body.wb, message: req.body.message});
@@ -103,9 +96,6 @@ router.post('/event', function(req, res) {
             res.json({status: "ok"});
         }
     });
-
-
-
 });
 
 router.get('/convert-legacy-routes', function(req, res) {

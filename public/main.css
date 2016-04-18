@@ -16,6 +16,39 @@
     padding:5px;
 }
 
+#eventBox {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color:#DDD;
+    z-index:99999;
+    margin:20px;
+    border-radius:10px;
+    border:solid #444 2px;
+}
+
+#eventBoxDecoration {
+    float:left;
+    min-width:80px;
+}
+
+#eventBoxText {
+    float:left;
+    height:65px;
+    overflow: hidden;
+}
+
+#eventBox i {
+    font-size:52px;
+    margin:20px 20px 10px 30px;
+}
+
+#eventBox h1 {
+    margin-left:20px;
+    margin-right:20px;
+}
+
 .autoLayout .wb_box {
     float:left;
     position: relative !important;

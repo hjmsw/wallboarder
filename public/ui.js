@@ -167,6 +167,28 @@ wbChange = false;
 
             });
 
+            this.wb.on("new-wb-event", function(event, message, icon) {
+                var eb = $("#eventBox");
+
+                eb.find("h1").text(message);
+
+                if (icon) {
+                    eb.find("i").attr("class", "fa " + icon);
+                }
+
+                eb.effect("fade", function() {
+                    eb.css("display", "block");
+
+                });
+
+                setTimeout(function(){
+                    eb.effect("fade", function() {
+                        eb.css("display", "none");
+
+                    });
+                }, 20000);
+            });
+
             this.wb.on("fixZindex", function() {
                 self.fixZindex();
             });

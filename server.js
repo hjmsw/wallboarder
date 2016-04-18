@@ -42,6 +42,7 @@ io.on('connection', function(socket) {
     socket.on('api-event', function(data) {
         console.log("socketio");
         console.log(data);
+        socket.broadcast.emit('wb-event', {wb: data.scope, message: data.message});
     });
 
     socket.on('wb_nsp', function (data) {
