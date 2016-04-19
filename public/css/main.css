@@ -1,4 +1,8 @@
 
+h1, h2, h3, th {
+    font-weight:400;
+}
+
 .wb {
     padding:0;
 }
@@ -63,7 +67,7 @@
 
 .header {
     margin:0;
-    padding:20px;
+    padding:20px 30px;
 }
 
 .newRow {
