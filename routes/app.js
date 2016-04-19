@@ -27,7 +27,6 @@ router.get('/wb/:url_slug', function (req, res) {
 
         if (!error && response.statusCode == 200) {
             var wallboard = JSON.parse(body);
-            console.log(wallboard);
             if (wallboard == null) {
                 if (url_slug === 'default') {
                     wb = require(__dirname + '/../json/example_wb.json');
