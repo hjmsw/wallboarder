@@ -9,7 +9,7 @@ $(function(){
     var wb_nsp = $("#url_slug").val();
 
     global_socket.on('wb-event', function(data) {
-        if (data.wb === wb_nsp || data.wb === "global") wb.trigger("new-wb-event", [data.message, false]);
+        if (data.wb === wb_nsp || data.wb === "global") wb.trigger("new-wb-event", [data]);
     });
 
     global_socket.emit('wb_nsp', { wb_nsp: wb_nsp});

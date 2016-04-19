@@ -165,13 +165,15 @@ wbChange = false;
 
             });
 
-            this.wb.on("new-wb-event", function(event, message, icon) {
+            this.wb.on("new-wb-event", function(event, data) {
                 var eb = $("#eventBox");
 
-                eb.find("h1").text(message);
+                eb.find("h1").text(data.message);
 
-                if (icon) {
-                    eb.find("i").attr("class", "fa " + icon);
+                if (data.icon) {
+                    eb.find("i").attr("class", "fa " + data.icon);
+                } else {
+                    eb.find("i").attr("class", "fa fa-exclamation");
                 }
 
                 eb.effect("fade", function() {
@@ -184,7 +186,7 @@ wbChange = false;
                         eb.css("display", "none");
 
                     });
-                }, 20000);
+                }, (data.delay ? data.delay : 20000));
             });
 
             this.wb.on("fixZindex", function() {
@@ -265,7 +267,6 @@ wbChange = false;
             var fontSize = elem.css("font-size");
             $("#plt-font-size").on("change", function() {
                 fontSize = $(this).val();
-                console.log(elem);
                 elem.css("font-size",fontSize);
             });
 

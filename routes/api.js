@@ -73,7 +73,6 @@ router.post('/upsert', function (req, res) {
         console.log("External upsert request");
         requestType = "external";
         wb = req.body;
-        console.log(wb);
     }
 
     WallboardProvider.save(wb, function (error) {
@@ -88,11 +87,17 @@ router.post('/event', function(req, res) {
     var socket = require('socket.io-client')('http://'+config.app.host+':'+config.app.port);
     socket.on('connect', function(){
         if (req.body.message) {
-            if (!req.body.wb || req.body.wb === "global") {
-                socket.emit('api-event', {scope: "global", message: req.body.message});
-            } else {
-                socket.emit('api-event', {scope: req.body.wb, message: req.body.message});
-            }
+            var payload = {};
+
+            payload.message = req.body.message;
+
+            if (!req.body.wb || req.body.wb === "global") payload.wb = "global";
+            else payload.wb = req.body.wb;
+
+            if (req.body.icon) payload.icon = req.body.icon;
+            if (req.body.delay) payload.delay = req.body.delay;
+
+            socket.emit('api-event', payload);
             res.json({status: "ok"});
         }
     });
