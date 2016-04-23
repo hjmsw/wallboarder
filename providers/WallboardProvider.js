@@ -11,7 +11,6 @@ WallboardProvider = function(uri) {
 
 };
 
-//WallboardProvider.prototype.wallboardSchema = mongoose.Schema({
 wallboardSchema = mongoose.Schema({
   title: String,
   url_slug: String,
@@ -63,7 +62,7 @@ WallboardProvider.prototype.save = function(wallboard, callback) {
 
   var wb = new this.wallboard(wallboard);
 
-  wb.created_at = new Date();
+  if (!wb.created_at) wb.created_at = new Date();
 
   wb.save(function(err, wb) {
     if (err) return console.error(err);
@@ -104,6 +103,13 @@ WallboardProvider.prototype.listWallboards = function(callback) {
         });
       });
     }
+  });
+};
+
+WallboardProvider.prototype.deleteByUrl = function(url_slug, callback) {
+  this.wallboard.remove({ url_slug: url_slug }, function(err, result) {
+    if (err) callback(err, null);
+    else callback(null, result);
   });
 };
 

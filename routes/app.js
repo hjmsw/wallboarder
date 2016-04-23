@@ -74,7 +74,7 @@ router.post('/save', function(req, res) {
     var wb = req.body.wb;
     
     request.post({url:'http://' + appUrl + '/api/v1/upsert', form: {internal: true, wb: wb}}, function(err,httpResponse,body){
-        console.log(body);
+        return true;
     });
 
 });
