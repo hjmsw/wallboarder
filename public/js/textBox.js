@@ -42,6 +42,11 @@
             self.wb.trigger("startEdit", [$(this)]);
         });
 
+        this.container.on("doubletap", function() {
+            console.log("doubletap event fired");
+            self.wb.trigger("startEdit", [$(this)]);
+        });
+
         this.container.on("rebuildTextBox", function(event, decorationInput, boxDecoration, boxContent, fontSize) {
 
             var colors = {

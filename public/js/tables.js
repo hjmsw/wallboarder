@@ -133,6 +133,11 @@ var wb_tables = [];
         this.container.dblclick(function() {
             self.wb.trigger("startEdit", [$(this)]);
         });
+
+        this.container.on("doubletap", function() {
+            console.log("doubletap event fired");
+            self.wb.trigger("startEdit", [$(this)]);
+        });
     };
 
     /**
