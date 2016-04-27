@@ -232,6 +232,10 @@ wbChange = false;
             $(".header").dblclick(function() {
                 self.wb.trigger("startEdit", [$(this)]);
             });
+
+            $(".header").on("doubletap", function() {
+                self.wb.trigger("startEdit", [$(this)]);
+            });
         } else {
             wbChange = true;
             self.wb.trigger("edit");
