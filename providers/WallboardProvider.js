@@ -22,6 +22,7 @@ wallboardSchema = mongoose.Schema({
       title: String,
       tagName: String,
       innerText: String,
+      src: String,
       decoration: String,
       decorationStyle: [],
       contentStyle: [],

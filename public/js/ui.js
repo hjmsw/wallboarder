@@ -312,6 +312,12 @@ wbChange = false;
 
         var decorationClass = elem.find(".fa").attr("class");
 
+        /*
+         TODO: show ez and choose appropriate tab
+         Populate values
+         */
+
+
         self.ez.html(function() {
 
             var el = "<div class='panel panel-default'><div class='panel-heading'>";
