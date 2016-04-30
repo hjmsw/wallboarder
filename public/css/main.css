@@ -217,6 +217,10 @@ td, th {
     padding:5px;
 }
 
+#editTablePanel, #editTitlePanel, #editTextPanel {
+    display:none;
+}
+
 #pltToolbar .btn-inner {
     float: left;
     padding:0;

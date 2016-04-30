@@ -42,13 +42,16 @@ $(function () {
     $(window).load(init);
 
     $("#plt").on("newColorPickers", function(event, elem, parent) {
-        parent.append(generateMarkup("colorPickerBG", "Bg", $(elem).css("background-color")) +
-            generateMarkup("colorPickerTX", "Aa", $(elem).css("color")));
 
-        init(null, $(elem), $(parent));
+        if (parent.hasClass('enabled')){
+            console.log(parent);
+            parent.append(generateMarkup("colorPickerBG", "Bg", $(elem).css("background-color")) +
+                generateMarkup("colorPickerTX", "Aa", $(elem).css("color")));
 
-        function generateMarkup(c_class, c_text, c_color) {
-            return  "<div class='colorPicker "+c_class+"'> \
+            init(null, $(elem), $(parent));
+
+            function generateMarkup(c_class, c_text, c_color) {
+                return  "<div class='colorPicker "+c_class+"'> \
                       <a class='color'> \
                           <div class='colorInner' style='background-color:"+c_color+";'></div> \
                       </a> \
@@ -63,7 +66,7 @@ $(function () {
                       </ul> \
                       <input type='hidden' class='colorInput'> \
                     </div>";
+            }
         }
-
     });
 });

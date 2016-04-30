@@ -196,7 +196,7 @@ wbChange = false;
             this.wb.click(function(e) {
                 //Only reset plt if wb parent was clicked
                 if ($(e.toElement).hasClass('wb')) {
-                    $("#editZone").html("");
+                    //$("#editZone").html("");
                     $("#accordion").show();
                 }
             });
@@ -255,7 +255,7 @@ wbChange = false;
         });
 
         this.wb.off("startEdit").on("startEdit", function(event, elem) {
-            self.buildEditSidebar(elem);
+            self.initEditSidebar(elem);
         });
     };
 
@@ -277,16 +277,15 @@ wbChange = false;
             $("#wb-box-confirm").on("click", function(event) {
                 event.preventDefault();
                 $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-decoration"),elem.find(".box-content"), fontSize]);
-                self.ez.html("");
+                self.ez.hide();
                 $("#accordion").show();
             });
 
             $(".dummyConfirmCancel").on("click", function(event) {
                 event.preventDefault();
-                self.ez.html("");
+                self.ez.hide();
                 $("#accordion").show();
             })
-
         }
 
         $(".boxDecoration").on("keyup", function() {
@@ -294,7 +293,7 @@ wbChange = false;
         });
     };
 
-    Ui.prototype.buildEditSidebar = function(elem) {
+    Ui.prototype.initEditSidebar = function(elem) {
         var self = this;
 
         wbChange = true;
@@ -308,74 +307,73 @@ wbChange = false;
 
         $("#accordion").hide();
 
-
-
         var decorationClass = elem.find(".fa").attr("class");
 
-        /*
-         TODO: show ez and choose appropriate tab
-         Populate values
-         */
+        $("#editZone").show();
 
-
-        self.ez.html(function() {
-
-            var el = "<div class='panel panel-default'><div class='panel-heading'>";
-
-            if (elem.hasClass('wb_table')) {
-                el += "<h3 class='panel-title'>Edit Table</h3></div><div class='panel-body'>\
-                           <form id='editTable'><div class='form-group'><label>Header Colours:</label><div class='colorPickers'></div></div>"+
-                        "<input type='submit' class='dummyConfirmCancel btn btn-default form-control' id='wb-table-confirm' value='Confirm'></form></div>";
-
-            } else if(elem.hasClass('wb_box')) {
-                if (typeof decorationClass === "undefined") decorationClass = "";
-
-                el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
-                        <form id='editTextBox'><div class='form-group'><input type='text' class='form-control' id='plt-edit-text' name='plt-edit-text' value='" +
-                    elem.find(".box-content").text() + "'/></div>\
-                        <div class='form-group'>\
-                        <label>Content Colours:</label>\
-                        <div id='colorPickersContent' class='colorPickers'></div>\
-                        </div>\
-                        <div class='form-group'>\
-                        <label>Decoration Colours:</label>\
-                        <div id='colorPickersDecoration' class='colorPickers'></div>\
-                        </div>\
-                        <div class='form-group'><label for='boxDecoration'>Decoration:</label>\
-                        <input type='text' class='form-control boxDecoration' placeholder='fa-icon-name' id='boxDecoration' name='boxDecoration' value='"+decorationClass+"'/>\
-                        <i class='boxDecorationPreview "+decorationClass+"'></i></div>" +
-                    self.buildFontSizeSelect(elem) +
-                    "<div class='form-group'><input type='submit' id='wb-box-confirm' name='wb-box-confirm' value='Confirm' class='btn btn-default form-control'/></div>\
-                    <div class='form-group'><input type='submit' id='wb-box-cancel' name='wb-box-cancel' value='Cancel' class='btn btn-default form-control dummyConfirmCancel'/></div>\
-                    </form></div>";
-            } else {
-                el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'><form id='editTitle'>" +
-                    "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text'/></div><div class='colorPickers'></div><input type='submit' class='dummyConfirmCancel btn btn-default form-control' id='wb-title-confirm' value='Confirm'></form></div>";
-            }
-
-            el +=  "</div>";
-
-            return el;
+        self.ez.find(".panel").each(function() {
+            $(this).hide();
         });
 
-        if (elem.is("h1")) {
-            $("#plt-edit-text").val(elem.text());
-        } else if (elem.hasClass("wb_box")) {
-            $("#plt-edit-text").val(elem.text());
-        }
+        self.ez.find(".colorPickers").each(function() {
+           $(this).html("");
+        });
 
-        this.setSidebarEvents(elem);
+        var colorPickers = [];
+        var ep;
 
-        if (elem.hasClass('wb_box')) {
-            if(elem.find(".box-decoration").length > 0) {
-                this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), self.ez.find("#colorPickersDecoration")]);
+        if (elem.hasClass("wb_table")) {
+            ep = $('#editTablePanel');
+
+            colorPickers.push({
+                picker: $("#editColorPickersTableHeader"),
+                target: elem.find("th")
+            });
+
+        } else if(elem.hasClass("wb_box")) {
+            ep = $('#editTextPanel');
+
+            if (typeof decorationClass === "undefined") decorationClass = "";
+            $("#editBoxDecoration").val(decorationClass);
+            $(".boxDecorationPreview").addClass(decorationClass);
+            
+            $("#plt-edit-text").val(elem.text());
+
+            if (elem.find(".box-decoration").length > 0) {
+                colorPickers.push({
+                    picker: $("#editColorPickersDecoration"),
+                    target: elem.find(".box-decoration")
+                });
+                self.ez.find("#editColorPickersDecoration").parent(".form-group").show();
             } else {
-                self.ez.find("#colorPickersDecoration").parent(".form-group").remove();
+                self.ez.find("#editColorPickersDecoration").parent(".form-group").hide();
             }
-            this.plt.trigger("newColorPickers", [elem.find(".box-content"), self.ez.find("#colorPickersContent")]);
-        } else {
-            this.plt.trigger("newColorPickers", [elem, self.ez.find(".colorPickers")]);
+
+            colorPickers.push({
+                picker: $("#editColorPickersContent"),
+                target: elem.find(".box-content")
+            });
+
+        } else if (elem.hasClass("header")) {
+            ep = $("#editTitlePanel");
+            $("#plt-edit-title").val(elem.text());
+
+            colorPickers.push({
+                picker: $("#editColorPickersTitle"),
+                target: elem
+            });
         }
+
+        //Show edit panel for elem
+        ep.show();
+
+        //setup colour pickers
+        colorPickers.forEach(function(i) {
+            i.picker.addClass("enabled");
+            self.plt.trigger("newColorPickers", [i.target, i.picker]);
+        });
+
+        self.setSidebarEvents(elem);
     };
 
     Ui.prototype.buildFontSizeSelect = function(elem) {
@@ -434,6 +432,6 @@ wbChange = false;
             height: $(window).height()
         });
 
-        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#plt").find(".colorPickers")]);
+        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#insertTextBox").find(".colorPickers")]);
     });
 })();
