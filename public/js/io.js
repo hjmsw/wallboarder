@@ -93,7 +93,7 @@
                 };
 
                 elem.headStyle = [
-                    ["background", i.find("th").css("background")],
+                    ["background-color", i.find("th").css("background-color")],
                     ["color", i.find("th").css("color")]
                 ];
 
@@ -111,7 +111,7 @@
                     elem.style = [
                         ["width", "100%"],
                         ["position", "fixed"],
-                        ["background", i.css("background")],
+                        ["background-color", i.css("background-color")],
                         ["color", i.css("color")]
                     ]
                 }
