@@ -122,7 +122,7 @@
         });
     }
 
-    $("#save").on("click", function () {
+    $("#save, #mini-save").on("click", function () {
         save();
     });
 
