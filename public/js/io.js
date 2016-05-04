@@ -38,7 +38,12 @@
                 elem.contentStyle = [
                     ["color", i.find(".box-content").css("color")],
                     ["background-color", i.find(".box-content").css("background-color")],
-                    ["width", (i.find(".box-content").outerWidth() / i.find(".box-content").parent().outerWidth() * 100) + "%"]
+                    function() {
+                        var bc = i.find(".box-content");
+                        if (!bc.hasClass("box-content-full-width"))
+                            return ["width", (bc.outerWidth() / bc.parent().outerWidth() * 100) + "%"]
+                    }()
+
                 ];
 
                 elem.style = [
@@ -122,7 +127,7 @@
         });
     }
 
-    $("#save").on("click", function () {
+    $("#save, #mini-save").on("click", function () {
         save();
     });
 

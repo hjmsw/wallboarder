@@ -46,7 +46,7 @@ div.container-fluid.wb
                         img(src="#{elem.src}")
 
 
-        else
+        else if elem.tagName == "DIV"
             #{elem.tagName}(
             id=elem.id
             class="draggable resizable ui-widget-content wb_box box editable")

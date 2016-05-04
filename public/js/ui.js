@@ -318,6 +318,7 @@ wbChange = false;
         self.ez.find(".colorPickers").each(function() {
            $(this).html("");
         });
+        $("#editFontSize").html("");
 
         var colorPickers = [];
         var ep;
@@ -353,6 +354,8 @@ wbChange = false;
                 picker: $("#editColorPickersContent"),
                 target: elem.find(".box-content")
             });
+
+            $("#editFontSize").html(self.buildFontSizeSelect(elem));
 
         } else if (elem.hasClass("header")) {
             ep = $("#editTitlePanel");
