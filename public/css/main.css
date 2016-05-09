@@ -151,6 +151,7 @@ td, th {
     padding:10px;
     text-align: center;
     float: left;
+    overflow:hidden;
 }
 
 .box-content {

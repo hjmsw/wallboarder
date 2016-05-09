@@ -31,13 +31,13 @@ html
       div#eventBoxText
         h1
 
-
-    script(src="/js/ui.js")
-    script(src="/js/colorPicker.js")
-    script(src="/js/tables.js")
-    script(src="/js/textBox.js")
-    script(src="/js/io.js")
-    if revision
+    if dev_mode
+      script(src="/js/ui.js")
+      script(src="/js/colorPicker.js")
+      script(src="/js/tables.js")
+      script(src="/js/textBox.js")
+      script(src="/js/io.js")
       script(src="/js/revisionPagination.js")
-    else
       script(src="/js/socketio.js")
+    else
+      script(src="/js/main.min.js")

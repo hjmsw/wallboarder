@@ -30,7 +30,7 @@ app.use('/img', express.static('public/img'));
 app.use('/components/jquery', express.static('node_modules/jquery'));
 app.use('/components/jquery-ui', express.static('node_modules/jquery-ui'));
 app.use('/components/jquery-ui-touch-punch', express.static('node_modules/jquery-ui-touch-punch'));
-app.use('/components/jquery-finger', express.static('node_modules/jquery.finger/dist'))
+app.use('/components/jquery-finger', express.static('node_modules/jquery.finger/dist'));
 app.use('/components/jquery-tabledit', express.static('node_modules/jquery-tabledit'));
 app.use('/components/bootstrap/', express.static('node_modules/bootstrap'));
 app.use('/components/socket.io-client/', express.static('node_modules/socket.io-client'));

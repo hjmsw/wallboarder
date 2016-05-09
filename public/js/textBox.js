@@ -60,9 +60,7 @@
                     "bcColor": boxContent.css("color"),
                     "bcBackground": boxContent.css("background-color")
                 };
-
-                console.log(colors);
-
+                
                 self.container.find(".box-inner").html(self.buildTextBox(decorationInput.val(),boxContent.text()));
                 self.container.find(".box-inner").css("font-size",fontSize);
 

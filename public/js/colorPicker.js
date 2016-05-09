@@ -44,7 +44,6 @@ $(function () {
     $("#plt").on("newColorPickers", function(event, elem, parent) {
 
         if (parent.hasClass('enabled')){
-            console.log(parent);
             parent.append(generateMarkup("colorPickerBG", "Bg", $(elem).css("background-color")) +
                 generateMarkup("colorPickerTX", "Aa", $(elem).css("color")));
 
