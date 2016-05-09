@@ -21,54 +21,61 @@
     TextBox.prototype.setEvents = function() {
         var self = this;
 
-        this.container.on({
-            "dragstart":  function() {
-                $("#binIcon").effect("fade", 500, function () {
-                    $(this).show();
-                })
-            },
-            "dragstop": function() {
-                $("#binIcon").effect("fade", 500, function() {
-                    $(this).hide();
+        this.container
+
+            .on({
+                "dragstart":  function() {
+                    $("#binIcon").effect("fade", 500, function () {
+                        $(this).show();
+                    })
+                },
+                "dragstop": function() {
+                    $("#binIcon").effect("fade", 500, function() {
+                        $(this).hide();
+                    });
+                    self.wb.trigger("fixZindex");
+                },
+                "click": function() {
+                    self.wb.trigger("fixZindex");
+                }
+            })
+
+            .dblclick(function() {
+                self.wb.trigger("startEdit", [$(this)]);
+            })
+
+            .on("doubletap", function() {
+                self.wb.trigger("startEdit", [$(this)]);
+            })
+
+            .on("rebuildTextBox", function(event, decorationInput, boxDecoration, boxContent, fontSize) {
+
+                var colors = {
+                    "bdColor": boxDecoration.css("color"),
+                    "bdBackground": function(p) {
+                        //Default to grey background if this a newly added decoration to existing textbox
+                        if (p === "rgba(0, 0, 0, 0)" || p === undefined) return "rgb(239, 239, 239)";
+                        else return p;
+                    }(boxDecoration.css("background-color")),
+                    "bcColor": boxContent.css("color"),
+                    "bcBackground": boxContent.css("background-color")
+                };
+
+                console.log(colors);
+
+                self.container.find(".box-inner").html(self.buildTextBox(decorationInput.val(),boxContent.text()));
+                self.container.find(".box-inner").css("font-size",fontSize);
+
+                self.container.find(".box-decoration").css({
+                    "color": colors.bdColor,
+                    "background-color": colors.bdBackground
                 });
-                self.wb.trigger("fixZindex");
-            },
-            "click": function() {
-                self.wb.trigger("fixZindex");
-            }
-        });
 
-        this.container.dblclick(function() {
-            self.wb.trigger("startEdit", [$(this)]);
-        });
-
-        this.container.on("doubletap", function() {
-            self.wb.trigger("startEdit", [$(this)]);
-        });
-
-        this.container.on("rebuildTextBox", function(event, decorationInput, boxDecoration, boxContent, fontSize) {
-
-            var colors = {
-                "bdColor": boxDecoration.css("color"),
-                "bdBackground": boxDecoration.css("background-color"),
-                "bcColor": boxContent.css("color"),
-                "bcBackground": boxContent.css("background-color")
-            };
-
-            self.container.find(".box-inner").html(self.buildTextBox(decorationInput.val(),boxContent.text()));
-            self.container.find(".box-inner").css("font-size",fontSize);
-
-            self.container.find(".box-decoration").css({
-                "color": colors.bdColor,
-                "background-color": colors.bdBackground
+                self.container.find(".box-content").css({
+                    "color": colors.bcColor,
+                    "background-color": colors.bcBackground
+                });
             });
-
-            self.container.find(".box-content").css({
-                "color": colors.bcColor,
-                "background-color": colors.bcBackground
-            });
-        });
-
     };
 
     /**

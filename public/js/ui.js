@@ -145,68 +145,80 @@ wbChange = false;
         if (!reInit) {
             //first init
 
-            this.wb.on("read-only", function() {
-                $("#shield").css({
-                    "height": $(window).height(),
-                    "width": $(window).width(),
-                    "z-index": self.plt.css("z-index") + 1
-                });
-            });
-
-            this.wb.on("new-status-message", function(event, message) {
-                var sm = $("#statusMessage");
-
-                sm.find("p").text(message);
-
-                sm.effect("fade", function() {
-                    sm.css("display", "block");
-
-                });
-
-            });
-
-            this.wb.on("new-wb-event", function(event, data) {
-                var eb = $("#eventBox");
-
-                eb.find("h1").text(data.message);
-
-                if (data.icon) {
-                    eb.find("i").attr("class", "fa " + data.icon);
-                } else {
-                    eb.find("i").attr("class", "fa fa-exclamation");
-                }
-
-                eb.effect("fade", function() {
-                    eb.css("display", "block");
-
-                });
-
-                setTimeout(function(){
-                    eb.effect("fade", function() {
-                        eb.css("display", "none");
-
+            this.wb
+                .on("read-only", function() {
+                    $("#shield").css({
+                        "height": $(window).height(),
+                        "width": $(window).width(),
+                        "z-index": self.plt.css("z-index") + 1
                     });
-                }, (data.delay ? data.delay : 20000));
-            });
+                })
 
-            this.wb.on("fixZindex", function() {
-                self.fixZindex();
-            });
+                .on("new-status-message", function(event, message) {
+                    var sm = $("#statusMessage");
 
-            this.wb.click(function(e) {
-                //Only reset plt if wb parent was clicked
-                if ($(e.toElement).hasClass('wb')) {
-                    //$("#editZone").html("");
-                    $("#accordion").show();
-                }
-            });
+                    sm.find("p").text(message);
+
+                    sm.effect("fade", function() {
+                        sm.css("display", "block");
+                    });
+
+                })
+
+                .on("new-wb-event", function(event, data) {
+                    var eb = $("#eventBox");
+
+                    eb.find("h1").text(data.message);
+
+                    if (data.icon) {
+                        eb.find("i").attr("class", "fa " + data.icon);
+                    } else {
+                        eb.find("i").attr("class", "fa fa-exclamation");
+                    }
+
+                    eb.effect("fade", function() {
+                        eb.css("display", "block");
+                    });
+
+                    setTimeout(function(){
+                        eb.effect("fade", function() {
+                            eb.css("display", "none");
+
+                        });
+                    }, (data.delay ? data.delay : 20000));
+
+                })
+
+                .on("fixZindex", function() {
+                    self.fixZindex();
+
+                })
+
+                .click(function(e) {
+                    //Only reset plt if wb parent was clicked
+                    if ($(e.toElement).hasClass('wb')) {
+                        self.ez.hide();
+                        $("#accordion").show();
+                    }
+                });
 
             var mt = $("#miniToolbar");
-            $(".header").hover(function(event, ui) {
-                if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
-            }, function(event, ui) {
-                if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
-            });
+
+            $(".header")
+                .hover(function(event, ui) {
+                    if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
+                }, function(event, ui) {
+                    if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
+                })
+
+                .dblclick(function() {
+                    self.wb.trigger("startEdit", [$(this)]);
+                })
+
+                .on("doubletap", function() {
+                    self.wb.trigger("startEdit", [$(this)]);
+                });
+
 
             $("#plt-show").click(function() {
                 $("#plt").effect("fade", function() {
@@ -229,13 +241,6 @@ wbChange = false;
                 $("#preview-box").text($("#boxText").val());
             });
 
-            $(".header").dblclick(function() {
-                self.wb.trigger("startEdit", [$(this)]);
-            });
-
-            $(".header").on("doubletap", function() {
-                self.wb.trigger("startEdit", [$(this)]);
-            });
         } else {
             wbChange = true;
             self.wb.trigger("edit");
@@ -245,36 +250,38 @@ wbChange = false;
             $(".wb").trigger("newWbTable");
         });
 
-        this.wb.off("clearTableForm").on("clearTableForm", function(event, delete_table) {
-            self.clearTableForm(delete_table);
-        });
 
-        //Custom event - triggered when wallboard update required
-        this.wb.off("update_wb").on("update_wb", function() {
-            self.init(true);
-        });
+        this.wb
+            .off("clearTableForm").on("clearTableForm", function(event, delete_table) {
+                self.clearTableForm(delete_table);
+            })
 
-        this.wb.off("startEdit").on("startEdit", function(event, elem) {
-            self.initEditSidebar(elem);
-        });
+            //Custom event - triggered when wallboard update required
+            .off("update_wb").on("update_wb", function() {
+                self.init(true);
+            })
+
+            .off("startEdit").on("startEdit", function(event, elem) {
+                self.initEditSidebar(elem);
+            });
     };
 
     Ui.prototype.setSidebarEvents = function(elem) {
         var self = this;
 
         if (typeof elem !== "undefined") {
-            $("#plt-edit-text").on("keyup", function() {
+            $("#plt-edit-text, #plt-edit-title").off("keyup").on("keyup", function() {
                 if (elem.hasClass("wb_box")) elem.find(".box-content").text($(this).val());
                 else if (elem.hasClass("header")) elem.text($(this).val());
             });
 
             var fontSize = elem.css("font-size");
-            $("#plt-font-size").on("change", function() {
+            $("#plt-font-size").off("click").on("change", function() {
                 fontSize = $(this).val();
                 elem.css("font-size",fontSize);
             });
 
-            $("#wb-box-confirm").on("click", function(event) {
+            $("#wb-box-confirm").off("click").on("click", function(event) {
                 event.preventDefault();
                 $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-decoration"),elem.find(".box-content"), fontSize]);
                 self.ez.hide();
