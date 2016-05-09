@@ -30,16 +30,16 @@ router.get('/wb/:url_slug', function (req, res) {
             if (wallboard == null) {
                 if (url_slug === 'default') {
                     wb = require(__dirname + '/../json/example_wb.json');
-                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug});
+                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug, dev_mode: config.dev_mode});
                 } else {
                     wb = require(__dirname + '/../json/new.json');
                     wb.url_slug = url_slug;
-                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug});
+                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug, dev_mode: config.dev_mode});
                 }
 
             } else {
                 var datetime = new Date(wallboard.created_at);
-                res.render('index', {title: wallboard.title, autoLayout: wallboard.autoLayout, elems: wallboard.elems, url_slug: wallboard.url_slug, datetime: datetime.getTime()});
+                res.render('index', {title: wallboard.title, autoLayout: wallboard.autoLayout, elems: wallboard.elems, url_slug: wallboard.url_slug, datetime: datetime.getTime(), dev_mode: config.dev_mode});
             }
         }
     });
@@ -61,7 +61,8 @@ router.get('/revisions/:url_slug/:epoch', function(req, res) {
                 revision: true,
                 url_slug: wallboard.url_slug,
                 datetime: wallboard.created_at,
-                epoch: epoch
+                epoch: epoch,
+                dev_mode: config.dev_mode
             });
         } else if (response.statusCode == 404) {
             res.render('404');
@@ -74,7 +75,7 @@ router.post('/save', function(req, res) {
     var wb = req.body.wb;
     
     request.post({url:'http://' + appUrl + '/api/v1/upsert', form: {internal: true, wb: wb}}, function(err,httpResponse,body){
-        console.log(body);
+        return true;
     });
 
 });

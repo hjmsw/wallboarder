@@ -23,7 +23,7 @@ div#plt
                 div(class="panel-body")
                     form#insertTextBox
                         div#preview-box.box.p_box= "Text goes here..."
-                        div.colorPickers
+                        div.colorPickers.enabled
                         div.form-group
                             label(for="boxText")="Text:"
                             input(type="text" id="boxText" name="boxText" placeholder="box text" class="form-control")
@@ -71,5 +71,45 @@ div#plt
             a(href="/wb" class="btn btn-default" id="viewAllWallboardsLink")= "View All Wallboards"
 
     div#editZone
+        div.panel.panel-default#editTablePanel
+            div.panel-heading
+                h3.panel-title="Edit Table"
+            div.panel-body
+                form#editTable
+                    div.form-group
+                        label="Header Colours"
+                        div#editColorPickersTableHeader.colorPickers
+                    input(type="submit" class="dummyConfirmCancel btn btn-default form-control" id="wb-table-edit-confirm" value="Confirm")
+        div.panel.panel-default#editTextPanel
+            div.panel-heading
+                h3.panel-title="Edit Text Box"
+            div.panel-body
+                form#editTextBox
+                    div.form-group
+                        input(type="text" class="form-control" id="plt-edit-text" name="plt-edit-text")
+                    div.form-group
+                        label="Content Colours"
+                        div#editColorPickersContent.colorPickers
+                    div.form-group
+                        label="Decoration Colours"
+                        div#editColorPickersDecoration.colorPickers
+                    div.form-group
+                        label(for="editBoxDecoration")="Decoration:"
+                        input(type="text" class="form-control boxDecoration" placeholder="fa-icon-name" id="editBoxDecoration")
+                        i.boxDecorationPreview
+                    div.form-group#editFontSize
+                    div.form-group
+                        input(type="submit" id="wb-box-confirm" name="wb-box-confirm" value="Confirm" class="btn btn-default form-control")
+                    div.form-group
+                        input(type="submit" id="wb-box-cancel" name="wb-box-cancel" value="Cancel" class="btn btn-default form-control dummyConfirmCancel")
+        div.panel.panel-default#editTitlePanel
+            div.panel-heading
+                h3.panel-title="Edit Title"
+            div.panel-body
+                form#editTitle
+                    div.form-group
+                        input(id="plt-edit-title" type="text" class="form-control edit-text")
+                    div#editColorPickersTitle.colorPickers
+                    input(type="submit" class="dummyConfirmCancel btn btn-default form-control" id="wb-title-edit-confirm" value="Confirm")
     div#binIcon
         span.glyphicon.glyphicon-trash

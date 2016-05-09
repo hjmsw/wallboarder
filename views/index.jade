@@ -5,6 +5,8 @@ html
 
     script(src="/components/jquery/dist/jquery.min.js")
     script(src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js")
+    script(src="/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js")
+    script(src="/components/jquery-finger/jquery.finger.min.js")
     script(src="/components/jquery-tabledit/jquery.tabledit.min.js")
     script(src="/js/jquery.tinycolorpicker.js")
     script(src="/components/bootstrap/js/collapse.js")
@@ -29,13 +31,13 @@ html
       div#eventBoxText
         h1
 
-
-    script(src="/js/ui.js")
-    script(src="/js/colorPicker.js")
-    script(src="/js/tables.js")
-    script(src="/js/textBox.js")
-    script(src="/js/io.js")
-    if revision
+    if dev_mode
+      script(src="/js/ui.js")
+      script(src="/js/colorPicker.js")
+      script(src="/js/tables.js")
+      script(src="/js/textBox.js")
+      script(src="/js/io.js")
       script(src="/js/revisionPagination.js")
-    else
       script(src="/js/socketio.js")
+    else
+      script(src="/js/main.min.js")

@@ -151,6 +151,7 @@ td, th {
     padding:10px;
     text-align: center;
     float: left;
+    overflow:hidden;
 }
 
 .box-content {
@@ -164,6 +165,11 @@ td, th {
 .box-content-full-width {
     width:100%;
     text-align: left;
+}
+
+.box-inner img {
+    width:100%;
+    height:auto;
 }
 
 /*------- Side Panel -------*/
@@ -212,6 +218,10 @@ td, th {
     padding:5px;
 }
 
+#editTablePanel, #editTitlePanel, #editTextPanel {
+    display:none;
+}
+
 #pltToolbar .btn-inner {
     float: left;
     padding:0;
@@ -250,19 +260,23 @@ td, th {
     left: 0;
 }
 
-.ui-resizable-e {
-    border-right: dashed 1px #444;
-}
-.ui-resizable-w {
-    border-left: dashed 1px #444;
-}
-
-.ui-resizable-n {
-    border-top: dashed 1px #444;
+.ui-resizable-n, .ui-resizable-e, .ui-resizable-s, .ui-resizable-w, .ui-resizable-nw, .ui-resizable-ne, .ui-resizable-sw, .ui-resizable-se {
+    width: 10px;
+    height: 10px;
+    background-color: #3498db;
 }
 
-.ui-resizable-s {
-    border-bottom: dashed 1px #444;
+.ui-resizable-n, .ui-resizable-s {
+    left:50%;
+}
+
+.ui-resizable-e, .ui-resizable-w {
+    top:50%;
+}
+
+.ui-resizable-se {
+    right: -5px;
+    bottom: -5px;
 }
 
 .ui-accordion .ui-accordion-content {

@@ -145,68 +145,80 @@ wbChange = false;
         if (!reInit) {
             //first init
 
-            this.wb.on("read-only", function() {
-                $("#shield").css({
-                    "height": $(window).height(),
-                    "width": $(window).width(),
-                    "z-index": self.plt.css("z-index") + 1
-                });
-            });
-
-            this.wb.on("new-status-message", function(event, message) {
-                var sm = $("#statusMessage");
-
-                sm.find("p").text(message);
-
-                sm.effect("fade", function() {
-                    sm.css("display", "block");
-
-                });
-
-            });
-
-            this.wb.on("new-wb-event", function(event, data) {
-                var eb = $("#eventBox");
-
-                eb.find("h1").text(data.message);
-
-                if (data.icon) {
-                    eb.find("i").attr("class", "fa " + data.icon);
-                } else {
-                    eb.find("i").attr("class", "fa fa-exclamation");
-                }
-
-                eb.effect("fade", function() {
-                    eb.css("display", "block");
-
-                });
-
-                setTimeout(function(){
-                    eb.effect("fade", function() {
-                        eb.css("display", "none");
-
+            this.wb
+                .on("read-only", function() {
+                    $("#shield").css({
+                        "height": $(window).height(),
+                        "width": $(window).width(),
+                        "z-index": self.plt.css("z-index") + 1
                     });
-                }, (data.delay ? data.delay : 20000));
-            });
+                })
 
-            this.wb.on("fixZindex", function() {
-                self.fixZindex();
-            });
+                .on("new-status-message", function(event, message) {
+                    var sm = $("#statusMessage");
 
-            this.wb.click(function(e) {
-                //Only reset plt if wb parent was clicked
-                if ($(e.toElement).hasClass('wb')) {
-                    $("#editZone").html("");
-                    $("#accordion").show();
-                }
-            });
+                    sm.find("p").text(message);
+
+                    sm.effect("fade", function() {
+                        sm.css("display", "block");
+                    });
+
+                })
+
+                .on("new-wb-event", function(event, data) {
+                    var eb = $("#eventBox");
+
+                    eb.find("h1").text(data.message);
+
+                    if (data.icon) {
+                        eb.find("i").attr("class", "fa " + data.icon);
+                    } else {
+                        eb.find("i").attr("class", "fa fa-exclamation");
+                    }
+
+                    eb.effect("fade", function() {
+                        eb.css("display", "block");
+                    });
+
+                    setTimeout(function(){
+                        eb.effect("fade", function() {
+                            eb.css("display", "none");
+
+                        });
+                    }, (data.delay ? data.delay : 20000));
+
+                })
+
+                .on("fixZindex", function() {
+                    self.fixZindex();
+
+                })
+
+                .click(function(e) {
+                    //Only reset plt if wb parent was clicked
+                    if ($(e.toElement).hasClass('wb')) {
+                        self.ez.hide();
+                        $("#accordion").show();
+                    }
+                });
 
             var mt = $("#miniToolbar");
-            $(".header").hover(function(event, ui) {
-                if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
-            }, function(event, ui) {
-                if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
-            });
+
+            $(".header")
+                .hover(function(event, ui) {
+                    if($(event.toElement).hasClass("header")) mt.effect("fade", function() { mt.show() });
+                }, function(event, ui) {
+                    if ($(event.toElement).hasClass("wb")) mt.effect("fade", function() { mt.hide() });
+                })
+
+                .dblclick(function() {
+                    self.wb.trigger("startEdit", [$(this)]);
+                })
+
+                .on("doubletap", function() {
+                    self.wb.trigger("startEdit", [$(this)]);
+                });
+
 
             $("#plt-show").click(function() {
                 $("#plt").effect("fade", function() {
@@ -229,9 +241,6 @@ wbChange = false;
                 $("#preview-box").text($("#boxText").val());
             });
 
-            $(".header").dblclick(function() {
-                self.wb.trigger("startEdit", [$(this)]);
-            });
         } else {
             wbChange = true;
             self.wb.trigger("edit");
@@ -241,48 +250,49 @@ wbChange = false;
             $(".wb").trigger("newWbTable");
         });
 
-        this.wb.off("clearTableForm").on("clearTableForm", function(event, delete_table) {
-            self.clearTableForm(delete_table);
-        });
 
-        //Custom event - triggered when wallboard update required
-        this.wb.off("update_wb").on("update_wb", function() {
-            self.init(true);
-        });
+        this.wb
+            .off("clearTableForm").on("clearTableForm", function(event, delete_table) {
+                self.clearTableForm(delete_table);
+            })
 
-        this.wb.off("startEdit").on("startEdit", function(event, elem) {
-            self.buildEditSidebar(elem);
-        });
+            //Custom event - triggered when wallboard update required
+            .off("update_wb").on("update_wb", function() {
+                self.init(true);
+            })
+
+            .off("startEdit").on("startEdit", function(event, elem) {
+                self.initEditSidebar(elem);
+            });
     };
 
     Ui.prototype.setSidebarEvents = function(elem) {
         var self = this;
 
         if (typeof elem !== "undefined") {
-            $("#plt-edit-text").on("keyup", function() {
+            $("#plt-edit-text, #plt-edit-title").off("keyup").on("keyup", function() {
                 if (elem.hasClass("wb_box")) elem.find(".box-content").text($(this).val());
                 else if (elem.hasClass("header")) elem.text($(this).val());
             });
 
             var fontSize = elem.css("font-size");
-            $("#plt-font-size").on("change", function() {
+            $("#plt-font-size").off("click").on("change", function() {
                 fontSize = $(this).val();
                 elem.css("font-size",fontSize);
             });
 
-            $("#wb-box-confirm").on("click", function(event) {
+            $("#wb-box-confirm").off("click").on("click", function(event) {
                 event.preventDefault();
                 $(elem).trigger("rebuildTextBox", [$(this).parents(".panel-body").find(".boxDecoration"),elem.find(".box-decoration"),elem.find(".box-content"), fontSize]);
-                self.ez.html("");
+                self.ez.hide();
                 $("#accordion").show();
             });
 
             $(".dummyConfirmCancel").on("click", function(event) {
                 event.preventDefault();
-                self.ez.html("");
+                self.ez.hide();
                 $("#accordion").show();
             })
-
         }
 
         $(".boxDecoration").on("keyup", function() {
@@ -290,7 +300,7 @@ wbChange = false;
         });
     };
 
-    Ui.prototype.buildEditSidebar = function(elem) {
+    Ui.prototype.initEditSidebar = function(elem) {
         var self = this;
 
         wbChange = true;
@@ -304,68 +314,76 @@ wbChange = false;
 
         $("#accordion").hide();
 
-
-
         var decorationClass = elem.find(".fa").attr("class");
 
-        self.ez.html(function() {
+        $("#editZone").show();
 
-            var el = "<div class='panel panel-default'><div class='panel-heading'>";
-
-            if (elem.hasClass('wb_table')) {
-                el += "<h3 class='panel-title'>Edit Table</h3></div><div class='panel-body'>\
-                           <form id='editTable'><div class='form-group'><label>Header Colours:</label><div class='colorPickers'></div></div>"+
-                        "<input type='submit' class='dummyConfirmCancel btn btn-default form-control' id='wb-table-confirm' value='Confirm'></form></div>";
-
-            } else if(elem.hasClass('wb_box')) {
-                if (typeof decorationClass === "undefined") decorationClass = "";
-
-                el += "<h3 class='panel-title'>Edit Text Box</h3></div><div class='panel-body'>\
-                        <form id='editTextBox'><div class='form-group'><input type='text' class='form-control' id='plt-edit-text' name='plt-edit-text' value='" +
-                    elem.find(".box-content").text() + "'/></div>\
-                        <div class='form-group'>\
-                        <label>Content Colours:</label>\
-                        <div id='colorPickersContent' class='colorPickers'></div>\
-                        </div>\
-                        <div class='form-group'>\
-                        <label>Decoration Colours:</label>\
-                        <div id='colorPickersDecoration' class='colorPickers'></div>\
-                        </div>\
-                        <div class='form-group'><label for='boxDecoration'>Decoration:</label>\
-                        <input type='text' class='form-control boxDecoration' placeholder='fa-icon-name' id='boxDecoration' name='boxDecoration' value='"+decorationClass+"'/>\
-                        <i class='boxDecorationPreview "+decorationClass+"'></i></div>" +
-                    self.buildFontSizeSelect(elem) +
-                    "<div class='form-group'><input type='submit' id='wb-box-confirm' name='wb-box-confirm' value='Confirm' class='btn btn-default form-control'/></div>\
-                    <div class='form-group'><input type='submit' id='wb-box-cancel' name='wb-box-cancel' value='Cancel' class='btn btn-default form-control dummyConfirmCancel'/></div>\
-                    </form></div>";
-            } else {
-                el += "<h3 class='panel-title'>Edit Title</h3></div><div class='panel-body'><form id='editTitle'>" +
-                    "<div class='form-group'><input id='plt-edit-text' type='text' class='form-control edit-text'/></div><div class='colorPickers'></div><input type='submit' class='dummyConfirmCancel btn btn-default form-control' id='wb-title-confirm' value='Confirm'></form></div>";
-            }
-
-            el +=  "</div>";
-
-            return el;
+        self.ez.find(".panel").each(function() {
+            $(this).hide();
         });
 
-        if (elem.is("h1")) {
-            $("#plt-edit-text").val(elem.text());
-        } else if (elem.hasClass("wb_box")) {
-            $("#plt-edit-text").val(elem.text());
-        }
+        self.ez.find(".colorPickers").each(function() {
+           $(this).html("");
+        });
+        $("#editFontSize").html("");
 
-        this.setSidebarEvents(elem);
+        var colorPickers = [];
+        var ep;
 
-        if (elem.hasClass('wb_box')) {
-            if(elem.find(".box-decoration").length > 0) {
-                this.plt.trigger("newColorPickers", [elem.find(".box-decoration"), self.ez.find("#colorPickersDecoration")]);
+        if (elem.hasClass("wb_table")) {
+            ep = $('#editTablePanel');
+
+            colorPickers.push({
+                picker: $("#editColorPickersTableHeader"),
+                target: elem.find("th")
+            });
+
+        } else if(elem.hasClass("wb_box")) {
+            ep = $('#editTextPanel');
+
+            if (typeof decorationClass === "undefined") decorationClass = "";
+            $("#editBoxDecoration").val(decorationClass);
+            $(".boxDecorationPreview").addClass(decorationClass);
+            
+            $("#plt-edit-text").val(elem.text());
+
+            if (elem.find(".box-decoration").length > 0) {
+                colorPickers.push({
+                    picker: $("#editColorPickersDecoration"),
+                    target: elem.find(".box-decoration")
+                });
+                self.ez.find("#editColorPickersDecoration").parent(".form-group").show();
             } else {
-                self.ez.find("#colorPickersDecoration").parent(".form-group").remove();
+                self.ez.find("#editColorPickersDecoration").parent(".form-group").hide();
             }
-            this.plt.trigger("newColorPickers", [elem.find(".box-content"), self.ez.find("#colorPickersContent")]);
-        } else {
-            this.plt.trigger("newColorPickers", [elem, self.ez.find(".colorPickers")]);
+
+            colorPickers.push({
+                picker: $("#editColorPickersContent"),
+                target: elem.find(".box-content")
+            });
+
+            $("#editFontSize").html(self.buildFontSizeSelect(elem));
+
+        } else if (elem.hasClass("header")) {
+            ep = $("#editTitlePanel");
+            $("#plt-edit-title").val(elem.text());
+
+            colorPickers.push({
+                picker: $("#editColorPickersTitle"),
+                target: elem
+            });
         }
+
+        //Show edit panel for elem
+        ep.show();
+
+        //setup colour pickers
+        colorPickers.forEach(function(i) {
+            i.picker.addClass("enabled");
+            self.plt.trigger("newColorPickers", [i.target, i.picker]);
+        });
+
+        self.setSidebarEvents(elem);
     };
 
     Ui.prototype.buildFontSizeSelect = function(elem) {
@@ -424,6 +442,6 @@ wbChange = false;
             height: $(window).height()
         });
 
-        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#plt").find(".colorPickers")]);
+        $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#insertTextBox").find(".colorPickers")]);
     });
 })();

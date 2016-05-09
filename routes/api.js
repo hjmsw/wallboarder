@@ -65,12 +65,10 @@ router.post('/upsert', function (req, res) {
     var requestType;
 
     if (req.body.internal) {
-        console.log("Internal upsert request");
         requestType = "internal";
         wb = req.body.wb;
 
     } else {
-        console.log("External upsert request");
         requestType = "external";
         wb = req.body;
     }
