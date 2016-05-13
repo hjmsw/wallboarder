@@ -65,12 +65,14 @@
                 columns = [];
 
                 i.find("tr").each(function (index) {
-                    row = [];
+                    var row = [];
                     //each td or th
                     $(this).children().each(function () {
                         //Rather horrible if - We just want to make sure we don't save the tabledit toolbar
-                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) || $(this).hasClass("tabledit-view-mode") && $(this).children(".tabledit-toolbar").length === 0 ) {
-                            row.push([$(this).prop("tagName"), $(this).text()]);
+                        if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) ||
+                            $(this).hasClass("tabledit-view-mode") &&
+                            $(this).children(".tabledit-toolbar").length === 0 ) {
+                            row.push($(this).text());
                         }
                     });
                     if (0 == index) columns = row;

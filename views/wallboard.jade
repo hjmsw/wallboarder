@@ -12,11 +12,17 @@ div.container-fluid.wb
                     span.glyphicon.glyphicon-plus
 
                 table#exampleTable.table.table-striped
+                    - var head = true
                     - each row in elem.struct.rows
                         tr
                             if row
                                 - each i in row
-                                    #{i[0]} #{i[1]}
+                                    if head
+                                        th #{i}
+                                    else
+                                        td #{i}
+                            - head = false
+
                 | <script>
                 |  $(function() {
                 |     wb_tables.push({
