@@ -47,6 +47,10 @@ io.on('connection', function(socket) {
         socket.broadcast.emit('wb-event', data);
     });
 
+    socket.on('api-upsert', function(data) {
+       socket.broadcast.emit('wb-server-io-external-upsert', data);
+    });
+
     socket.on('wb_nsp', function (data) {
         var nspString =  data.wb_nsp;
         socket.emit('acc', {wb_nsp: nspString});
