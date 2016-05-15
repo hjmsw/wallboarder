@@ -240,6 +240,7 @@ var wb_tables = [];
 
 
     $(function() {
+      if ($("#autoLayout").val() !== "true") {
         wb_tables.forEach(function (i) {
             var table = new Table($(i.t_elem), i.params);
         });
@@ -247,11 +248,7 @@ var wb_tables = [];
         $(".wb").on("newWbTable", function() {
             var table = new Table();
         });
+      }
     });
 
 })();
-
-
-
-
-

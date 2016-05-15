@@ -72,7 +72,8 @@
                         if (($(this).is("th") && !$(this).hasClass("tabledit-toolbar-column")) ||
                             $(this).hasClass("tabledit-view-mode") &&
                             $(this).children(".tabledit-toolbar").length === 0 ) {
-                            row.push($(this).text());
+                            //A change in JSON structure has caused TH and TD to be inserted into TH and TD tags
+                            row.push($(this).text().replace(/TH\,|TD\,/, ""));
                         }
                     });
                     if (0 == index) columns = row;
