@@ -12,6 +12,10 @@ $(function(){
         if (data.wb === wb_nsp || data.wb === "global") wb.trigger("new-wb-event", [data]);
     });
 
+    global_socket.on('wb-server-io-external-upsert', function(data) {
+        if (data === wb_nsp) location.reload();
+    });
+
     global_socket.emit('wb_nsp', { wb_nsp: wb_nsp});
     global_socket.on('acc', function (data) {
         var socket = io('/' + data.wb_nsp);

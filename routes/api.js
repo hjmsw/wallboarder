@@ -70,7 +70,12 @@ router.post('/upsert', function (req, res) {
 
     } else {
         requestType = "external";
-        wb = req.body;
+        wb = req.body.wb;
+        
+        var socket = require('socket.io-client')('http://'+config.app.host+':'+config.app.port);
+        socket.on('connect', function(){
+            socket.emit('api-upsert', wb.url_slug);
+        });
     }
 
     WallboardProvider.save(wb, function (error) {
