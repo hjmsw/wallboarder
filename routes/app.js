@@ -30,16 +30,24 @@ router.get('/wb/:url_slug', function (req, res) {
             if (wallboard == null) {
                 if (url_slug === 'default') {
                     wb = require(__dirname + '/../json/example_wb.json');
-                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug, dev_mode: config.dev_mode});
+                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug, dev_mode: config.dev_mode, classes: wb.classes});
                 } else {
                     wb = require(__dirname + '/../json/new.json');
                     wb.url_slug = url_slug;
-                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug, dev_mode: config.dev_mode});
+                    res.render('index', {title: wb.title, elems: wb.elems, url_slug: url_slug, dev_mode: config.dev_mode, classes: wb.classes});
                 }
 
             } else {
                 var datetime = new Date(wallboard.created_at);
-                res.render('index', {title: wallboard.title, autoLayout: wallboard.autoLayout, elems: wallboard.elems, url_slug: wallboard.url_slug, datetime: datetime.getTime(), dev_mode: config.dev_mode});
+                res.render('index', {
+                    title: wallboard.title,
+                    autoLayout: wallboard.autoLayout,
+                    elems: wallboard.elems,
+                    url_slug: wallboard.url_slug,
+                    datetime: datetime.getTime(),
+                    dev_mode: config.dev_mode,
+                    classes: wallboard.classes
+                });
             }
         }
     });

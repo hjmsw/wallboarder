@@ -16,6 +16,7 @@ wallboardSchema = mongoose.Schema({
   url_slug: String,
   created_at: Date,
   autoLayout: Boolean,
+  classes: String,
   elems: [
     {
       id: String,

@@ -42,6 +42,8 @@ wbChange = false;
 
     Ui.prototype.initAutoLayout = function() {
         this.wb.addClass("autoLayout");
+        console.log($("#classes").val());
+        this.wb.addClass($("#classes").val() != "undefined" ? $("#classes").val() : '');
     };
 
     Ui.prototype.initAccordion = function() {
