@@ -27,16 +27,7 @@ server.listen(config.app.port, config.app.host);
 app.use('/js', express.static('public/js'));
 app.use('/css', express.static('public/css'));
 app.use('/img', express.static('public/img'));
-app.use('/components/jquery', express.static('node_modules/jquery'));
-app.use('/components/jquery-ui', express.static('node_modules/jquery-ui'));
-app.use('/components/jquery-ui-touch-punch', express.static('node_modules/jquery-ui-touch-punch'));
-app.use('/components/jquery-finger', express.static('node_modules/jquery.finger/dist'));
-app.use('/components/jquery-tabledit', express.static('node_modules/jquery-tabledit'));
-app.use('/components/bootstrap/', express.static('node_modules/bootstrap'));
-app.use('/components/socket.io-client/', express.static('node_modules/socket.io-client'));
-app.use('/components/bootstrap/dist/css/', express.static('node_modules/bootstrap/dist/css'));
-app.use('/components/font-awesome/', express.static('node_modules/font-awesome'));
-app.use('/components/datatables-bootstrap3-plugin/', express.static('node_modules/datatables-bootstrap3-plugin'));
+app.use('/components', express.static('node_modules'));
 
 var editing = {};
 var c_client = {};
