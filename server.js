@@ -24,10 +24,10 @@ app.use('/api/v1', api);
 
 server.listen(config.app.port, config.app.host);
 
-app.use('/js', express.static('public/js'));
-app.use('/css', express.static('public/css'));
-app.use('/img', express.static('public/img'));
-app.use('/components', express.static('node_modules'));
+app.use('/js', express.static(__dirname + '/public/js'));
+app.use('/css', express.static(__dirname + '/public/css'));
+app.use('/img', express.static(__dirname + '/public/img'));
+app.use('/components', express.static(__dirname + '/node_modules'));
 
 var editing = {};
 var c_client = {};
