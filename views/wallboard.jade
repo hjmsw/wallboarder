@@ -44,13 +44,11 @@ div.container-fluid.wb
             class="editable header"
             )= elem.innerText
 
-        else if elem.tagName == "IMG"
+        else if elem.tagName == "img"
             div(
             id=elem.id
-            class="draggable resizable ui-widget-content wb_box box editable")
-                div.box-inner
-                    div(class="box-content box-content-full-width" contentEditable="true")
-                        img(src="#{elem.src}")
+            class="draggable resizable ui-widget-content wb_image_box box editable")
+                img(src="#{elem.src}")
 
 
         else if elem.tagName == "DIV"

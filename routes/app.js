@@ -39,6 +39,7 @@ router.get('/wb/:url_slug', function (req, res) {
 
             } else {
                 var datetime = new Date(wallboard.created_at);
+                console.log(wallboard.elems);
                 res.render('index', {
                     title: wallboard.title,
                     autoLayout: wallboard.autoLayout,

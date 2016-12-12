@@ -42,7 +42,6 @@ wbChange = false;
 
     Ui.prototype.initAutoLayout = function() {
         this.wb.addClass("autoLayout");
-        console.log($("#classes").val());
         this.wb.addClass($("#classes").val() != "undefined" ? $("#classes").val() : '');
     };
 
@@ -237,6 +236,11 @@ wbChange = false;
             $("#addTextBox").on("click", function(event) {
                 event.preventDefault();
                 self.wb.trigger("newTextBox", [$(this).parent().siblings(".p_box")]);
+            });
+
+            $("#addImageBox").on("click", function(event) {
+               event.preventDefault();
+                self.wb.trigger("newImageBox", [$("#imageLink").val()]);
             });
 
             $("#boxText").keyup(function() {

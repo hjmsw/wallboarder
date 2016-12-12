@@ -58,6 +58,18 @@
                     ["z-index", i.css("z-index")]
                 ];
 
+            } else if (i.hasClass("wb_image_box")) {
+                elem.src = i.find("img").attr("src");
+                elem.tagName = "img";
+
+                elem.style = [
+                    ["height", i.find("img").css("height")],
+                    ["width", i.find("img").css("width")],
+                    ["position", "absolute"],
+                    ["left", i.css("left")],
+                    ["top", i.css("top")]
+                ];
+
             } else if (i.hasClass("wb_table")) {
                 elem.tagName = "table";
 

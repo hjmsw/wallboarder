@@ -65,6 +65,19 @@ div#plt
                             input(type="submit" id="wb-table-confirm" name="wb-table-confirm" value="Confirm" class="btn btn-default form-control hidden")
                         div.form-group
                             input(type="submit" id="wb-table-cancel" name="wb-table-cancel" value="Cancel" class="btn btn-default form-control hidden")
+
+        div(class="panel panel-default")
+            div(class="panel-heading" role="tab" id="headingThree")
+                h4
+                    a(role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                    href="#collapseThree" aria-expanded="true" aria-controls="collapseThree")="Insert Image"
+            div(id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree")
+                div(class="panel-body")
+                    div.form-group
+                        input(type="text" class="form-control tbl-struct imageLink" id="imageLink" name="tableCols" placeholder="Image link")
+                    div.form-group
+                        input(type="submit" id="addImageBox" name="addImageBox" value="Add" class="btn btn-default form-control")
+
         div#viewRevisions
             a(href="/revisions/#{url_slug}/#{datetime}" class="btn btn-default" id="viewRevisionsLink")= "View Revisions"
         div#viewAllWallboards
