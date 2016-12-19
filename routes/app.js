@@ -39,11 +39,12 @@ router.get('/wb/:url_slug', function (req, res) {
 
             } else {
                 var datetime = new Date(wallboard.created_at);
-                console.log(wallboard.elems);
+
                 res.render('index', {
                     title: wallboard.title,
                     autoLayout: wallboard.autoLayout,
                     elems: wallboard.elems,
+                    css: wallboard.css,
                     url_slug: wallboard.url_slug,
                     datetime: datetime.getTime(),
                     dev_mode: config.dev_mode,
