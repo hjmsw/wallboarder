@@ -451,7 +451,6 @@ wbChange = false;
         $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#insertTextBox").find(".colorPickers")]);
 
         $.get("/api/v1/wb/css/" + $("#url_slug").val(), function(data) {
-            console.log(data);
             $("body").append("<style>" + CSSJSON.toCSS(data).replace(/u002E/g,".") + "</style>");
 
         });

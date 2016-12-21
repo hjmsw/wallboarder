@@ -9,6 +9,9 @@ div#plt
         a(id="save" class="save btn btn-default")
             span.btn-inner.glyphicon.glyphicon-floppy-save
             p.btn-inner="Save"
+        a(id="preview" class="preview btn btn-default")
+            span.btn-inner.glyphicon.glyphicon-floppy-save
+            p.btn-inner="Preview"
         a(id="plt-hide" class="plt-hide btn btn-default")
             span.btn-inner.glyphicon.glyphicon-remove-circle
             p.btn-inner="Hide"
@@ -82,7 +85,9 @@ div#plt
             a(href="/revisions/#{url_slug}/#{datetime}" class="btn btn-default" id="viewRevisionsLink")= "View Revisions"
         div#viewAllWallboards
             a(href="/wb" class="btn btn-default" id="viewAllWallboardsLink")= "View All Wallboards"
-
+        div#EditCss
+            a(href="#editcss" class="btn btn-default" id="editcssBtn")= "Edit CSS"
+    div#cssEditor
     div#editZone
         div.panel.panel-default#editTablePanel
             div.panel-heading

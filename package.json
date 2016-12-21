@@ -10,6 +10,7 @@
     "node": "5.10.1"
   },
   "dependencies": {
+    "ace-builds": "^1.2.5",
     "body-parser": "~1.0.1",
     "bootstrap": "^3.3.6",
     "cssjson": "^2.1.3",
