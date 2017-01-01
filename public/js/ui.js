@@ -195,7 +195,7 @@ wbChange = false;
 
                 })
 
-                .click(function(e) {
+                .on("click", function(e) {
                     //Only reset plt if wb parent was clicked
                     if ($(e.toElement).hasClass('wb')) {
                         self.ez.hide();

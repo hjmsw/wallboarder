@@ -37,15 +37,13 @@
                 },
                 "click": function() {
                     self.wb.trigger("fixZindex");
+                },
+                "dblclick": function() {
+                    self.wb.trigger("startEdit", [$(this)]);
+                },
+                "doubletap": function() {
+                    self.wb.trigger("startEdit", [$(this)]);
                 }
-            })
-
-            .dblclick(function() {
-                self.wb.trigger("startEdit", [$(this)]);
-            })
-
-            .on("doubletap", function() {
-                self.wb.trigger("startEdit", [$(this)]);
             })
 
             .on("rebuildTextBox", function(event, decorationInput, boxDecoration, boxContent, fontSize) {
@@ -73,7 +71,8 @@
                     "color": colors.bcColor,
                     "background-color": colors.bcBackground
                 });
-            });
+            })
+        ;
     };
 
     /**
