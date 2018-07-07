@@ -17,6 +17,10 @@ wallboardSchema = mongoose.Schema({
   created_at: Date,
   autoLayout: Boolean,
   classes: String,
+  css: {
+    attributes: {},
+    children: {}
+  },
   elems: [
     {
       id: String,
@@ -25,10 +29,6 @@ wallboardSchema = mongoose.Schema({
       innerText: String,
       src: String,
       decoration: String,
-      decorationStyle: [],
-      contentStyle: [],
-      headStyle: [],
-      style: [],
       struct: {
         rows: []
       },
@@ -60,6 +60,7 @@ WallboardProvider.prototype.findOneWithDate = function(slug, datetime, callback 
 };
 
 WallboardProvider.prototype.save = function(wallboard, callback) {
+  // console.log(wallboard);
   var self = this;
 
   var wb = new this.wallboard(wallboard);
@@ -87,6 +88,12 @@ WallboardProvider.prototype.find = function(slug, callback) {
 
 WallboardProvider.prototype.listWallboards = function(callback) {
   var self = this;
+
+  self.wallboard.count(function(err, result) {
+    if (result === 0) {
+      callback('Empty collection', null);
+    }
+  });
 
   self.wallboard.distinct('url_slug', function(err, result) {
     if (err) {

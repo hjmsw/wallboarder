@@ -14,6 +14,8 @@ router.get('/wb', function(req, res) {
             res.render('wbList', {
                 wallboards: JSON.parse(body)
             });
+        } else {
+            res.render('no_wallboards');
         }
     })
 
@@ -39,10 +41,12 @@ router.get('/wb/:url_slug', function (req, res) {
 
             } else {
                 var datetime = new Date(wallboard.created_at);
+
                 res.render('index', {
                     title: wallboard.title,
                     autoLayout: wallboard.autoLayout,
                     elems: wallboard.elems,
+                    css: wallboard.css,
                     url_slug: wallboard.url_slug,
                     datetime: datetime.getTime(),
                     dev_mode: config.dev_mode,

@@ -24,6 +24,15 @@ router.get('/wb/:url_slug', function (req, res) {
     });
 });
 
+router.get('/wb/css/:url_slug', function(req, res) {
+    var url_slug = req.params.url_slug;
+
+    WallboardProvider.findOne(url_slug, {}, function (error, wallboard) {
+        if (error || (error == null && wallboard == null)) res.status(404).json({success: false, errorCode: 404, error: error});
+        else res.json(wallboard.css);
+    });
+});
+
 router.get('/revisions/:url_slug', function(req, res) {
 
     var url_slug = req.params.url_slug;
@@ -77,6 +86,8 @@ router.post('/upsert', function (req, res) {
             socket.emit('api-upsert', wb.url_slug);
         });
     }
+
+    console.log(wb);
 
     WallboardProvider.save(wb, function (error) {
         if (error) res.status(500).json({success: false, errorCode: 500, error: error});

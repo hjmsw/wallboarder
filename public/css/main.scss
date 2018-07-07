@@ -191,6 +191,25 @@ td, th {
     height:auto;
 }
 
+.wb_image_box img {
+    width:100%;
+    height:100%;
+}
+
+.ui-tooltip {
+    padding: 5px;
+    color: #fff;
+    background: #444;
+    border-radius: 5px;
+}
+
+#cssEditor {
+    position: absolute;
+    width: 400px;
+    height: 100%;
+
+}
+
 /*------- Side Panel -------*/
 
 #miniToolbar {
@@ -220,6 +239,11 @@ td, th {
 #pltToolbar {
     padding: 10px 5px;
     background-color: #AAA;
+    height:60px;
+}
+
+#pltToolbar .btn {
+    float:left;
 }
 
 #pltToolbar a {
@@ -252,6 +276,10 @@ td, th {
 }
 #pltToolbar p.btn-inner {
     margin:0;
+}
+
+#preview {
+    display:none;
 }
 
 .p_box {

@@ -10,9 +10,12 @@
             title: $("body").find("h1").text(),
             url_slug: $("#url_slug").val(),
             autoLayout: false,
+            css: {
+                attributes: {},
+                children: {}
+            },
             elems: []
         };
-
 
         $(".wb").children().each(function (index) {
             i = $(this);
@@ -25,38 +28,69 @@
             if (i.hasClass("wb_box")) {
                 elem.innerText = i.find(".box-content").text();
 
+                wb.css.children["#" + "wb_" + index] = {
+                    attributes: {
+                        "height": i.css("height"),
+                        "width": i.css("width"),
+                        "position": "absolute",
+                        "left": i.css("left"),
+                        "top": i.css("top"),
+                        "font-size": i.css("font-size"),
+                        "color": i.css("color"),
+                        "background-color": i.css("background-color"),
+                        "z-index": i.css("z-index")
+                    },
+                    children: {}
+                };
+
                 if(i.find(".box-decoration").length == 1) {
                     c = i.find("i").attr("class").split(" ");
                     elem.decoration = c[c.length-1];
-                    elem.decorationStyle = [
-                        ["color", i.find(".box-decoration").css("color")],
-                        ["background-color", i.find(".box-decoration").css("background-color")],
-                        ["width", (i.find(".box-decoration").outerWidth() / i.find(".box-decoration").parent().outerWidth() * 100) + "%"]
-                    ];
+
+                    wb.css.children["#wb_" + index + " u002Ebox-decoration"] = {
+                        attributes: {
+                            "color": i.find(".box-decoration").css("color"),
+                            "background-color": i.find(".box-decoration").css("background-color"),
+                            "width": (i.find(".box-decoration").outerWidth() / i.find(".box-decoration").parent().outerWidth() * 100) + "%"
+                        },
+                        children: {}
+                    }
                 }
 
-                elem.contentStyle = [
-                    ["color", i.find(".box-content").css("color")],
-                    ["background-color", i.find(".box-content").css("background-color")],
-                    function() {
-                        var bc = i.find(".box-content");
-                        if (!bc.hasClass("box-content-full-width"))
-                            return ["width", (bc.outerWidth() / bc.parent().outerWidth() * 100) + "%"]
-                    }()
+                var width = function() {
+                    var bc = i.find(".box-content");
 
-                ];
+                    if (bc.hasClass("box-content-full-width"))
+                        return (bc.outerWidth() / bc.parent().outerWidth() * 100) + "%";
+                    else
+                        return null;
+                }();
 
-                elem.style = [
-                    ["height", i.css("height")],
-                    ["width", i.css("width")],
-                    ["position", "absolute"],
-                    ["left", i.css("left")],
-                    ["top", i.css("top")],
-                    ["font-size", i.css("font-size")],
-                    ["color", i.css("color")],
-                    ["background-color", i.css("background-color")],
-                    ["z-index", i.css("z-index")]
-                ];
+                wb.css.children["#wb_" + index + " u002Ebox-content"] = {
+                    attributes: {
+                        "color": i.find(".box-content").css("color"),
+                        "background-color": i.find(".box-content").css("background-color"),
+                        "width": width
+                    },
+                    children: {}
+                }
+
+            } else if (i.hasClass("wb_image_box")) {
+                elem.src = i.find("img").attr("src");
+                elem.tagName = "img";
+
+                wb.css.children["#wb_" + index] = {
+                    attributes: {
+                        "height": i.find("img").css("height"),
+                        "width": i.find("img").css("width"),
+                        "position": "absolute",
+                        "left": i.css("left"),
+                        "top": i.css("top")
+                    },
+                    children: {}
+                };
+
+
 
             } else if (i.hasClass("wb_table")) {
                 elem.tagName = "table";
@@ -95,32 +129,42 @@
                     "editable": editable
                 };
 
-                elem.headStyle = [
-                    ["background-color", i.find("th").css("background-color")],
-                    ["color", i.find("th").css("color")]
-                ];
+                wb.css.children["#wb_" + index] = {
+                    attributes: {
+                        "height": i.css("height"),
+                        "width": i.css("width"),
+                        "position": "absolute",
+                        "left": i.css("left"),
+                        "top": i.css("top"),
+                        "z-index": i.css("z-index")
+                    },
+                    children: {}
 
-                elem.style = [
-                    ["height", i.css("height")],
-                    ["width", i.css("width")],
-                    ["position", "absolute"],
-                    ["left", i.css("left")],
-                    ["top", i.css("top")],
-                    ["z-index", i.css("z-index")]
-                ];
+                };
+
+                wb.css.children["#wb_" + index + " th"] = {
+                    attributes: {
+                        "background-color": i.find("th").css("background-color"),
+                        "color": i.find("th").css("color")
+                    },
+                    children: {}
+                };
+
             } else {
                 if (elem.tagName == 'H1') {
                     elem.innerText = i.text();
-                    elem.style = [
-                        ["width", "100%"],
-                        ["position", "fixed"],
-                        ["background-color", i.css("background-color")],
-                        ["color", i.css("color")]
-                    ]
+
+                    wb.css.children["#wb_" + index] = {
+                        attributes: {
+                            "width": "100%",
+                            "position": "fixed",
+                            "background-color": i.css("background-color"),
+                            "color": i.css("color")
+                        },
+                        children: {}
+                    }
                 }
             }
-
-
             wb.elems.push(elem);
 
         }).promise().done(function () {

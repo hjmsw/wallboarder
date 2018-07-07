@@ -5,7 +5,7 @@ div#shield
 div.container-fluid.wb
     - each elem in elems
         if elem.tagName == "table"
-            div(id=elem.id class="draggable resizable-table ui-widget-content wb_table editable")
+            div(id=elem.id class="draggable resizable-table ui-widget-content wb_table editable" data-toggle="tooltip" data-placement="top" title="##{elem.id}")
                 if elem.title
                     div.tableTitle
                         h2=elem.title
@@ -42,21 +42,22 @@ div.container-fluid.wb
             #{elem.tagName}(
             id=elem.id
             class="editable header"
+            data-toggle="tooltip" data-placement="top" title="##{elem.id}"
             )= elem.innerText
 
-        else if elem.tagName == "IMG"
+        else if elem.tagName == "img"
             div(
             id=elem.id
-            class="draggable resizable ui-widget-content wb_box box editable")
-                div.box-inner
-                    div(class="box-content box-content-full-width" contentEditable="true")
-                        img(src="#{elem.src}")
+            class="draggable resizable ui-widget-content wb_image_box box editable"
+            data-toggle="tooltip" data-placement="top" title="##{elem.id}")
+                img(src="#{elem.src}")
 
 
         else if elem.tagName == "DIV"
             #{elem.tagName}(
             id=elem.id
-            class="draggable resizable ui-widget-content wb_box box editable")
+            class="draggable resizable ui-widget-content wb_box box editable"
+            data-toggle="tooltip" data-placement="top" title="##{elem.id}")
                 div.box-inner
                     if elem.decoration
                         div.box-decoration

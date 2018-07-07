@@ -42,7 +42,6 @@ wbChange = false;
 
     Ui.prototype.initAutoLayout = function() {
         this.wb.addClass("autoLayout");
-        console.log($("#classes").val());
         this.wb.addClass($("#classes").val() != "undefined" ? $("#classes").val() : '');
     };
 
@@ -196,7 +195,7 @@ wbChange = false;
 
                 })
 
-                .click(function(e) {
+                .on("click", function(e) {
                     //Only reset plt if wb parent was clicked
                     if ($(e.toElement).hasClass('wb')) {
                         self.ez.hide();
@@ -237,6 +236,11 @@ wbChange = false;
             $("#addTextBox").on("click", function(event) {
                 event.preventDefault();
                 self.wb.trigger("newTextBox", [$(this).parent().siblings(".p_box")]);
+            });
+
+            $("#addImageBox").on("click", function(event) {
+               event.preventDefault();
+                self.wb.trigger("newImageBox", [$("#imageLink").val()]);
             });
 
             $("#boxText").keyup(function() {
@@ -436,7 +440,7 @@ wbChange = false;
     };
 
 
-    $(window).load(function() {
+    $(window).on("load", function() {
 
         var ui = new Ui();
 
@@ -445,5 +449,10 @@ wbChange = false;
         });
 
         $("#plt").trigger("newColorPickers", [$("#preview-box"), $("#insertTextBox").find(".colorPickers")]);
+
+        $.get("/api/v1/wb/css/" + $("#url_slug").val(), function(data) {
+            $("body").append("<style>" + CSSJSON.toCSS(data).replace(/u002E/g,".") + "</style>");
+
+        });
     });
 })();

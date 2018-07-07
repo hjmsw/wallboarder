@@ -10,14 +10,9 @@ A WYSIWYG Editor for Wallboards and Dashboards.
 
 ## Installation
 
-Install node dependencies:
+Install dependencies:
 ```
 npm install
-```
-
-Install Bower dependencies: (e.g. jquery)
-```
-./node_modules/bower/bin/bower install
 ```
 
 Install MongoDB (Mac OSX with Homebrew installed only)
