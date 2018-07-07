@@ -39,7 +39,7 @@ $(function () {
     };
 
     // Events
-    $(window).load(init);
+    $(window).on("load", init);
 
     $("#plt").on("newColorPickers", function(event, elem, parent) {
 

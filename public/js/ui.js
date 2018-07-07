@@ -440,7 +440,7 @@ wbChange = false;
     };
 
 
-    $(window).load(function() {
+    $(window).on("load", function() {
 
         var ui = new Ui();
 

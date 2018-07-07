@@ -88,7 +88,7 @@
         });
     };
 
-    $(window).load(function() {
+    $(window).on("load", function() {
 
         $("#editcssBtn").on("click", function() {
             var tt = new Tooltips();
