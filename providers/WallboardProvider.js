@@ -89,6 +89,12 @@ WallboardProvider.prototype.find = function(slug, callback) {
 WallboardProvider.prototype.listWallboards = function(callback) {
   var self = this;
 
+  self.wallboard.count(function(err, result) {
+    if (result === 0) {
+      callback('Empty collection', null);
+    }
+  });
+
   self.wallboard.distinct('url_slug', function(err, result) {
     if (err) {
       callback(err, null);

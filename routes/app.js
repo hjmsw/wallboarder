@@ -14,6 +14,8 @@ router.get('/wb', function(req, res) {
             res.render('wbList', {
                 wallboards: JSON.parse(body)
             });
+        } else {
+            res.render('no_wallboards');
         }
     })
 

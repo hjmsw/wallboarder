@@ -3,7 +3,7 @@
   "description": "Wallboarder - WYSIWYG Editor for Wallboards",
   "author": "James Harding <james@jamesharding.me>",
   "license": "MIT",
-  "repository": "https://github.com/hjamesw93/wallboarder",
+  "repository": "https://github.com/hjmsw/wallboarder",
   "main": "server.js",
   "version": "0.4.2",
   "engines": {
@@ -21,7 +21,7 @@
     "forever": "^0.15.1",
     "install": "^0.6.1",
     "jade": "^1.11.0",
-    "jquery": "^2.2.2",
+    "jquery": "^3.3.1",
     "jquery-ui": "^1.10.5",
     "jquery-ui-touch-punch": "^0.2.3",
     "jquery.finger": "^0.1.3",
@@ -35,12 +35,12 @@
     "tinycolorpicker": "^0.9.5"
   },
   "scripts": {
-    "start": "npm run mongod:start && forever start server.js",
-    "stop": "npm run mongod:stop && forever stop server.js",
+    "start": "npm run mongodb:start && forever start server.js",
+    "stop": "npm run mongodb:stop && forever stop server.js",
     "forever": "forever",
-    "mongod:install": "brew install mongodb",
-    "mongod:start": "mongod --config /usr/local/etc/mongod.conf &",
-    "mongod:stop": "pkill mongod",
+    "mongodb:install": "brew install mongodb",
+    "mongodb:start": "mongod --config /usr/local/etc/mongod.conf &",
+    "mongodb:stop": "pkill mongod",
     "install": "napa"
   },
   "napa": {

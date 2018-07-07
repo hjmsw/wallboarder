@@ -28,7 +28,7 @@ router.get('/wb/css/:url_slug', function(req, res) {
     var url_slug = req.params.url_slug;
 
     WallboardProvider.findOne(url_slug, {}, function (error, wallboard) {
-        if (error) res.status(404).json({success: false, errorCode: 404, error: error});
+        if (error || (error == null && wallboard == null)) res.status(404).json({success: false, errorCode: 404, error: error});
         else res.json(wallboard.css);
     });
 });
