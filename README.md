@@ -15,10 +15,8 @@ Install dependencies:
 npm install
 ```
 
-Install MongoDB (Mac OSX with Homebrew installed only)
-```
-npm run mongodb:install
-```
+Make sure mongodb is running and config is added to ```config/config.js```
+Project default for db name is ```node-mongo-wallboarder```
 
 ## Usage
 
